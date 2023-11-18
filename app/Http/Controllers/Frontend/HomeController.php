@@ -21,6 +21,7 @@ use App\Models\ParentArea;
 use App\Models\Unggulan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Log;
 use DB;
 use App\Models\Landing;
 use App\Models\SearchConsole;
@@ -107,5 +108,46 @@ class HomeController extends Controller
                                                      )
                    );
     }
+
+    public function store(Request $request)
+    {
+        try {                   
+            $order = new ListOrder();        
+            $order->name = $request->input('name');
+            $order->telp = $request->input('telp');
+            $order->date = $request->input('date');
+            $order->location = $request->input('location');
+            $order->time = $request->input('time');
+            $order->rute = $request->input('rute');
+            $order->numberorder = $request->input('numberorder');
+            $order->save();
+                
+            return redirect()->back()->with('success', 'Link pesan ke WA sudah digenerate');
+        } catch (\Exception $e) {            
+            return redirect()->back()->with('error', 'Failed to order. Please try again.');
+        }
+    }
+
+    public function inputreview(Request $request)
+    {        
+        $request->validate([
+            'name_review' => 'required|string',
+            'input_review' => 'required|string',
+        ]);
+        
+        $review = new Feedback();
+        $review->title = $request->input('name_review');
+        $review->desc = $request->input('input_review');
+        $review->rating = $request->input('rating_review');
+        if ($request->file('image_review')) {
+            $gambarPath = $request->file('image_review')->store('ramatrans/feedback', 's3');
+            $review->image = $gambarPath;
+        }     
+        $review->save();
+
+        // Tanggapan sukses (jika diperlukan)
+        return response()->json(['message' => 'Review berhasil disimpan!']);
+    }
+
    
 }

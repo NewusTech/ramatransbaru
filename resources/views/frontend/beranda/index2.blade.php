@@ -3,6 +3,36 @@
 @section('content')
     <!-- Content Wrap  -->
     <div class="content-wrap">
+
+        <!-- Bootstrap Modal for Notifications -->
+        <div class="modal fade" id="notificationModal" tabindex="-1" role="dialog" aria-labelledby="notificationModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="notificationModalLabel">Notification</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Display success message -->
+                        @if (session('success'))
+                            <div class="alert alert-success" role="alert">
+                                {{ session('success') }}
+                            </div>
+                        @endif
+
+                        <!-- Display error message -->
+                        @if (session('error'))
+                            <div class="alert alert-danger" role="alert">
+                                {{ session('error') }}
+                            </div>
+                        @endif
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- slider -->
         <div class="img-hero">
             @foreach ($carousel as $slider)
@@ -13,7 +43,7 @@
         </div>
         <!-- .slider -->
 
-        <!-- Modal -->
+        <!-- Modal Booking-->
         <div class="modal fade" id="modalBookingIndex" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -24,51 +54,104 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form id="orderForm" {{-- action="{{ route('order-store') }}" --}} method="POST" enctype="multipart/form-data">
+                    <form action="{{ url('order-store') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
                         <div class="modal-body">
                             <div id="msgError" class="alert alert-danger" style="display:none"></div>
                             {{-- <form> --}}
-                            @csrf
                             <div class="form-group">
                                 <label>Name</label>
-                                <input type="text" placeholder="Ibrahim" id="name" class="form-control" />
+                                <input type="text" placeholder="Ibrahim" id="name" name="name"
+                                    class="form-control" />
                             </div>
                             <div class="form-group">
                                 <label>No. Hp</label>
-                                <input type="number" placeholder="087987654321" id="telp"
+                                <input type="number" placeholder="087987654321" id="telp" name="telp"
                                     class="form-control newus-form-number" />
                             </div>
                             <div class="form-group">
                                 <label>Tanggal</label>
-                                <input type="date" id="date" class="form-control" />
+                                <input type="date" id="date" name="date" class="form-control" />
                             </div>
                             <div class="form-group">
                                 <label>Waktu</label>
-                                <select id="time" class="form-control">
+                                <select id="time" name="time" class="form-control">
                                     <option value="" disabled selected>--Pilih Waktu--</option>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label>Rute</label>
-                                <input type="text" id="rute" readonly class="form-control" />
+                                <input type="text" id="rute" name="rute" readonly class="form-control" />
                             </div>
                             <div class="form-group">
                                 <label>Tempat Duduk</label>
-                                <input type="text" placeholder="Contoh : 1 Orang" id="numberorder"
+                                <input type="text" placeholder="Contoh : 1 Orang" id="numberorder" name="numberorder"
                                     class="form-control" />
                             </div>
                             <div class="form-group">
                                 <label>Titik Jemput</label>
-                                <input type="text" id="location"
+                                <input type="text" id="location" name="location"
                                     placeholder="Permata Kost - Jl. Swakarya 1 no. H-28A Rt. 09 RW 02 Dwikora II"
                                     class="form-control" />
                             </div>
 
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal"
-                                onclick="resetBookingIndex()">Close</button>
-                            <button type="submit" class="btn btn-success" form="orderForm">Pesan</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-success">Pesan</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- End Modal -->
+
+        <!-- Modal Review -->
+        <div class="modal fade" id="modalReview" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalTitle">Form Review</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form id="formReview" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <div class="modal-body">
+                            <div id="msgError" class="alert alert-danger" style="display:none"></div>
+                            {{-- <form> --}}
+                            <div class="form-group">
+                                <label>Name</label>
+                                <input type="text" id="name_review" name="name_review" class="form-control" />
+                            </div>
+                            <div class="form-group">
+                                <label>Penilaian</label>
+                                <input type="text" id="input_review" name="input_review" class="form-control" />
+                            </div>
+                            <div class="form-group">
+                                <label>Rating</label>
+                                <br>
+                                <div class="star-rating">
+                                    <span class="star" data-rating="1"></span>
+                                    <span class="star" data-rating="2"></span>
+                                    <span class="star" data-rating="3"></span>
+                                    <span class="star" data-rating="4"></span>
+                                    <span class="star" data-rating="5"></span>
+                                    <input type="hidden" name="rating_review" id="rating_review">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="image">Foto (Opsional)</label>
+                                <input type="file" id="image_review" name="image_review" class="form-control"
+                                    accept="image/*">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            {{-- <button class="btn btn-success">Kirim</button> --}}
+                            <button type="submit" class="btn btn-success" id="submitReview">Pesan</button>
                         </div>
                     </form>
                 </div>
@@ -128,6 +211,16 @@
                                 <img src="{{ url('assets-plesir/img2/cultures.png') }}" alt="icon">
                                 <div class="s-icon-text">
                                     TENTANG KAMI
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s-icon">
+                            <a class="homepage-icon-menu" data-toggle="modal" data-target="#modalReview">
+                                <img src="{{ url('assets-plesir/img2/hospital.png') }}" alt="icon">
+                                <div class="s-icon-text">
+                                    Review
                                 </div>
                             </a>
                         </div>
@@ -416,20 +509,23 @@
                         @foreach ($feedback as $feedItem)
                             <div class="testimonial-item">
                                 <div class="testimonial-top">
-                                    <div class="author">
-                                        <img src="{{ Storage::disk('s3')->url($feedItem->image) }}"
-                                            data-at2x="{{ Storage::disk('s3')->url($feedItem->image) }}" alt=""
-                                            style="width: 120px;height: 120px;">
-                                    </div>
+                                    @if ($feedItem->image)
+                                        <div class="author">
+                                            <img src="{{ Storage::disk('s3')->url($feedItem->image) }}"
+                                                data-at2x="{{ Storage::disk('s3')->url($feedItem->image) }}"
+                                                alt="" style="width: 120px;height: 120px;">
+                                        </div>
+                                    @endif
                                 </div>
                                 <!-- testimonial content-->
                                 <div class="testimonial-body">
                                     <h5 class="title"><span>{{ $feedItem->title }}</span></h5>
-                                    <div class="stars stars-5"></div>
+                                    <div class="stars stars-{{ $feedItem->rating }}"></div>
                                     <p class="align-center">{{ $feedItem->desc }}</p>
                                 </div>
                             </div>
                         @endforeach
+
                     </div>
                 </div>
             </div>
@@ -550,8 +646,8 @@
 
         function formSubmitIndex(idForm) {
             var name = $('#name').val();
-            var noHp = $('#telp').val();
-            var tglBerangkat = $('#date').val();
+            var telp = $('#telp').val();
+            var date = $('#date').val();
             var time = $('#time').find(":selected").val();
             var rute = $('#rute').val();
 
@@ -564,13 +660,13 @@
                 return false;
             }
 
-            if (noHp.trim() == '') {
+            if (telp.trim() == '') {
                 alert('Silakan isi nomor hp terlebih dahulu.');
                 $('#telp').focus();
                 return false;
             }
 
-            if (tglBerangkat.trim() == '') {
+            if (date.trim() == '') {
                 alert('Silakan isi tanggal berangkat terlebih dahulu.');
                 $('#date').focus();
                 return false;
@@ -583,8 +679,8 @@
             }
 
             window.open('https://api.whatsapp.com/send?phone=628117298168' + '&text=Nama%3A%20' + name +
-                '+%20%0ANo.%20hp%3A%20' + noHp + '%20%0ATanggal%20%3A%20' +
-                tglBerangkat + '%20%20%0Awaktu%20%20%3A%20' + time + '%20%0ARute%20%3A%20' + rute +
+                '+%20%0ANo.%20hp%3A%20' + telp + '%20%0ATanggal%20%3A%20' +
+                date + '%20%20%0Awaktu%20%20%3A%20' + time + '%20%0ARute%20%3A%20' + rute +
                 '%20%20%0ATempat%20Duduk%3A%20' + numberorder + '%0ATitik%20Jemput%3A%20' + location + '')
         }
 
@@ -611,4 +707,67 @@
             });
         };
     </script>
+
+    <!-- Script jQuery -->
+    <script>
+        $(document).ready(function() {
+            // Tangkap event submit formulir
+            $('#formReview').submit(function(e) {
+                e.preventDefault(); // Menghentikan aksi bawaan formulir
+
+                var formData = new FormData(this);
+
+                var name_review = $('#name_review').val();
+                var input_review = $('#input_review').val();
+                var rating_review = $('#rating_review').val();
+
+                if (name_review.trim() == '') {
+                    alert('Silakan isi nama terlebih dahulu.');
+                    $('#name_review').focus();
+                    return false;
+                }
+                if (input_review.trim() == '') {
+                    alert('Silakan isi kolom penilaian terlebih dahulu.');
+                    $('#input_review').focus();
+                    return false;
+                }
+                if (rating_review.trim() == '') {
+                    alert('Silakan isi rating terlebih dahulu.');
+                    $('#rating_review').focus();
+                    return false;
+                }
+
+                $.ajax({
+                    type: 'POST',
+                    url: '{{ url('input-review') }}', // Ganti dengan rute yang sesuai
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function(data) {
+                        alert('Review berhasil disimpan!');
+                    },
+                    error: function(error) {
+                        console.log(error);
+
+                        alert('Terjadi kesalahan saat menyimpan review.');
+                    }
+                });
+            });
+        });
+
+        $(document).ready(function() {
+            // Star rating selection
+            $('.star-rating .star').on('click', function() {
+                var rating = $(this).data('rating');
+                $('#rating_review').val(rating);
+
+                // Set active state for selected stars
+                $(this).addClass('active').prevAll().addClass('active');
+                $(this).nextAll().removeClass('active');
+            });
+
+            // Rest of your existing script...
+        });
+    </script>
+
 @endsection

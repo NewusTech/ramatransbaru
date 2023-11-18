@@ -37,6 +37,10 @@ Route::get('sitemap.xml', [SitemapController::class, 'index']);
 
 Route::get('/', [HomeController::class, 'portal'])->name('beranda');
 
+Route::post('/order-store', [HomeController::class, 'store']);
+
+Route::post('/input-review', [HomeController::class, 'inputreview']);
+
 Route::get('/tentang-kami.html', [AboutController::class, 'index'])->name('tentang-kami');
 
 Route::get('/jadwal.html', [JadwalController::class, 'index'])->name('jadwal');
@@ -155,6 +159,11 @@ Route::middleware(['auth:web', 'verified'])->prefix('dashboard')->group(function
         Route::get('/create', App\Http\Livewire\Backend\Unggulan\FormUnggulan::class)->name('create-unggulan');
         Route::get('/edit/{id}', App\Http\Livewire\Backend\Unggulan\FormUnggulan::class)->name('edit-unggulan');
         Route::get('/{id}', App\Http\Livewire\Backend\Unggulan\DetailUnggulan::class)->name('detail-unggulan');
+    });
+
+    Route::prefix('history-pesanan')->group(function () {
+        Route::get('/', App\Http\Livewire\Backend\HistoryPesanan\HistoryPesanan::class)->name('history-pesanan');
+        Route::get('/{id}', App\Http\Livewire\Backend\HistoryPesanan\DetailHistoryPesanan::class)->name('detail-history-pesanan');
     });
 
     Route::prefix('faq')->group(function () {

@@ -734,12 +734,17 @@ template {
     vertical-align: middle;
 }
 
+.star:hover,
+.star.active {
+    color: #FFA500; /* Set the star color on hover or when selected */
+}
+
 .star-rating:before,
 .stars:before {
     color: #f2b90f;
 }
 
-.star-rating:before,
+/* .star-rating:before, */
 .star-rating > span:before,
 .stars:before,
 .stars .stars-active {
@@ -765,12 +770,12 @@ template {
     content: "\f005\f005\f005";
 }
 
-/* .stars.stars-4:before {
-    content: "\f005\f005\f005\f005";
-} */
 .stars.stars-4:before {
-    content: "";
+    content: "\f005\f005\f005\f005";
 }
+/* .stars.stars-4:before {
+    content: "";
+} */
 
 .stars.stars-5:before {
     content: "\f005\f005\f005\f005\f005";
