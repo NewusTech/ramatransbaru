@@ -317,14 +317,14 @@
                         </div>
                     </div>
 
-                    <div class="col-12 col-md-6 mb-4 mb-md-0">
+                    <div class="col-12 col-md-5 mb-4 mb-md-0">
                         <h6 style="font-family: Verdana, Geneva, Tahoma, sans-serif">Sekilas Kami</h6>
                         <hr class="my-1 mb-3" style="border-color: #28a745; width: 80%; border-width: 2px;">
                         <p class="text-left linkfooter">
                             {{ company_config('tentang') }}</p>
                     </div>
 
-                    <div class="col-12 col-md-3 mb-4 mb-md-0">
+                    <div class="col-12 col-md-4 mb-4 mb-md-0">
                         <h6 style="font-family: Verdana, Geneva, Tahoma, sans-serif">Akses Cepat</h6>
                         <hr class="my-1 mb-3" style="border-color: #28a745; width: 80%; border-width: 2px;">
                         <div class="row d-flex justify-content-center align-items-center">
