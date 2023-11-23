@@ -34,10 +34,10 @@
             </div>
         </div>
         <!-- slider -->
-        <div class="img-hero">
+        <div class="img-hero ">
             @foreach ($carousel as $slider)
-                <div>
-                    <img src="{{ Storage::disk('s3')->url($slider->image) }}" alt="slider">
+                <div class="d-flex justify-content-center align-items-center">
+                    <img src="{{ Storage::disk('s3')->url($slider->image) }}" alt="slider" class="img-fluid">
                 </div>
             @endforeach
         </div>

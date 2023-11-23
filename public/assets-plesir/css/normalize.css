@@ -249,35 +249,13 @@ article,
 aside,
 /* footer, */
 
-a.footera{
-  color: white;
-}
-
 footer {
-  background-color: #333; /* Warna latar belakang */
-  color: #fff; /* Warna teks */
+  background-color: #333333; /* Warna latar belakang */
+  color: #ffffff; /* Warna teks */
   
   text-align: center; /* Posisi teks di tengah */
   margin-bottom: 60px;
   
-}
-h5.footerhead {
-  border-bottom: 2px solid green;
-  color: white; /* Mengatur warna teks menjadi putih */
-  font-family: Arial, sans-serif; /* Mengatur jenis font yang Anda inginkan */
-  font-size: 17px; /* Mengatur ukuran font */
-  text-transform: uppercase;
-}
-
-small.smallfooter{
-  color: white; /* Mengatur warna teks menjadi putih */
-  font-family: Arial, sans-serif; /* Mengatur jenis font yang Anda inginkan */
-  font-size: 12px; /* Mengatur ukuran font */
-}
-
-p.footerisi{
-  font-family: Arial, sans-serif; /* Mengatur jenis font yang Anda inginkan */
-  font-size: 14px; /* Mengatur ukuran font */
 }
 
 .tag.linkfooter:hover {
