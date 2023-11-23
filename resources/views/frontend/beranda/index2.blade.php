@@ -2,7 +2,7 @@
 @section('title', 'Beranda')
 @section('content')
     <!-- Content Wrap  -->
-    <div class="content-wrap">
+    <div class="content">
 
         <!-- Bootstrap Modal for Notifications -->
         <div class="modal fade" id="notificationModal" tabindex="-1" role="dialog" aria-labelledby="notificationModalLabel"

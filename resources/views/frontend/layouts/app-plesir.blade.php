@@ -295,18 +295,19 @@
         <footer>
             <div class="container pt-2">
                 <div class="row">
-                    <div class="col-3">
-                        <div class="mb-3">
-                            <a href="{{ url('/') }}" class="logo">
+                    <div class="col-12 col-md-3 mb-4 mb-md-0">
+                        <div class="mb-3 d-flex justify-content-center align-items-center">
+                            <a href="{{ url('/') }}" class="logo d-flex align-items-center">
                                 <img src="{{ url('frontend-assets/img/logo-2.png') }}" width="50px" alt>
-                                <span style="color: white">Rama Tranz Travel</span>
+                                <span class="ml-2" style="color: white">Rama Tranz Travel</span>
                             </a>
                         </div>
-                        <div class="social-link dark">
-                            <a href="#" class="btn btn-primary btn-sm mr-2">
+
+                        <div class="social-link dark d-flex justify-content-center align-items-center">
+                            <a href="#" class="btn btn-primary btn-sm mr-1">
                                 <i class="fab fa-facebook"></i>
                             </a>
-                            <a href="#" class="btn btn-primary btn-sm mr-2">
+                            <a href="#" class="btn btn-primary btn-sm mr-1">
                                 <i class="fab fa-instagram"></i>
                             </a>
                             <a href="https://www.youtube.com/channel/UCY7MCn80wnrJTn219ACedYQ" target="_blank"
@@ -315,61 +316,50 @@
                             </a>
                         </div>
                     </div>
-                    <div class="col-1"></div>
 
-                    <div class="col-3">
+                    <div class="col-12 col-md-6 mb-4 mb-md-0">
                         <h6 style="font-family: Verdana, Geneva, Tahoma, sans-serif">Sekilas Kami</h6>
                         <hr class="my-1 mb-3" style="border-color: #28a745; width: 80%; border-width: 2px;">
                         <p class="text-left linkfooter">
                             {{ company_config('tentang') }}</p>
                     </div>
-                    <div class="col-1"></div>
 
-                    <div class="col-4">
+                    <div class="col-12 col-md-3 mb-4 mb-md-0">
                         <h6 style="font-family: Verdana, Geneva, Tahoma, sans-serif">Akses Cepat</h6>
                         <hr class="my-1 mb-3" style="border-color: #28a745; width: 80%; border-width: 2px;">
-                        <div class="row">
-                            <div class="col-1"></div>
-                            <div class="col-5">
+                        <div class="row d-flex justify-content-center align-items-center">
+                            <div class="col-12 col-md-5">
                                 @foreach ($menuLayanan as $item)
                                     <a href="{{ route('layananCategoryId', $item->slug) }}" rel="tag"
                                         class="tag linkfooter">{{ $item->title }}</a>
                                     <br>
                                 @endforeach
                             </div>
-                            <div class="col-5">
+                            <div class="col-12 col-md-5">
                                 <a href="{{ route('tarif') }}" rel="tag" class="tag linkfooter">Tarif</a><br>
                                 <a href="{{ route('kontak-kami') }}" rel="tag"
                                     class="tag linkfooter">Kontak</a><br>
                                 <a href="{{ route('tentang-kami') }}" rel="tag" class="tag linkfooter">Tentang
                                     Kami</a><br>
                             </div>
-                            <div class="col-1"></div>
                         </div>
                     </div>
-
                 </div>
 
                 <div class="d-flex flex-column flex-sm-row justify-content-between py-3 my-1 border-top">
                     <p>&copy; Copyright 2023 RAMATRANZ | All Rights Reserved.</p>
                     <ul class="list-unstyled d-flex">
-                        <li class="ms-3"><a class="link-body-emphasis" href="#"><svg class="bi"
-                                    width="24" height="24">
-                                    <use xlink:href="#twitter" />
-                                </svg></a></li>
-                        <li class="ms-3"><a class="link-body-emphasis" href="#"><svg class="bi"
-                                    width="24" height="24">
-                                    <use xlink:href="#instagram" />
-                                </svg></a></li>
-                        <li class="ms-3"><a class="link-body-emphasis" href="#"><svg class="bi"
-                                    width="24" height="24">
-                                    <use xlink:href="#facebook" />
-                                </svg></a></li>
+                        <li class="ms-3"><a class="link-body-emphasis" href="#"><i
+                                    class="fab fa-twitter"></i></a></li>
+                        <li class="ms-3"><a class="link-body-emphasis" href="#"><i
+                                    class="fab fa-instagram"></i></a></li>
+                        <li class="ms-3"><a class="link-body-emphasis" href="#"><i
+                                    class="fab fa-facebook"></i></a></li>
                     </ul>
                 </div>
-
             </div>
         </footer>
+
     </div>
 
     <!-- Botom Panel  -->
