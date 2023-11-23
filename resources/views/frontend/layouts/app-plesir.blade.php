@@ -54,6 +54,12 @@
         href="{{ asset('frontend-assets') }}/favicon/favicon-96x96.png">
     <link rel="icon" type="image/png" sizes="16x16"
         href="{{ asset('frontend-assets') }}/favicon/favicon-16x16.png">
+
+    <!-- Tag canonical untuk halaman utama -->
+    <link rel="canonical" href="{{ url('/blog/search') }}" />
+    <link rel="prev" href="{{ url('/blog/search') }}?page=3" />
+    <link rel="next" href="{{ url('/blog/search') }}?page=2" />
+
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="theme-color" content="#ffffff">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
