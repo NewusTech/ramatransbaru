@@ -18,6 +18,7 @@ class FormParentArea extends Component
     protected $rules = [
         'parentArea.nama_provinsi'   => 'required',
         'parentArea.slug'            => 'required',
+        'parentArea.excerpt'      => 'required',
     ];
 
     public function mount($id = null)

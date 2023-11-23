@@ -40,6 +40,16 @@
                                                 </span>
                                             @enderror
                                         </div>
+                                        <div class="form-group">
+                                            <label for="">Deskripsi Singkat</label>
+                                            <textarea wire:model="jenisLayanan.excerpt" class="form-control @error('jenisLayanan.excerpt') is-invalid @enderror"></textarea>
+
+                                            @error('jenisLayanan.excerpt')
+                                                <span class='invalid-feedback'>
+                                                    <strong>{{ $message }} </strong>
+                                                </span>
+                                            @enderror
+                                        </div>
 
                                         <div class="form-group">
                                             <label for="">Gambar</label>

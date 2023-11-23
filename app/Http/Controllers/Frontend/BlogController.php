@@ -30,24 +30,21 @@ class BlogController extends Controller
         $tentang = Page::get()->first();
         $tagManager = TagManager::first();
         $seoPage = Page::where('slug', '=', 'blog')->first();
+        $metades = "Bepergian dengan cepat dan aman hanya dapat ditemukan di Rama Tranz Travel. Tidak perlu diragukan adalah jasa travel terbaik.";
         $gtagManager = GtagManager::first();
         $analytics = Analytics::first();
-        return view('frontend.blog.index', compact('data', 'blogs', 'contacts', 'tentang', 'menuLayanan','tagManager','seoPage','gtagManager','analytics'));
+        return view('frontend.blog.index', compact('data', 'blogs', 'contacts', 'tentang', 'menuLayanan','tagManager','seoPage', 'metades','gtagManager','analytics'));
     }
 
     public function liveSearch(Request $request)
     {
         $query = $request->input('query');
-        $page = $request->input('page', 1); // Ambil nomor halaman, atau gunakan halaman 1 jika tidak ada
-    
-        // Lakukan pencarian di tabel 'blogs' berdasarkan query dengan paginasi
-        $results = Blog::where('title', 'like', '%' . $query . '%')->paginate(9, ['*'], 'page', $page);
-    
-        // Kembalikan hasil pencarian beserta tautan halaman dalam respons JSON
-        return response()->json($results);
-    }
-    
+        $blogs = Blog::where('title', 'LIKE', "%$query%")
+            ->orWhere('excerpt', 'LIKE', "%$query%")
+            ->paginate(9);
 
+        return view('frontend.blog.blog-list', compact('blogs'));
+    }
 
     public function detailBlog($slug)
     {

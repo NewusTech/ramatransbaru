@@ -21,13 +21,13 @@ class LocationController extends Controller
         $data['intro'] = 'Rama Trans adalah jasa Transportasi Terbaik.';
         $data['type'] = 'Lokasi Rama Trans Travel';
         $data['url'] = URL::current();
-
+        $metades =  ParentArea::where('slug', $key->slug)->value('excerpt');
         $parentOutlet = ParentArea::select(['id', 'nama_provinsi', 'slug'])->where('slug', $key->slug)->get();
         $outlet_all =  $key->areas()->latest()->paginate(6);
         $menuLayanan = JenisLayanan::select(['id', 'title', 'slug'])->orderBy('slug', 'ASC')->get();
         $contacts = Kontak::where('id', 1)->first();
         $tentang = Page::get()->first();
         $tagManager = TagManager::first();
-        return view('frontend.location.outletByProvinsi', compact('data', 'tentang', 'parentOutlet', 'outlet_all', 'menuLayanan', 'contacts','tagManager'));
+        return view('frontend.location.outletByProvinsi', compact('data', 'metades', 'tentang', 'parentOutlet', 'outlet_all', 'menuLayanan', 'contacts','tagManager'));
     }
 }

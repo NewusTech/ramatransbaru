@@ -21,6 +21,7 @@ class AboutController extends Controller
         $data['intro'] = 'Rama Trans adalah jasa Transportasi Terbaik.';
         $data['type'] = 'Tentang Kami';
         $data['url'] = URL::current();
+        $metades = "Perjalanan nyaman dan mudah hanya dengan Rama Tranz Travel. Dengan harga murah sudah bisa pulang kampung";
 
         $menuLayanan = JenisLayanan::select(['id', 'title', 'slug'])->orderBy('slug', 'ASC')->get();
         $tentang = Page::get()->first();
@@ -29,6 +30,6 @@ class AboutController extends Controller
         $seoPage = Page::where('slug', '=', 'tentang-kami')->first();
         $gtagManager = GtagManager::first();
         $analytics = Analytics::first();
-        return view('frontend.abouts.index', compact('data', 'tentang', 'contacts', 'menuLayanan','tagManager','seoPage','gtagManager','analytics'));
+        return view('frontend.abouts.index', compact('data', 'tentang', 'metades', 'contacts', 'menuLayanan','tagManager','seoPage','gtagManager','analytics'));
     }
 }

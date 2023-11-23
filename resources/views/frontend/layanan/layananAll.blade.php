@@ -11,7 +11,7 @@
                     </div>
                 </div>
             </div>
-            <div class="container sm-box-shadow">
+            <div class="container sm-box-shadow" id="layananAll-list">
                 @foreach ($layanan as $layanans)
                     <div class="card" style="width:100%;">
                         <a href="{{ route('detail-jasa-transportasi.jasaId', $layanans->slug) }}" class="sm-hover">
@@ -28,10 +28,11 @@
                     </div>
                 @endforeach
                 <div class="row car-row pagination-row">
-                    <div class="col-md-12 text-center">
+                    <div class="col-md-12">
                         <nav aria-label="Page navigation example">
-                            {{ $layanan->links() }}
-
+                            <div id="pagination">
+                                {{ $layanan->links() }}
+                            </div>
                         </nav>
                     </div>
                 </div>
@@ -42,7 +43,30 @@
 @endsection
 
 @section('script')
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Handle pagination links
+            $(document).on('click', '.pagination a', function(e) {
+                e.preventDefault();
+                var page = $(this).attr('href').split('page=')[1];
+                fetch_data(page);
+            });
 
+            // Fetch data function
+            function fetch_data(page = 1) {
+                $.ajax({
+                    url: "{{ url('/tarif.html/search') }}?page=" + page,
+                    type: 'GET',
+                    data: {},
+                    success: function(data) {
+                        $('#layananAll-list').html(data);
+                    }
+                });
+            }
+        });
+    </script>
+    {{-- 
     <script type="text/javascript">
         $(document).on('click', '.details-button', function(e) {
             e.preventDefault();
@@ -95,5 +119,5 @@
                 $(this).removeClass('shadow-lg');
             }
         );
-    </script>
+    </script> --}}
 @endsection

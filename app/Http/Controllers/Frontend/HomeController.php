@@ -82,6 +82,7 @@ class HomeController extends Controller
         $jenis_l = DB::table('layanans')->select('jenis_layanan_id')->distinct()->get()->pluck('jenis_layanan_id');
         $jenisLayanan = JenisLayanan::select(['id', 'title', 'slug','media','content'])->get();
         $layanan = Layanan::latest()->paginate(6)->withQueryString();
+        $metades = "Rama Tranz Travel adalah agen perjalanan  yang terbaik dan terpercaya. Lebih dari 11 tahun melayani para pelanggan dengan pelayanan yang terbaik.";
         $tagManager = TagManager::first();
         $gtagManager = GtagManager::first();
         $analytics = Analytics::first();
@@ -92,13 +93,13 @@ class HomeController extends Controller
         $dataSeo['description'] = $seoTools->site_description;
         $dataSeo['keywords'] = $seoTools->keywords;
         $dataSeo['image'] = $seoTools->image;
-
+        $metades = "Rama Tranz Travel adalah agen perjalanan  yang terbaik dan terpercaya. Lebih dari 11 tahun melayani para pelanggan dengan pelayanan yang terbaik.";
         // data seo Home
-        $seoPage = Page::where('slug', '=', 'home')->first();
+        $seoPage = Page::where('slug', '=', 'home')->first();        
         $blogs = Blog::latest()->paginate(3)->withQueryString();
         $gallery = Gallery::latest()->get();
         return view('frontend.beranda.index2', compact(
-                                                      'data', 'layananTarif', 'carousel', 
+                                                      'data', 'layananTarif', 'carousel', 'metades',
                                                       'youtube', 'unggulan', 'feedback', 
                                                       'hq', 'contacts', 
                                                       'jenisLayanan', 'tentang', 'parentOutlet', 

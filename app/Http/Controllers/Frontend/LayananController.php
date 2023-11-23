@@ -41,6 +41,16 @@ class LayananController extends Controller
         return view('frontend.layanan.layananAll', compact('data', 'layanan', 'jenisLayanan', 'menuLayanan', 'asals', 'tujuans', 'jenis_l', 'contacts', 'tentang','tagManager','seoPage','gtagManager','analytics'));
     }
 
+    public function liveSearch(Request $request)
+    {    
+        $query = $request->input('query');
+        $layanan = Layanan::where('title', 'LIKE', "%$query%")
+            ->orWhere('content', 'LIKE', "%$query%")
+            ->paginate(10);
+
+        return view('frontend.layanan.layananAll-list', compact('layanan'));
+    }
+
     public function layananByCategory(JenisLayanan $key)
     {
         $data['title'] = 'Rama Tranz - Layanan Transportasi | Rama Transportasi';
@@ -49,7 +59,8 @@ class LayananController extends Controller
         $data['type'] = 'Layanan Carter';
         $data['url'] = URL::current();
 
-        $jenisLayanan = JenisLayanan::select(['id', 'title', 'slug','media','content'])->where('slug', $key->slug)->first();
+        $metades =  JenisLayanan::where('slug', $key->slug)->value('excerpt');
+        $jenisLayanan = JenisLayanan::select(['id', 'title', 'slug','media','content', 'excerpt'])->where('slug', $key->slug)->first();
         $jenisLayanan_all =  $key->layanan()->latest()->paginate(6);
         $asals = DB::table('layanans')->select('asal')->distinct()->get()->pluck('asal');
         $tujuans = DB::table('layanans')->select('tujuan')->distinct()->get()->pluck('tujuan');
@@ -60,7 +71,7 @@ class LayananController extends Controller
         $tagManager = TagManager::first();
         $gtagManager = GtagManager::first();
         $analytics = Analytics::first();
-        return view('frontend.layanan.categories.layananByCategory', compact('data', 'tentang', 'jenisLayanan', 'jenisLayanan_all', 'menuLayanan', 'asals', 'tujuans', 'jenis_l', 'contacts','tagManager','gtagManager','analytics'));
+        return view('frontend.layanan.categories.layananByCategory', compact('data', 'metades', 'tentang', 'jenisLayanan', 'jenisLayanan_all', 'menuLayanan', 'asals', 'tujuans', 'jenis_l', 'contacts','tagManager','gtagManager','analytics'));
     }
 
     public function detailJasaTransportasi($slug)
@@ -159,11 +170,13 @@ class LayananController extends Controller
         $tagManager = TagManager::first();
         $seoPage = Page::where('slug', '=', 'jadwal')->first();
         $gtagManager = GtagManager::first();
+        $metades = "Rama Tranz Travel memiliki jenis layanan yang dapat memudahkan para pelanggan. Door to door, point to point, dan charter adalah layanan yang unggul.";
         $analytics = Analytics::first();
         $tentang = Page::get()->first();
         $menuLayanan = JenisLayanan::select(['id', 'title', 'slug'])->orderBy('slug', 'ASC')->get();
         return view('frontend.jenis-layanan.index', compact(
                                                 'data', 
+                                                'metades',
                                                 'tentang',
                                                 'menuLayanan',
                                                 'jenisLayanan', 

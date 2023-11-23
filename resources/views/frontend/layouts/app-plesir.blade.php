@@ -115,9 +115,13 @@
     </title>
     @if (trim($__env->yieldContent('excerpt')))
         <meta name="description" content="@yield('excerpt')">
-    @else
+    @elseif(isset($metades))
+        <meta name="description" content="{{ $metades }}">
+    @elseif(isset($seoPage) && isset($seoPage->meta_desc))
+        <meta name="description" content="{{ $seoPage->meta_desc }}">
+        {{-- @else
         <meta name="description"
-            content="{{ isset($seoPage) ? $seoPage->meta_desc : 'Nikmati perjalanan Jakarta-Lampung yang nyaman dan aman bersama Rama Tranz Travel. Pesan tiket sekarang dan jelajahi keindahan kedua destinasi' }}">
+            content="Nikmati perjalanan Jakarta-Lampung yang nyaman dan aman bersama Rama Tranz Travel. Pesan tiket sekarang dan jelajahi keindahan kedua destinasi"> --}}
     @endif
     @if (trim($__env->yieldContent('keyword')))
         <meta name="keywords" content="@yield('keyword')">

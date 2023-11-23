@@ -50,7 +50,10 @@ Route::get('/filterGallery', [GalleryController::class, 'filterGallery'])->name(
 
 Route::get('/kontak-kami.html', [ContactController::class, 'index'])->name('kontak-kami');
 
-Route::get('/tarif.html', [LayananController::class, 'layananAll'])->name('tarif');
+Route::prefix('tarif.html')->group(function () {
+    Route::get('/', [LayananController::class, 'layananAll'])->name('tarif');    
+    Route::get('/search', [LayananController::class, 'liveSearch']);
+});
 
 Route::get('/jenis-layanan.html', [LayananController::class, 'indexJenisLayanan'])->name('jenis-layanan');
 
@@ -69,10 +72,8 @@ Route::prefix('layanan')->group(function () {
 Route::prefix('blog')->group(function () {
     Route::get('/', [BlogController::class, 'index'])->name('blog');
     Route::get('/{slug}.html', [BlogController::class, 'detailBlog'])->name('detail-blog.blogId');
+    Route::get('/search', [BlogController::class, 'liveSearch']);
 });
-
-Route::get('/searchblog', [BlogController::class, 'liveSearch']);
-
 
 Route::prefix('search')->group(function () {
     Route::get('/', [LayananController::class, 'searchLayanan'])->name('search-layanan');

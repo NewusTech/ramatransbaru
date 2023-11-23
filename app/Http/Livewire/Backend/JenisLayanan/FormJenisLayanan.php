@@ -19,6 +19,7 @@ class FormJenisLayanan extends Component
 
     protected $rules = [
         'jenisLayanan.title'        => 'required',
+        'jenisLayanan.excerpt'      => 'required',
         'jenisLayanan.slug'         => 'required',
         'jenisLayanan.content'         => '',
     ];
