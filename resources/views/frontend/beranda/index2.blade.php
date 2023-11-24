@@ -243,7 +243,7 @@
             <div class="container pt-3" style="background-color: #F0F4F7">
                 <div class="row">
                     <div class="col-md-12">
-                        <form method="get" class="form search" action="{{ route('search-layanan') }}">
+                        <form method="get" class="form search" action="{{ route('tarif') }}">
                             <div class="row">
                                 <div class="col-md-3 col-sm-12">
                                     <div class="input-group">

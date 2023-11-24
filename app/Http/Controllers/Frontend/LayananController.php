@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\URL;
 
 class LayananController extends Controller
 {
-    public function layananAll()
+    public function layananAll(Request $request)
     {
         $data['title'] = 'Rama Tranz - Layanan Transportasi | Rama Transportasi';
         $data['image'] = '';
@@ -25,7 +25,27 @@ class LayananController extends Controller
         $data['type'] = 'Layanan Carter';
         $data['url'] = URL::current();
 
-        $layanan = Layanan::latest()->paginate(10)->withQueryString();
+        $asal = $request->input('asal');
+        $tujuan = $request->input('tujuan');
+        $jam = $request->input('jam');
+
+        $layananQuery = Layanan::query();
+
+        $layananQuery->where('asal', 'LIKE', "%$asal%")
+        ->where('tujuan', 'LIKE', "%$tujuan%");
+    
+    // Jika $jam diisi, tambahkan kondisi untuk jam
+        if ($jam) {
+            $layananQuery->where(function ($query) use ($jam) {
+                $query->where('jam_pagi', 'LIKE', "%$jam%")
+                    ->orWhere('jam_siang', 'LIKE', "%$jam%")
+                    ->orWhere('jam_sore', 'LIKE', "%$jam%")
+                    ->orWhere('jam_malam', 'LIKE', "%$jam%");
+            });
+        }
+    
+        // Menjalankan kueri dan mengambil hasilnya
+        $layanan = $layananQuery->latest()->paginate(10)->withQueryString();        
         $asals = DB::table('layanans')->select('asal')->distinct()->get()->pluck('asal');
         $tujuans = DB::table('layanans')->select('tujuan')->distinct()->get()->pluck('tujuan');
         $jenis_l = DB::table('layanans')->select('jenis_layanan_id')->distinct()->get()->pluck('jenis_layanan_id');
@@ -44,9 +64,17 @@ class LayananController extends Controller
     public function liveSearch(Request $request)
     {    
         $query = $request->input('query');
-        $layanan = Layanan::where('title', 'LIKE', "%$query%")
-            ->orWhere('content', 'LIKE', "%$query%")
-            ->paginate(10);
+        $query2 = $request->input('query2');
+        $query3 = $request->input('query3');
+
+        $layanan = Layanan::where('asal', 'LIKE', "%$query%")
+            ->where('tujuan', 'LIKE', "%$query2%")
+            ->where(function ($queryBuilder) use ($query3) {
+                $queryBuilder->orWhere('jam_pagi', 'LIKE', "%$query3%")
+                    ->orWhere('jam_siang', 'LIKE', "%$query3%")
+                    ->orWhere('jam_sore', 'LIKE', "%$query3%")
+                    ->orWhere('jam_malam', 'LIKE', "%$query3%");
+            })->paginate(6);
 
         return view('frontend.layanan.layananAll-list', compact('layanan'));
     }
@@ -93,65 +121,7 @@ class LayananController extends Controller
         $gtagManager = GtagManager::first();
         $analytics = Analytics::first();
         return view('frontend.layanan.layananDetail', compact('data', 'tentang', 'detailLayanan', 'fasilitas', 'jenisLayanan', 'menuLayanan', 'contacts','tagManager','gtagManager','analytics'));
-    }
-
-    public function searchLayanan(Request $request)
-    {
-        $data['title'] = 'Rama Tranz - Pencarian Layanan Jasa Transportasi | Rama Transportasi';
-        $data['image'] = '';
-        $data['intro'] = 'Rama Trans adalah jasa Transportasi Terbaik.';
-        $data['type'] = 'Pencarian Layanan Jasa Transportasi';
-        $data['url'] = URL::current();
-
-        $menuLayanan = JenisLayanan::select(['id', 'title', 'slug'])->orderBy('slug', 'ASC')->get();
-        $jenisLayanan = JenisLayanan::select(['id', 'title', 'slug'])->get();
-        $contacts = Kontak::where('id', 1)->first();
-        $tentang = Page::get()->first();
-
-        $asals = DB::table('layanans')->select('asal')->distinct()->get()->pluck('asal')->sort();
-        $tujuans = DB::table('layanans')->select('tujuan')->distinct()->get()->pluck('tujuan')->sort();
-        $jenis_l = DB::table('layanans')->select('jenis_layanan_id')->distinct()->get()->pluck('jenis_layanan_id')->sort();
-
-        $layanan = Layanan::query();
-        if ($request->filled('asal')) {
-            $layanan->where('asal', $request->asal);
-        }
-        if ($request->filled('tujuan')) {
-            $layanan->where('tujuan', $request->tujuan);
-        }
-        // if ($request->filled('jenis_layanan_id')) {
-        //     $layanan->where('jenis_layanan_id', $request->jenis_layanan_id);
-        // }
-        if ($request->filled('jam')) {
-            $layanan->where(function ($query) use ($request) {
-                $query->orWhere('jam_pagi', 'like', '%'.$request->jam.'%');
-                $query->orWhere('jam_siang', 'like', '%'.$request->jam.'%');
-                $query->orWhere('jam_sore', 'like', '%'.$request->jam.'%');
-                $query->orWhere('jam_malam', 'like', '%'.$request->jam.'%');
-            });
-        }
-
-        // if ($request->filled('tgl_berangkat')) {
-        //     $layanan->where('tgl_berangkat', $request->tgl_berangkat);
-        // }
-        $tagManager = '';
-        $gtagManager = GtagManager::first();
-        $analytics = Analytics::first();
-        return view('frontend.layanan.searchLayanan', [
-            'data' => $data,
-            'menuLayanan' => $menuLayanan,
-            'jenisLayanan' => $jenisLayanan,
-            'contacts' => $contacts,
-            'tentang' => $tentang,
-            'asals' => $asals,
-            'tujuans' => $tujuans,
-            'jenis_l' => $jenis_l,
-            'layanan' => $layanan->latest()->paginate(6),
-            'tagManager' => $tagManager,
-            'gtagManager' => $gtagManager,
-            'analytics' => $analytics
-        ]);
-    }
+    }   
 
     public function store(Request $request)
     {

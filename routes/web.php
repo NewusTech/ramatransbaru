@@ -33,7 +33,7 @@ Route::get('/link', function () {
 //frontend routes
 // Route::get('/', [HomeController::class, 'index'])->name('homescreen');
 
-Route::get('sitemap.xml', [SitemapController::class, 'index']);
+Route::get('/sitemap.xml', [SitemapController::class, 'index']);
 
 Route::get('/', [HomeController::class, 'portal'])->name('beranda');
 
@@ -52,7 +52,7 @@ Route::get('/kontak-kami.html', [ContactController::class, 'index'])->name('kont
 
 Route::prefix('tarif.html')->group(function () {
     Route::get('/', [LayananController::class, 'layananAll'])->name('tarif');    
-    Route::get('/search', [LayananController::class, 'liveSearch']);
+    Route::get('/search', [LayananController::class, 'liveSearch'])->name('search-rute');
 });
 
 Route::get('/jenis-layanan.html', [LayananController::class, 'indexJenisLayanan'])->name('jenis-layanan');
@@ -74,15 +74,6 @@ Route::prefix('blog')->group(function () {
     Route::get('/{slug}.html', [BlogController::class, 'detailBlog'])->name('detail-blog.blogId');
     Route::get('/search', [BlogController::class, 'liveSearch']);
 });
-
-Route::prefix('search')->group(function () {
-    Route::get('/', [LayananController::class, 'searchLayanan'])->name('search-layanan');
-});
-
-// Route::get('sitemap.xml', function() {
-//     dd(Storage::putFile('sitemap', 'sitemap.xml'));
-//     // return response()->('sitemap.xml');
-// });
 
 //backend routes
 Route::middleware(['auth:web', 'verified'])->prefix('dashboard')->group(function () {

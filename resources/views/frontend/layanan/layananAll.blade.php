@@ -11,6 +11,55 @@
                     </div>
                 </div>
             </div>
+            <div class="row mb-3">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-4 col-sm-12">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-map-marker"></i>
+                                    </span>
+                                </div>
+                                <select id="asal" name="asal" class="form-control">
+                                    <option selected disabled>Berangkat dari...</option>
+                                    @foreach ($asals as $item)
+                                        <option value="{{ $item }}">{{ $item }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-12">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-map-marker"></i>
+                                    </span>
+                                </div>
+                                <select id="tujuan" name="tujuan" class="form-control">
+                                    <option selected disabled>Tujuan...</option>
+                                    @foreach ($tujuans as $item)
+                                        <option value="{{ $item }}">{{ $item }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-12">
+                            <div class="input-group">
+                                <select name="jam" id="jam" class="custom-select">
+                                    <option value="" selected disabled>-- Pilih Waktu --</option>
+                                    <option value="08.00">08.00</option>
+                                    <option value="12.00">12.00</option>
+                                    <option value="15.00">15.00</option>
+                                    <option value="17.00">17.00</option>
+                                    <option value="19.00">19.00</option>
+                                    <option value="20.00">20.00</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="container sm-box-shadow" id="layananAll-list">
                 @foreach ($layanan as $layanans)
                     <div class="card" style="width:100%;">
@@ -46,6 +95,22 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
         $(document).ready(function() {
+            var asalSelect = document.getElementById('asal');
+            var tujuanSelect = document.getElementById('tujuan');
+            var jamSelect = document.getElementById('jam');
+
+            asalSelect.addEventListener('change', function() {
+                fetch_data();
+            });
+
+            tujuanSelect.addEventListener('change', function() {
+                fetch_data();
+            });
+
+            jamSelect.addEventListener('change', function() {
+                fetch_data();
+            });
+
             // Handle pagination links
             $(document).on('click', '.pagination a', function(e) {
                 e.preventDefault();
@@ -55,10 +120,17 @@
 
             // Fetch data function
             function fetch_data(page = 1) {
+                var query = $('#asal').val();
+                var query2 = $('#tujuan').val();
+                var query3 = $('#jam').val();
                 $.ajax({
                     url: "{{ url('/tarif.html/search') }}?page=" + page,
                     type: 'GET',
-                    data: {},
+                    data: {
+                        query: query,
+                        query2: query2,
+                        query3: query3,
+                    },
                     success: function(data) {
                         $('#layananAll-list').html(data);
                     }

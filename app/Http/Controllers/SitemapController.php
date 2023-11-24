@@ -14,16 +14,24 @@ class SitemapController extends Controller
 {
     public function index()
     {
-        $routes = collect(Route::getRoutes())->map(function ($route) {
-            return $route->uri();
-        });
 
-        $data = $routes->map(function ($route) {
+        $routes = collect(Route::getRoutes())->filter(function ($route) {
+            // Filter out routes you want to exclude
+            $excludedRoutes = ['log-viewer', '_debugbar', '_ignition'];
+            foreach ($excludedRoutes as $excluded) {
+                if (str_contains($route->uri(), $excluded)) {
+                    return false;
+                }
+            }
+            return true;
+        })->map(function ($route) {
             return [
-                'loc' => url($route),
+                'loc' => url($route->uri()),
                 'lastmod' => now()->toAtomString(),
             ];
         });
+        
+        $data = $routes->toArray();
 
         $blog = Blog::all(); 
         $layanan = Layanan::all();
