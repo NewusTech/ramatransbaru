@@ -61,12 +61,12 @@
                             {{-- <form> --}}
                             <div class="form-group">
                                 <label>Name</label>
-                                <input type="text" placeholder="Ibrahim" id="name" name="name"
+                                <input type="text" placeholder="Nama" id="name" name="name"
                                     class="form-control" />
                             </div>
                             <div class="form-group">
                                 <label>No. Hp</label>
-                                <input type="number" placeholder="087987654321" id="telp" name="telp"
+                                <input type="number" placeholder="" id="telp" name="telp"
                                     class="form-control newus-form-number" />
                             </div>
                             <div class="form-group">
@@ -91,14 +91,14 @@
                             <div class="form-group">
                                 <label>Titik Jemput</label>
                                 <input type="text" id="location" name="location"
-                                    placeholder="Permata Kost - Jl. Swakarya 1 no. H-28A Rt. 09 RW 02 Dwikora II"
+                                    placeholder="Contoh = Permata Kost - Jl. Swakarya 1 no. H-28A Rt. 09 RW 02 Dwikora II"
                                     class="form-control" />
                             </div>
 
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-success">Pesan</button>
+                            <button type="submit" class="btn btn-success">Submit</button>
                         </div>
                     </form>
                 </div>
@@ -245,7 +245,7 @@
                     <div class="col-md-12">
                         <form method="get" class="form search" action="{{ route('tarif') }}">
                             <div class="row">
-                                <div class="col-md-3 col-sm-12">
+                                <div class="col-md-3 col-sm-12 mb-2">
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">
@@ -260,7 +260,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-3 col-sm-12">
+                                <div class="col-md-3 col-sm-12 mb-2">
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">
@@ -275,7 +275,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-3 col-sm-12">
+                                <div class="col-md-3 col-sm-12 mb-2">
                                     <div class="input-group">
                                         <select name="jam" id="jam" class="custom-select">
                                             <option value="" selected disabled>-- Pilih Waktu --</option>
@@ -301,7 +301,7 @@
             <div class="row">
                 @foreach ($layanan as $key => $layanans)
                     <!-- item -->
-                    <div class="col-md-4">
+                    <div class="col-md-4 col-sm-12 mb-1">
                         <div class="acr-box">
                             <div class="acr-box-in">
                                 <div class="acr-img">
@@ -311,7 +311,7 @@
                                     <div class="ct-name">{{ $layanans->title }}</div>
                                     <div class="ct-cost">
                                         <div class="jadwal-jemput">
-                                            <h4>Jadwal Jemputan</h4>
+                                            <h4>Jadwal Jemput</h4>
                                             <table class="tabel-jadwal-jemput">
                                                 <tbody>
                                                     <tr>
@@ -585,27 +585,22 @@
 
 @endsection
 {{-- modal --}}
-{{-- <div id="gallery-modal">
-    @foreach (File::files(public_path('storage/gallery')) as $item)
-        <div class="modal fade" id="{{ $item }}" tabindex="-1" role="dialog"
+<div id="gallery-modal">
+    @foreach ($gallery as $item)
+        <div class="modal fade" id="imageresource-{{ $item->id }}" tabindex="-1" role="dialog"
             aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
-                <div class="modal-content"> --}}
-{{-- <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-          </div> --}}
-{{-- <div class="modal-body" id="sm-section-modal-gallery">
-                        <img src="{{ asset('storage/gallery/' . $item->getFilename()) }}" id="imagepreview"
+                <div class="modal-content">
+                    <div class="modal-body" id="sm-section-modal-gallery">
+                        <img src="{{ Storage::disk('s3')->url($item->image) }}" id="imagepreview"
                             style="width: 100%; height: 264px;">
-                    </div> --}}
-{{-- <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          </div> --}}
-{{-- </div>
+                    </div>
+                </div>
             </div>
         </div>
     @endforeach
-</div> --}}
+</div>
+
 {{-- end modal --}}
 
 @section('script')
@@ -685,13 +680,8 @@
         }
 
         $(".home-gallery").on("click", function(e) {
-            var imageUrl = $(this).attr("src");
-            // console.log(imageUrl)
-
-            // Ubah URL gambar dalam modal
-            $("#imagemodal img").attr("src", imageUrl);
-            // Tampilkan modal
-            $('#imagemodal').modal("show");
+            $('#' + e.target.id).modal(
+            'show'); // imagemodal is the id attribute assigned to the bootstrap modal, then i use the show function
         });
 
         window.onload = function() {
