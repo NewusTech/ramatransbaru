@@ -218,7 +218,7 @@
                     <div class="row">
                         <div class="col s-icon">
                             <a class="homepage-icon-menu" data-toggle="modal" data-target="#modalReview">
-                                <img src="{{ url('assets-plesir/img2/hospital.png') }}" alt="icon">
+                                <img src="{{ url('assets-plesir/img2/cultures.png') }}" alt="icon">
                                 <div class="s-icon-text">
                                     Review
                                 </div>
@@ -740,7 +740,7 @@
         $(".home-gallery").on("click", function(e) {
             $('#' + e.target.id).modal(
                 'show'
-                ); // imagemodal is the id attribute assigned to the bootstrap modal, then i use the show function
+            ); // imagemodal is the id attribute assigned to the bootstrap modal, then i use the show function
         });
 
         window.onload = function() {
