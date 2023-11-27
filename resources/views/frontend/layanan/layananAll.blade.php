@@ -322,7 +322,7 @@
                     },
                     success: function(data) {
                         $('#layananAll-list').html(data);
-                        document.title = "Rama Trans Travel - Rute | Page " + pageNumber;
+                        document.title = "Rama Trans Travel - Rute | Page " + page;
                     }
                 });
             }
