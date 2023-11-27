@@ -151,7 +151,7 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                             {{-- <button class="btn btn-success">Kirim</button> --}}
-                            <button type="submit" class="btn btn-success" id="submitReview">Pesan</button>
+                            <button type="submit" class="btn btn-success" id="submitReview">Submit</button>
                         </div>
                     </form>
                 </div>
@@ -258,6 +258,11 @@
                                                 <option value="{{ $item }}">{{ $item }}</option>
                                             @endforeach
                                         </select>
+                                        <div class="input-group-append">
+                                            <button class="btn py-0" type="button"
+                                                style="background-color: white; border: 1px solid #ced4da; color: gray"
+                                                id="clearAsal"><span>x</span></button>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-md-3 col-sm-12 mb-2">
@@ -273,6 +278,11 @@
                                                 <option value="{{ $item }}">{{ $item }}</option>
                                             @endforeach
                                         </select>
+                                        <div class="input-group-append">
+                                            <button class="btn py-0" type="button"
+                                                style="background-color: white; border: 1px solid #ced4da; color: gray"
+                                                id="clearTujuan"><span>x</span></button>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-md-3 col-sm-12 mb-2">
@@ -286,6 +296,11 @@
                                             <option value="19.00">19.00</option>
                                             <option value="20.00">20.00</option>
                                         </select>
+                                        <div class="input-group-append">
+                                            <button class="btn py-0" type="button"
+                                                style="background-color: white; border: 1px solid #ced4da; color: gray"
+                                                id="clearJam"><span>x</span></button>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-md-3 col-sm-12">
@@ -605,6 +620,49 @@
 
 @section('script')
     <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            var asalSelect = document.getElementById('asal');
+            var tujuanSelect = document.getElementById('tujuan');
+            var jamSelect = document.getElementById('jam');
+
+            $('#clearTujuan').on('click', function() {
+                // Clear the selected option
+                tujuanSelect.selectedIndex = 0;
+                $(tujuanSelect).change();
+
+                fetch_data();
+            });
+
+            $('#clearAsal').on('click', function() {
+                // Clear the selected option
+                asalSelect.selectedIndex = 0;
+                $(asalSelect).change();
+
+                fetch_data();
+            });
+
+            $('#clearJam').on('click', function() {
+                // Clear the selected option
+                jamSelect.selectedIndex = 0;
+                $(jamSelect).change();
+
+            });
+
+            asalSelect.addEventListener('change', function() {
+                fetch_data();
+            });
+
+            tujuanSelect.addEventListener('change', function() {
+                fetch_data();
+            });
+
+            jamSelect.addEventListener('change', function() {
+                fetch_data();
+            });
+
+        });
+    </script>
 
     <script>
         $(document).ready(function() {
@@ -681,7 +739,8 @@
 
         $(".home-gallery").on("click", function(e) {
             $('#' + e.target.id).modal(
-            'show'); // imagemodal is the id attribute assigned to the bootstrap modal, then i use the show function
+                'show'
+                ); // imagemodal is the id attribute assigned to the bootstrap modal, then i use the show function
         });
 
         window.onload = function() {

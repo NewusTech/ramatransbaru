@@ -58,7 +58,7 @@ class LayananController extends Controller
         $seoPage = Page::where('slug', '=', 'jadwal')->first();
         $gtagManager = GtagManager::first();
         $analytics = Analytics::first();
-        return view('frontend.layanan.layananAll', compact('data', 'layanan', 'jenisLayanan', 'menuLayanan', 'asals', 'tujuans', 'jenis_l', 'contacts', 'tentang','tagManager','seoPage','gtagManager','analytics'));
+        return view('frontend.layanan.layananAll', compact('data', 'layanan', 'jenisLayanan', 'menuLayanan', 'asals', 'tujuans', 'jenis_l', 'contacts', 'tentang','tagManager','seoPage','gtagManager','analytics', 'asal', 'tujuan', 'jam'));
     }
 
     public function liveSearch(Request $request)
@@ -74,7 +74,7 @@ class LayananController extends Controller
                     ->orWhere('jam_siang', 'LIKE', "%$query3%")
                     ->orWhere('jam_sore', 'LIKE', "%$query3%")
                     ->orWhere('jam_malam', 'LIKE', "%$query3%");
-            })->paginate(6);
+            })->paginate(10);
 
         return view('frontend.layanan.layananAll-list', compact('layanan'));
     }
