@@ -39,11 +39,27 @@ class BlogController extends Controller
     public function liveSearch(Request $request)
     {
         $query = $request->input('query');
+        $title2 = $request->input('page');
         $blogs = Blog::where('title', 'LIKE', "%$query%")
             ->orWhere('excerpt', 'LIKE', "%$query%")
             ->paginate(9);
 
-        return view('frontend.blog.blog-list', compact('blogs'));
+        $data['title'] = 'Rama Tranz - Blog Kami | Rama Transportasi';
+        $data['image'] = '';
+        $data['intro'] = 'Rama Trans adalah jasa Transportasi Terbaik.';
+        $data['type'] = 'Home Screen';
+        $data['url'] = URL::current();
+        
+        $menuLayanan = JenisLayanan::select(['id', 'title', 'slug'])->orderBy('slug', 'ASC')->get();
+        $contacts = Kontak::where('id', 1)->first();
+        $tentang = Page::get()->first();
+        $tagManager = TagManager::first();
+        $seoPage = Page::where('slug', '=', 'blog')->first();
+        $metades = "Bepergian dengan cepat dan aman hanya dapat ditemukan di Rama Tranz Travel. Tidak perlu diragukan adalah jasa travel terbaik.";
+        $gtagManager = GtagManager::first();
+        $analytics = Analytics::first();
+
+        return view('frontend.blog.blog-list', compact('data', 'title2', 'blogs', 'contacts', 'tentang', 'menuLayanan','tagManager','seoPage', 'metades','gtagManager','analytics'));
     }
 
     public function detailBlog($slug)

@@ -2,7 +2,7 @@
 @section('title', 'Blog')
 @section('content')
 
-    <div class="content-wrap page-news-list">
+    <div class="content-wrap page-news-list" id="blog-list">
         <div class="subsite-banner">
             <img src="https://ramatranzlampung.com/storage/jenis-layanan/90hVpgV5oMu32B8TQNGxbpHiGxc8TYifaH24IkSY.jpg">
         </div>
@@ -27,7 +27,7 @@
                     </div>
                 </div>
             </div>
-            <div id="blog-list">
+            <div>
                 @foreach ($blogs as $blog)
                     <div class="row news-row">
                         <div class="col-md-12">
