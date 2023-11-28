@@ -322,7 +322,8 @@
                     },
                     success: function(data) {
                         $('#layananAll-list').html(data);
-                        document.title = "Rama Trans Travel halaman rute ke " + page;
+                        document.title = "Harga Tiket - " + page +
+                            " dari Rama Tranz Travel Sangat Murah";
                     }
                 });
             }

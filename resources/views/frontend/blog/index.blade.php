@@ -101,7 +101,8 @@
                     },
                     success: function(data) {
                         $('#blog-list').html(data);
-                        document.title = "Rama Trans Travel halaman blog ke " + page;
+                        document.title = "Rama Tranz Travel Terpercaya, Kunjungi Kami di Blog ke " +
+                            page;
                     }
                 });
             }

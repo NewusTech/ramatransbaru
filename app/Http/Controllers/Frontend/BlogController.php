@@ -44,22 +44,7 @@ class BlogController extends Controller
             ->orWhere('excerpt', 'LIKE', "%$query%")
             ->paginate(9);
 
-        $data['title'] = 'Rama Tranz - Blog Kami | Rama Transportasi';
-        $data['image'] = '';
-        $data['intro'] = 'Rama Trans adalah jasa Transportasi Terbaik.';
-        $data['type'] = 'Home Screen';
-        $data['url'] = URL::current();
-        
-        $menuLayanan = JenisLayanan::select(['id', 'title', 'slug'])->orderBy('slug', 'ASC')->get();
-        $contacts = Kontak::where('id', 1)->first();
-        $tentang = Page::get()->first();
-        $tagManager = TagManager::first();
-        $seoPage = Page::where('slug', '=', 'blog')->first();
-        $metades = "Bepergian dengan cepat dan aman hanya dapat ditemukan di Rama Tranz Travel. Tidak perlu diragukan adalah jasa travel terbaik.";
-        $gtagManager = GtagManager::first();
-        $analytics = Analytics::first();
-
-        return view('frontend.blog.blog-list', compact('data', 'title2', 'blogs', 'contacts', 'tentang', 'menuLayanan','tagManager','seoPage', 'metades','gtagManager','analytics'));
+        return view('frontend.blog.blog-list', compact('blogs', 'title2'));
     }
 
     public function detailBlog($slug)

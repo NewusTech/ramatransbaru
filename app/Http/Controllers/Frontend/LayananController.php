@@ -66,6 +66,7 @@ class LayananController extends Controller
         $query = $request->input('query');
         $query2 = $request->input('query2');
         $query3 = $request->input('query3');
+        $title2 = $request->input('page');
 
         $layanan = Layanan::where('asal', 'LIKE', "%$query%")
             ->where('tujuan', 'LIKE', "%$query2%")
@@ -76,7 +77,7 @@ class LayananController extends Controller
                     ->orWhere('jam_malam', 'LIKE', "%$query3%");
             })->paginate(10);
 
-        return view('frontend.layanan.layananAll-list', compact('layanan'));
+        return view('frontend.layanan.layananAll-list', compact('layanan', 'title2'));
     }
 
     public function layananByCategory(JenisLayanan $key)

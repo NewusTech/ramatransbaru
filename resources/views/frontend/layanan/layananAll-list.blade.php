@@ -1,3 +1,7 @@
+<head>
+    <title>Harga Tiket - {{ $title2 }} dari Rama Tranz Travel Sangat Murah</title>
+</head>
+
 @if ($layanan->count())
     @foreach ($layanan as $layanans)
         <div class="card" style="width:100%;">
