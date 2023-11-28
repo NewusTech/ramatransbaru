@@ -101,6 +101,7 @@
                     },
                     success: function(data) {
                         $('#blog-list').html(data);
+                        document.title = "Rama Trans Travel halaman blog ke " + page;
                     }
                 });
             }
