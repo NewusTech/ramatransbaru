@@ -57,8 +57,8 @@
 
     <!-- Tag canonical untuk halaman utama -->
     <link rel="canonical" href="{{ url('/blog/search') }}" />
-    <link rel="prev" href="{{ url('/blog/search') }}?page=3" />
-    <link rel="next" href="{{ url('/blog/search') }}?page=2" />
+    {{-- <link rel="prev" href="{{ url('/blog/search') }}?page=3" />
+    <link rel="next" href="{{ url('/blog/search') }}?page=2" /> --}}
 
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="theme-color" content="#ffffff">
