@@ -1,15 +1,8 @@
 <head>
     <meta charset="utf-8">
     <title>Rama Tranz Travel Terpercaya, Kunjungi Kami di Blog - {{ $title2 }}</title>
-    <meta property="og:image:width" content="240">
-    <meta property="og:image:height" content="90">
-    <meta property="og:type" content="website">
-    <meta property="og:title" content='Travel resmi dan terpercaya BANGETTTTTTTTTTTTTT ke {{ $title2 }}'>
-    <meta property="og:description"
-        content='Nikmati perjalanan Jakarta-Lampung yang nyaman dan aman bersama Rama Tranz Travel. Pesan tiket sekarang dan jelajahi keindahan kedua destinasi page ke {{ $title2 }}'>
-    <meta property="fb:app_id" content="">
     <meta name="author" content="Rama Tranz Travel">
-    <meta name="description" content='Ini hanya percobaan, Bismillah berhasil ke {{ $title2 }}'>
+    <meta name="description" content='Rama Tranz Travel Penyedia Agen Perjalanan, Baca Artikel ke {{ $title2 }}'>
     <link rel="apple-touch-icon" sizes="57x57" href="{{ asset('frontend-assets') }}/favicon/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="{{ asset('frontend-assets') }}/favicon/apple-icon-60x60.png">
     <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('frontend-assets') }}/favicon/apple-icon-72x72.png">
@@ -31,22 +24,9 @@
     <meta name="theme-color" content="#ffffff">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <link rel="stylesheet" href="{{ url('assets-plesir/lib/bootstrap/css/bootstrap.min.css') }} ">
-    <link rel="stylesheet" href="{{ url('frontend-assets/css/owl.carousel.css') }}">
     <link rel="stylesheet" href="{{ url('frontend-assets/css/font-awesome.css') }}">
     <link rel="stylesheet" href="{{ url('assets-plesir/css/normalize.css') }} ">
     <link rel="stylesheet" href="{{ url('assets-plesir/css/theme.css') }} ">
-    <link rel="stylesheet" type="text/css" href="{{ url('assets-plesir/lib/slick/slick/slick.css') }} ">
-    <link rel="stylesheet" type="text/css" href="{{ url('assets-plesir/lib/slick/slick/slick-theme.css') }} ">
-    <!-- Magnific Popup core CSS file -->
-    <link rel="stylesheet" href=" {{ url('assets-plesir/lib/Magnific-Popup-master/dist/magnific-popup.css') }}">
-    <!-- Font Awesome Free 5.10.2 CSS JS -->
-    <link href="{{ url('assets-plesir/lib/fontawesome-free-5.10.2-web/css/all.css') }}" rel="stylesheet">
-    <script defer src="{{ url('assets-plesir/lib/fontawesome-free-5.10.2-web/js/brands.js') }} "></script>
-    <script defer src="{{ url('assets-plesir/lib/fontawesome-free-5.10.2-web/js/solid.js') }} "></script>
-    <script defer src="{{ url('assets-plesir/lib/fontawesome-free-5.10.2-web/js/fontawesome.js') }} "></script>
-
-    <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 
 <div class="subsite-banner">

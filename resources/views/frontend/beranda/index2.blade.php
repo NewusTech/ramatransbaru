@@ -1,5 +1,5 @@
 @extends('frontend.layouts.app-plesir')
-@section('title', 'Beranda')
+@section('title', 'Travel dari Jakarta ke Lampung yang Termurah dan Terpercaya')
 @section('content')
     <!-- Content Wrap  -->
     <div class="content">

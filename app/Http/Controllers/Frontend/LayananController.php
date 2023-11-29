@@ -45,6 +45,7 @@ class LayananController extends Controller
         }
     
         // Menjalankan kueri dan mengambil hasilnya
+        $metades = "Rama Tranz Travel menyediakan kenyamanan dan keamanan untuk perjalanan anda. Jangan ragu percayakan perjalananmu dengan kami";
         $layanan = $layananQuery->latest()->paginate(10)->withQueryString();        
         $asals = DB::table('layanans')->select('asal')->distinct()->get()->pluck('asal');
         $tujuans = DB::table('layanans')->select('tujuan')->distinct()->get()->pluck('tujuan');
@@ -58,7 +59,7 @@ class LayananController extends Controller
         $seoPage = Page::where('slug', '=', 'jadwal')->first();
         $gtagManager = GtagManager::first();
         $analytics = Analytics::first();
-        return view('frontend.layanan.layananAll', compact('data', 'layanan', 'jenisLayanan', 'menuLayanan', 'asals', 'tujuans', 'jenis_l', 'contacts', 'tentang','tagManager','seoPage','gtagManager','analytics', 'asal', 'tujuan', 'jam'));
+        return view('frontend.layanan.layananAll', compact('data', 'metades', 'layanan', 'jenisLayanan', 'menuLayanan', 'asals', 'tujuans', 'jenis_l', 'contacts', 'tentang','tagManager','seoPage','gtagManager','analytics', 'asal', 'tujuan', 'jam'));
     }
 
     public function liveSearch(Request $request)

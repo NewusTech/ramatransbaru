@@ -12,7 +12,8 @@
     @endif
 
     <x-jet-validation-errors class="mb-3" />
-
+    <h1 style="display: none;">Login dan Menjelajahi Dunia dengan Rama Tranz Travel: Mengungkap Pesona dan Manfaatnya
+        Perjalanan Dengan Kami</h1>
     <form method="POST" action="/forgot-password">
         @csrf
 

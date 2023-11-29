@@ -1,5 +1,5 @@
 @extends('frontend.layouts.app-plesir')
-@section('title', 'Tentang Kami')
+@section('title', 'Rama Tranz Travel, Agen Perjalanan Terbaik dan Teraman')
 @section('content')
 
     <!-- page section about-->

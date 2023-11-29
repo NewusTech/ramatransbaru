@@ -8,6 +8,8 @@
             <img src="{{ asset('frontend-assets/img/bg-login.jpg') }}">
         </div>
         <div class="subsite subsite-with-banner">
+            <h1 style="display: none;">Login dan Menjelajahi Dunia dengan Rama Tranz Travel: Mengungkap Pesona dan Manfaatnya
+                Perjalanan Dengan Kami</h1>
             <div class="text-center mb-3">
                 <img style="max-width:300px" src="{{ asset('img/logo.png') }}" alt="{{ company_config('name') }}">
             </div>
