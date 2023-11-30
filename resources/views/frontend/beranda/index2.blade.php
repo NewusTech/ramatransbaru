@@ -3,10 +3,27 @@
 @section('content')
     <!-- Content Wrap  -->
     <div class="content">
+        {{-- modal --}}
+        <div id="gallery-modal">
+            @foreach ($gallery as $item)
+                <div class="modal fade" id="imageresource-{{ $item->id }}" tabindex="-1" role="dialog"
+                    aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-body" id="sm-section-modal-gallery">
+                                <img src="{{ Storage::disk('s3')->url($item->image) }}" id="imagepreview"
+                                    style="width: 100%; height: 264px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+        {{-- end modal --}}
 
         <!-- Bootstrap Modal for Notifications -->
-        <div class="modal fade" id="notificationModal" tabindex="-1" role="dialog" aria-labelledby="notificationModalLabel"
-            aria-hidden="true">
+        <div class="modal fade" id="notificationModal" tabindex="-1" role="dialog"
+            aria-labelledby="notificationModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -599,24 +616,7 @@
     </div>
 
 @endsection
-{{-- modal --}}
-<div id="gallery-modal">
-    @foreach ($gallery as $item)
-        <div class="modal fade" id="imageresource-{{ $item->id }}" tabindex="-1" role="dialog"
-            aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-body" id="sm-section-modal-gallery">
-                        <img src="{{ Storage::disk('s3')->url($item->image) }}" id="imagepreview"
-                            style="width: 100%; height: 264px;">
-                    </div>
-                </div>
-            </div>
-        </div>
-    @endforeach
-</div>
 
-{{-- end modal --}}
 
 @section('script')
     <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
