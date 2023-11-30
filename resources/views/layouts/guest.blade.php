@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ config('app.name', 'TNA App') }}</title>
+    <meta name="description" content="Rama Tranz Travel, Penyedia Agen Perjalanan Terbaik">
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
@@ -165,7 +166,7 @@
                 </div>
                 <div class="col-md-5 login-sec">
                     <div class="text-center mb-3">
-                        <img style="max-width:300px" src="{{ Storage::disk('public')->url(company_config('logo')) }}"
+                        <img style="max-width:300px" src="{{ asset('img/logo.png') }}"
                             alt="{{ company_config('name') }}">
                     </div>
                     {{ $slot }}
