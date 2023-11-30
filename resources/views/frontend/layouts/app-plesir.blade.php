@@ -56,7 +56,7 @@
         href="{{ asset('frontend-assets') }}/favicon/favicon-16x16.png">
 
     <!-- Tag canonical untuk halaman utama -->
-    <link rel="canonical" href="{{ url('/blog/search') }}" />
+    <link rel="canonical" href="{{ url('') }}" />
     {{-- <link rel="prev" href="{{ url('/blog/search') }}?page=3" />
     <link rel="next" href="{{ url('/blog/search') }}?page=2" /> --}}
 

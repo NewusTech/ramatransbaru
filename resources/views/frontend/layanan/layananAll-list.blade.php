@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+
 <head>
     <meta charset="utf-8">
     <title>Harga Tiket - {{ $title2 }} dari Rama Tranz Travel Sangat Murah</title>

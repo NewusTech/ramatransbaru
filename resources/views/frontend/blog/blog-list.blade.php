@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+
 <head>
     <meta charset="utf-8">
     <title>Rama Tranz Travel Terpercaya, Kunjungi Kami di Blog - {{ $title2 }}</title>

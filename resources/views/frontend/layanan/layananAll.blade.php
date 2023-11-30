@@ -312,10 +312,13 @@
                 var query = $('#asal').val();
                 var query2 = $('#tujuan').val();
                 var query3 = $('#jam').val();
+                var baseUrl = "{!! url('/tarif.html/search') !!}";
+
                 $.ajax({
-                    url: "{{ url('/tarif.html/search') }}?page=" + page,
+                    url: baseUrl,
                     type: 'GET',
                     data: {
+                        page: page,
                         query: query,
                         query2: query2,
                         query3: query3,
