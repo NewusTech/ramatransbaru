@@ -92,7 +92,7 @@
             // Fetch data function
             function fetch_data(page = 1) {
                 var query = $('#search').val();
-                var baseUrl = "{!! url('/tarif.html/search') !!}";
+                var baseUrl = "{!! url('/blog/search') !!}";
 
                 $.ajax({
                     url: baseUrl,
