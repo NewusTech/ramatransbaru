@@ -64,23 +64,10 @@
     <meta name="theme-color" content="#ffffff">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
-    {{-- <link rel="stylesheet" href="{{url('frontend-assets/css/reset.css')}}"> --}}
     <!-- Bootstrap v4.3.1 CSS -->
     <link rel="stylesheet" href="{{ url('assets-plesir/lib/bootstrap/css/bootstrap.min.css') }} ">
     <link rel="stylesheet" href="{{ url('frontend-assets/css/owl.carousel.css') }}">
     <link rel="stylesheet" href="{{ url('frontend-assets/css/font-awesome.css') }}">
-    {{-- <link rel="stylesheet" href="{{ url('frontend-assets/css/bootstrap.css') }}"> --}}
-    {{-- <link rel="stylesheet" href="{{url('frontend-assets/css/font-awesome.css')}}">
-    <link rel="stylesheet" href="{{url('frontend-assets/css/owl.carousel.css')}}">
-    <link rel="stylesheet" href="{{url('frontend-assets/css/jquery.fancybox.css')}}">
-    <link rel="stylesheet" href="{{url('frontend-assets/fonts/fi/flaticon.css')}}"> --}}
-    {{-- <link rel="stylesheet" href="{{url('frontend-assets/css/flexslider.css')}}">
-    <link rel="stylesheet" href="{{url('frontend-assets/css/main.css')}}">
-    <link rel="stylesheet" href="{{url('frontend-assets/css/indent.css')}}"> --}}
-    {{-- <link rel="stylesheet" href="{{url('frontend-assets/rs-plugin/css/settings.css')}}">
-    <link rel="stylesheet" href="{{url('frontend-assets/rs-plugin/css/layers.css')}}">
-    <link rel="stylesheet" href="{{url('frontend-assets/rs-plugin/css/navigation.css')}}"> --}}
-    {{-- <link rel="stylesheet" href="{{url('frontend-assets/css/custom.css')}}"> --}}
     <link rel="stylesheet" href="{{ url('assets-plesir/css/normalize.css') }} ">
     <link rel="stylesheet" href="{{ url('assets-plesir/css/theme.css') }} ">
 
@@ -138,10 +125,10 @@
     <meta property="og:locale" content="en_US">
     <meta property="og:site_name" content="{{ isset($dataSeo) ? $dataSeo['site_title'] : 'Rama Tranz Travel' }}">
     @if (trim($__env->yieldContent('image')))
-        <meta property="og:image" content="{{ Storage::disk('public')->url('') }}@yield('image') ">
+        <meta property="og:image" content="{{ Storage::disk('s3')->url('') }}@yield('image') ">
     @else
         <meta property="og:image"
-            content="{{ isset($seoPage->media) ? Storage::disk('public')->url($seoPage->media) : 'https://ramatranzlampung.com/frontend-assets/img/logo-1.png' }} ">
+            content="{{ isset($seoPage->media) ? Storage::disk('s3')->url($seoPage->media) : 'https://ramatranzlampung.com/frontend-assets/img/logo-1.png' }} ">
     @endif
     <meta property="og:image:width" content="240">
     <meta property="og:image:height" content="90">
@@ -162,16 +149,16 @@
     <meta name="apple-mobile-web-app-title"
         content="@if (trim($__env->yieldContent('title'))) @yield('title')- @endif {{ isset($dataSeo) ? $dataSeo['site_title'] : 'Rama Tranz Travel' }} - {{ isset($dataSeo) ? $dataSeo['title'] : 'Travel resmi dan terpercaya' }}">
     @if (trim($__env->yieldContent('image')))
-        <meta name="msapplication-TileImage" content="{{ Storage::disk('public')->url('') }}@yield('image') ">
+        <meta name="msapplication-TileImage" content="{{ Storage::disk('s3')->url('') }}@yield('image') ">
     @else
         <meta name="msapplication-TileImage"
-            content="{{ isset($seoPage->media) ? Storage::disk('public')->url($seoPage->media) : 'https://ramatranzlampung.com/frontend-assets/img/logo-1.png' }}">
+            content="{{ isset($seoPage->media) ? Storage::disk('s3')->url($seoPage->media) : 'https://ramatranzlampung.com/frontend-assets/img/logo-1.png' }}">
     @endif
     <link rel="manifest" href="{{ asset('frontend-assets') }}/favicon/manifest.json">
     <link rel="apple-touch-icon"
-        href="{{ isset($dataSeo) ? Storage::disk('public')->url($dataSeo['image']) : 'https://ramatranzlampung.com/frontend-assets/img/logo-1.png' }}">
+        href="{{ isset($dataSeo) ? Storage::disk('s3')->url($dataSeo['image']) : 'https://ramatranzlampung.com/frontend-assets/img/logo-1.png' }}">
     <link rel="shortcut icon" type="image/png"
-        href="{{ isset($dataSeo) ? Storage::disk('public')->url($dataSeo['image']) : 'https://ramatranzlampung.com/frontend-assets/favicon/favicon-96x96.png' }}">
+        href="{{ isset($dataSeo) ? Storage::disk('s3')->url($dataSeo['image']) : 'https://ramatranzlampung.com/frontend-assets/favicon/favicon-96x96.png' }}">
 </head>
 
 <body class="default">

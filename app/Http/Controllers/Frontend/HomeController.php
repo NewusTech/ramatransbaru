@@ -98,7 +98,7 @@ class HomeController extends Controller
         // data seo Home
         $seoPage = Page::where('slug', '=', 'home')->first();        
         $blogs = Blog::latest()->paginate(3)->withQueryString();
-        $gallery = Gallery::latest()->get();
+        $gallery = Gallery::take(10)->latest()->get();
         return view('frontend.beranda.index2', compact(
                                                       'data', 'layananTarif', 'carousel', 'metades',
                                                       'youtube', 'unggulan', 'feedback', 
