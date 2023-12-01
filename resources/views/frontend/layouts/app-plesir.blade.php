@@ -57,9 +57,6 @@
 
     <!-- Tag canonical untuk halaman utama -->
     <link rel="canonical" href="{{ url('') }}" />
-    {{-- <link rel="prev" href="{{ url('/blog/search') }}?page=3" />
-    <link rel="next" href="{{ url('/blog/search') }}?page=2" /> --}}
-
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="theme-color" content="#ffffff">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
@@ -210,20 +207,6 @@
             <li>
                 <a href="{{ url('/tentang-kami.html') }}"><i class="fas fa-car"></i>Tentang Kami</a>
             </li>
-            {{-- <li>
-                <a href="#pagemybooking" data-toggle="collapse" aria-expanded="false"><i class="fas fa-receipt"></i>My Bookings <span><i class="fas fa-caret-down"></i></span></a>
-                <ul class="collapse collapsible-body" id="pagemybooking">
-                    <li>
-                        <a href="my_rides.html">My rides</a>
-                    </li>
-                    <li>
-                        <a href="cart.html">Cart</a>
-                    </li>
-                    <li>
-                        <a href="checkout.html">Checkout</a>
-                    </li>
-                </ul>
-            </li> --}}
         </ul>
     </nav>
     <!-- .Sidebar left -->
@@ -476,7 +459,7 @@
     <!--  Bootstrap v4.3.1 JS -->
     <script src="{{ url('assets-plesir/lib/bootstrap/js/bootstrap.min.js') }} "></script>
     <!-- Magnific Popup core JS file -->
-    <script src="{{ url('assets-plesir/lib/Magnific-Popup-master/dist/jquery.magnific-popup.js') }} "></script>
+    <script defer src="{{ url('assets-plesir/lib/Magnific-Popup-master/dist/jquery.magnific-popup.js') }} "></script>
     <!-- Slick JS -->
     <script src="{{ url('assets-plesir/lib/slick/slick/slick.min.js') }} "></script>
     <!--  Custom JS -->

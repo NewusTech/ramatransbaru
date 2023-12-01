@@ -41,7 +41,7 @@
         <div class="img-hero ">
             @foreach ($carousel as $slider)
                 <div class="d-flex justify-content-center align-items-center">
-                    <img src="{{ Storage::disk('s3')->url($slider->image) }}" alt="slider" class="img-fluid"
+                    <img data-src="{{ Storage::disk('s3')->url($slider->image) }}" alt="slider" class="img-fluid lazy-load"
                         loading="lazy">
                 </div>
             @endforeach
@@ -171,7 +171,8 @@
                     <div class="row">
                         <div class="col s-icon">
                             <a href="{{ url('/jenis-layanan.html') }}" class="homepage-icon-menu">
-                                <img src="{{ url('assets-plesir/img2/hotel.png') }}" alt="icon" loading="lazy">
+                                <img data-src="{{ url('assets-plesir/img2/hotel.png') }}" alt="icon" loading="lazy"
+                                    class="lazy-load">
                                 <div class="s-icon-text">
                                     LAYANAN
                                 </div>
@@ -179,7 +180,8 @@
                         </div>
                         <div class="col s-icon">
                             <a href="{{ url('/jadwal.html') }}" class="homepage-icon-menu">
-                                <img src="{{ url('assets-plesir/img2/cab.png') }}" alt="icon" loading="lazy">
+                                <img data-src="{{ url('assets-plesir/img2/cab.png') }}" alt="icon" loading="lazy"
+                                    class="lazy-load">
                                 <div class="s-icon-text">
                                     JADWAL
                                 </div>
@@ -187,7 +189,8 @@
                         </div>
                         <div class="col s-icon">
                             <a href="#rute" class="homepage-icon-menu">
-                                <img src="{{ url('assets-plesir/img2/takeoff.png') }}" alt="icon" loading="lazy">
+                                <img data-src="{{ url('assets-plesir/img2/takeoff.png') }}" alt="icon" loading="lazy"
+                                    class="lazy-load">
                                 <div class="s-icon-text">
                                     RUTE
                                 </div>
@@ -197,7 +200,8 @@
                     <div class="row">
                         <div class="col s-icon">
                             <a href="#blog" class="homepage-icon-menu">
-                                <img src="{{ url('assets-plesir/img2/temple.png') }}" alt="icon" loading="lazy">
+                                <img data-src="{{ url('assets-plesir/img2/temple.png') }}" alt="icon" loading="lazy"
+                                    class="lazy-load">
                                 <div class="s-icon-text">
                                     BLOG
                                 </div>
@@ -205,7 +209,8 @@
                         </div>
                         <div class="col s-icon">
                             <a href="{{ url('/kontak-kami.html') }}" class="homepage-icon-menu">
-                                <img src="{{ url('assets-plesir/img2/hospital.png') }}" alt="icon" loading="lazy">
+                                <img data-src="{{ url('assets-plesir/img2/hospital.png') }}" alt="icon" loading="lazy"
+                                    class="lazy-load">
                                 <div class="s-icon-text">
                                     KONTAK
                                 </div>
@@ -213,7 +218,8 @@
                         </div>
                         <div class="col s-icon">
                             <a href="{{ url('/tentang-kami.html') }}" class="homepage-icon-menu">
-                                <img src="{{ url('assets-plesir/img2/cultures.png') }}" alt="icon" loading="lazy">
+                                <img data-src="{{ url('assets-plesir/img2/cultures.png') }}" alt="icon" loading="lazy"
+                                    class="lazy-load">
                                 <div class="s-icon-text">
                                     TENTANG KAMI
                                 </div>
@@ -223,7 +229,8 @@
                     <div class="row">
                         <div class="col s-icon">
                             <a class="homepage-icon-menu" data-toggle="modal" data-target="#modalReview">
-                                <img src="{{ url('assets-plesir/img2/cultures.png') }}" alt="icon" loading="lazy">
+                                <img data-src="{{ url('assets-plesir/img2/cultures.png') }}" alt="icon" loading="lazy"
+                                    class="lazy-load">
                                 <div class="s-icon-text">
                                     Review
                                 </div>
@@ -403,8 +410,8 @@
                         <div class="news-content">
                             <div class="hnw-img">
                                 <a href="{{ route('layananCategoryId', $item->slug) }}" style="color: #2450A6">
-                                    <img src="{{ Storage::disk('s3')->url($item->media) }}" alt="news"
-                                        loading="lazy">
+                                    <img data-src="{{ Storage::disk('s3')->url($item->media) }}" alt="news"
+                                        loading="lazy" class="lazy-load">
                                 </a>
                             </div>
                             <div class="hnw-desc">
@@ -451,8 +458,8 @@
                                 </div>
                                 <div class="vsbt-img">
                                     <a href="{{ route('locationId', $outlet->slug) }}">
-                                        <img src="{{ Storage::disk('s3')->url($outlet->image) }}" alt="img"
-                                            loading="lazy">
+                                        <img data-src="{{ Storage::disk('s3')->url($outlet->image) }}" alt="img"
+                                            class="lazy-load" loading="lazy">
                                     </a>
                                 </div>
                             </div>
@@ -490,8 +497,8 @@
                         <div class="news-content">
                             <div class="hnw-img">
                                 <a href="{{ route('detail-blog.blogId', $blog->slug) }}" style="color: #2450A6">
-                                    <img src="{{ Storage::disk('s3')->url($blog->image) }}" alt="news"
-                                        loading="lazy">
+                                    <img data-src="{{ Storage::disk('s3')->url($blog->image) }}" alt="news"
+                                        class="lazy-load" loading="lazy">
                                 </a>
                             </div>
                             <div class="hnw-desc">
@@ -571,8 +578,9 @@
                             <div class="vs-box">
                                 <div class="vsb-top">
                                     <div class="vsbt-img">
-                                        <img class="home-gallery" id="imageresource-{{ $item->id }}" loading="lazy"
-                                            src="{{ Storage::disk('s3')->url($item->image) }}" alt="img">
+                                        <img class="home-gallery lazy-load" id="imageresource-{{ $item->id }}"
+                                            loading="lazy" data-src="{{ Storage::disk('s3')->url($item->image) }}"
+                                            alt="img">
                                     </div>
                                 </div>
                             </div>
@@ -599,7 +607,7 @@
                 </div>
             </div>
             <div class="bg-subscribe">
-                <img src="{{ url('assets-plesir/img/image.jpg') }}" alt="banner" loading="lazy">
+                <img data-src="{{ url('assets-plesir/img/image.jpg') }}" alt="banner" loading="lazy" class="lazy-load">
             </div>
         </div>
         <!-- END SUBSCRIBE -->
@@ -615,8 +623,8 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-body" id="sm-section-modal-gallery">
-                        <img src="{{ Storage::disk('s3')->url($item->image) }}" id="imagepreview" loading="lazy"
-                            style="width: 100%; height: 264px;">
+                        <img data-src="{{ Storage::disk('s3')->url($item->image) }}" id="imagepreview" loading="lazy"
+                            class="lazy-load" style="width: 100%; height: 264px;">
                     </div>
                 </div>
             </div>
@@ -818,6 +826,29 @@
             });
 
             // Rest of your existing script...
+        });
+
+        document.addEventListener("DOMContentLoaded", function() {
+            var lazyImages = document.querySelectorAll('.lazy-load');
+
+            var lazyLoad = function(target) {
+                var io = new IntersectionObserver(function(entries, observer) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            var img = entry.target;
+                            img.src = img.dataset.src;
+                            img.classList.remove('lazy-load');
+                            observer.disconnect();
+                        }
+                    });
+                });
+
+                io.observe(target);
+            };
+
+            lazyImages.forEach(function(img) {
+                lazyLoad(img);
+            });
         });
     </script>
 
