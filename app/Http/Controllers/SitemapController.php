@@ -17,7 +17,7 @@ class SitemapController extends Controller
 
         $routes = collect(Route::getRoutes())->filter(function ($route) {
             // Filter out routes you want to exclude
-            $excludedRoutes = ['log-viewer', '_debugbar', '_ignition', 'register', 'forgot-password', 'reset-password', 'terms-of-service', 'privacy-policy', 'link', 'sitemap', 'login', 'logout', 'two-factor-challenge'];
+            $excludedRoutes = ['log-viewer', '_debugbar', '_ignition', 'register', 'forgot-password', 'reset-password', 'terms-of-service', 'privacy-policy', 'link', 'sitemap', 'login', 'logout', 'two-factor-challenge', 'user', 'livewire', 'input-review', 'order-store', 'api', 'lokasi-kami/{key}', 'layanan/{key}', 'sanctum'];
             foreach ($excludedRoutes as $excluded) {
                 if (str_contains($route->uri(), $excluded)) {
                     return false;

@@ -4,7 +4,7 @@
 @section('content')
     <!-- Content Wrap  -->
     <div class="content">
-
+        <h1 style="display: none;">Rama Tranz Travel adalah agen jasa travel terbaik</h1>
         <!-- Bootstrap Modal for Notifications -->
         <div class="modal fade" id="notificationModal" tabindex="-1" role="dialog" aria-labelledby="notificationModalLabel"
             aria-hidden="true">
@@ -400,7 +400,8 @@
                         <div class="news-content">
                             <div class="hnw-img">
                                 <a href="{{ route('layananCategoryId', $item->slug) }}" style="color: #2450A6">
-                                    <img src="{{ Storage::disk('s3')->url($item->media) }}" alt="news" loading="lazy">
+                                    <img src="{{ Storage::disk('s3')->url($item->media) }}" alt="news"
+                                        loading="lazy">
                                 </a>
                             </div>
                             <div class="hnw-desc">
@@ -447,7 +448,8 @@
                                 </div>
                                 <div class="vsbt-img">
                                     <a href="{{ route('locationId', $outlet->slug) }}">
-                                        <img src="{{ Storage::disk('s3')->url($outlet->image) }}" alt="img" loading="lazy">
+                                        <img src="{{ Storage::disk('s3')->url($outlet->image) }}" alt="img"
+                                            loading="lazy">
                                     </a>
                                 </div>
                             </div>
@@ -485,7 +487,8 @@
                         <div class="news-content">
                             <div class="hnw-img">
                                 <a href="{{ route('detail-blog.blogId', $blog->slug) }}" style="color: #2450A6">
-                                    <img src="{{ Storage::disk('s3')->url($blog->image) }}" alt="news" loading="lazy">
+                                    <img src="{{ Storage::disk('s3')->url($blog->image) }}" alt="news"
+                                        loading="lazy">
                                 </a>
                             </div>
                             <div class="hnw-desc">
@@ -528,7 +531,7 @@
                                 <div class="testimonial-top">
                                     @if ($feedItem->image)
                                         <div class="author">
-                                            <img src="{{ Storage::disk('s3')->url($feedItem->image) }}" loading="lazy"
+                                            <img src="{{ Storage::disk('s3')->url($feedItem->image) }}"
                                                 data-at2x="{{ Storage::disk('s3')->url($feedItem->image) }}"
                                                 alt="" style="width: 120px;height: 120px;">
                                         </div>
@@ -663,9 +666,7 @@
             });
 
         });
-    </script>
 
-    <script>
         $(document).ready(function() {
             $(".details-button").on("click", function() {
                 var itemId = $(this).data("item");
@@ -696,6 +697,12 @@
                 });
                 console.log(itemId)
             });
+        });
+
+        $(".home-gallery").on("click", function(e) {
+            $('#' + e.target.id).modal(
+                'show'
+            ); // imagemodal is the id attribute assigned to the bootstrap modal, then i use the show function
         });
 
         function formSubmitIndex(idForm) {
@@ -738,12 +745,6 @@
                 '%20%20%0ATempat%20Duduk%3A%20' + numberorder + '%0ATitik%20Jemput%3A%20' + location + '')
         }
 
-        $(".home-gallery").on("click", function(e) {
-            $('#' + e.target.id).modal(
-                'show'
-            ); // imagemodal is the id attribute assigned to the bootstrap modal, then i use the show function
-        });
-
         window.onload = function() {
             $('.sm-slider').slick({
                 autoplay: true,
@@ -756,10 +757,7 @@
                 slidesToScroll: 1
             });
         };
-    </script>
 
-    <!-- Script jQuery -->
-    <script>
         $(document).ready(function() {
             // Tangkap event submit formulir
             $('#formReview').submit(function(e) {

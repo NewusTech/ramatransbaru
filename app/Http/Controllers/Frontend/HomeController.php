@@ -93,8 +93,7 @@ class HomeController extends Controller
         $dataSeo['title'] = $seoTools->home_title;
         $dataSeo['description'] = $seoTools->site_description;
         $dataSeo['keywords'] = $seoTools->keywords;
-        $dataSeo['image'] = $seoTools->image;
-        $metades = "Rama Tranz Travel adalah agen perjalanan  yang terbaik dan terpercaya. Lebih dari 11 tahun melayani para pelanggan dengan pelayanan yang terbaik.";
+        $dataSeo['image'] = $seoTools->image;        
         // data seo Home
         $seoPage = Page::where('slug', '=', 'home')->first();        
         $blogs = Blog::latest()->paginate(3)->withQueryString();
