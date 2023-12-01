@@ -88,7 +88,7 @@
 
     @if (isset($tagManager))
         <script async src="https://www.googletagmanager.com/gtag/js?id={{ $tagManager->codeTag }}"></script>
-        <script>
+        <script async>
             window.dataLayer = window.dataLayer || [];
 
             function gtag() {
@@ -181,7 +181,7 @@
         </div>
         <div class="sdprofile">
             <div class="sdp-left">
-                <img src="{{ url('frontend-assets/img/logo-2.png') }}" alt="profile">
+                <img src="{{ url('frontend-assets/img/logo-2.png') }}" alt="profile" loading="lazy">
             </div>
             <div class="sdp-right">
                 {{-- <div class="sd-name">Lilia Doe</div> --}}
@@ -293,7 +293,8 @@
                     <div class="col-12 col-md-3 mb-4 mb-md-0">
                         <div class="mb-3 d-flex justify-content-center align-items-center">
                             <a href="{{ url('/') }}" class="logo d-flex align-items-center">
-                                <img src="{{ url('frontend-assets/img/logo-2.png') }}" width="50px" alt>
+                                <img src="{{ url('frontend-assets/img/logo-2.png') }}" width="50px" alt
+                                    loading="lazy">
                                 <span class="ml-2" style="color: white">Rama Tranz Travel</span>
                             </a>
                         </div>
@@ -361,14 +362,16 @@
     <div class="bottom-panel">
         <div class="bp-col">
             <a href="{{ url('/') }}">
-                <div class="bp-icon"><img src="{{ url('assets-plesir/img2/menu-bottom/home.png') }}" alt="icon">
+                <div class="bp-icon"><img src="{{ url('assets-plesir/img2/menu-bottom/home.png') }}" alt="icon"
+                        loading="lazy">
                 </div>
                 <div class="bp-text">Beranda</div>
             </a>
         </div>
         <div class="bp-col">
             <a href="{{ url('/tarif.html') }}">
-                <div class="bp-icon"><img src="{{ url('assets-plesir/img2/menu-bottom/rute.png') }}" alt="icon">
+                <div class="bp-icon"><img src="{{ url('assets-plesir/img2/menu-bottom/rute.png') }}" alt="icon"
+                        loading="lazy">
                 </div>
                 <div class="bp-text">Rute</div>
             </a>
@@ -376,21 +379,22 @@
         <div class="bp-col">
             <a href="{{ url('/gallery.html') }}">
                 <div class="bp-icon"><img src="{{ url('assets-plesir/img2/menu-bottom/gallery.png') }}"
-                        alt="icon"></div>
+                        alt="icon" loading="lazy"></div>
                 <div class="bp-text">Gallery</div>
             </a>
         </div>
         <div class="bp-col">
             <a href="{{ url('/jadwal.html') }}">
                 <div class="bp-icon"><img src="{{ url('assets-plesir/img2/menu-bottom/jadwal-removebg.png') }}"
-                        alt="icon"></div>
+                        alt="icon" loading="lazy"></div>
                 <div class="bp-text">Jadwal</div>
             </a>
         </div>
         <div class="bp-col">
             <a
                 href="https://api.whatsapp.com/send?phone=628117298168&text=Hallo%2C%20Saya%20ingin%20memesan%20tiket%20perjalanan%20di%20Rama%20Trans%20Travel.%20Untuk%20pemesanannya%20bagaimana%20ya%3F">
-                <div class="bp-icon"><img src="{{ url('assets-plesir/img2/menu-bottom/wa.png') }}" alt="icon">
+                <div class="bp-icon"><img src="{{ url('assets-plesir/img2/menu-bottom/wa.png') }}" alt="icon"
+                        loading="lazy">
                 </div>
                 <div class="bp-text">Chat</div>
             </a>

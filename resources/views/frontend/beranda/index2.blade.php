@@ -2,6 +2,9 @@
 @extends('frontend.layouts.app-plesir')
 @section('title', 'Travel dari Jakarta ke Lampung yang Termurah dan Terpercaya')
 @section('content')
+
+    <link rel="canonical" href="{{ url('') }}" />
+
     <!-- Content Wrap  -->
     <div class="content">
         <h1 style="display: none;">Rama Tranz Travel adalah agen jasa travel terbaik</h1>
