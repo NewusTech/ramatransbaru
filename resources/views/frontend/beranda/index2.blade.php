@@ -1,1054 +1,625 @@
 <!DOCTYPE html>
-<html>
+@extends('frontend.layouts.app-plesir')
+@section('title', 'Travel dari Jakarta ke Lampung yang Termurah dan Terpercaya')
+@section('content')
+    <!-- Content Wrap  -->
+    <div class="content">
 
-<head>
-    <!-- Google Tag Manager -->
-    @if (isset($gtagManager))
-        <script>
-            (function(w, d, s, l, i) {
-                w[l] = w[l] || [];
-                w[l].push({
-                    'gtm.start': new Date().getTime(),
-                    event: 'gtm.js'
-                });
-                var f = d.getElementsByTagName(s)[0],
-                    j = d.createElement(s),
-                    dl = l != 'dataLayer' ? '&l=' + l : '';
-                j.async = true;
-                j.src =
-                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-                f.parentNode.insertBefore(j, f);
-            })(window, document, 'script', 'dataLayer', '{{ $gtagManager->code }}');
-        </script>
-    @endif
-    <!-- End Google Tag Manager -->
-    {{-- Analytics --}}
-    @if (isset($analytics))
-        <script async src="https://www.googletagmanager.com/gtag/js?id={{ $analytics->code }}"></script>
-        <script>
-            window.dataLayer = window.dataLayer || [];
+        <!-- Bootstrap Modal for Notifications -->
+        <div class="modal fade" id="notificationModal" tabindex="-1" role="dialog" aria-labelledby="notificationModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="notificationModalLabel">Notification</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Display success message -->
+                        @if (session('success'))
+                            <div class="alert alert-success" role="alert">
+                                {{ session('success') }}
+                            </div>
+                        @endif
 
-            function gtag() {
-                dataLayer.push(arguments);
-            }
-            gtag('js', new Date());
-            gtag('config', '{{ $analytics->code }}');
-        </script>
-    @endif
-    {{-- End Analytics --}}
-    <meta charset="utf-8">
-    <link rel="apple-touch-icon" sizes="57x57" href="{{ asset('frontend-assets') }}/favicon/apple-icon-57x57.png">
-    <link rel="apple-touch-icon" sizes="60x60" href="{{ asset('frontend-assets') }}/favicon/apple-icon-60x60.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('frontend-assets') }}/favicon/apple-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('frontend-assets') }}/favicon/apple-icon-76x76.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="{{ asset('frontend-assets') }}/favicon/apple-icon-114x114.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="{{ asset('frontend-assets') }}/favicon/apple-icon-120x120.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="{{ asset('frontend-assets') }}/favicon/apple-icon-144x144.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="{{ asset('frontend-assets') }}/favicon/apple-icon-152x152.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('frontend-assets') }}/favicon/apple-icon-180x180.png">
-    <link rel="icon" type="image/png" sizes="192x192"
-        href="{{ asset('frontend-assets') }}/favicon/android-icon-192x192.png">
-    <link rel="icon" type="image/png" sizes="32x32"
-        href="{{ asset('frontend-assets') }}/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="96x96"
-        href="{{ asset('frontend-assets') }}/favicon/favicon-96x96.png">
-    <link rel="icon" type="image/png" sizes="16x16"
-        href="{{ asset('frontend-assets') }}/favicon/favicon-16x16.png">
-
-    <!-- Tag canonical untuk halaman utama -->
-    <link rel="canonical" href="{{ url('') }}" />
-    {{-- <link rel="prev" href="{{ url('/blog/search') }}?page=3" />
-    <link rel="next" href="{{ url('/blog/search') }}?page=2" /> --}}
-
-    <meta name="msapplication-TileColor" content="#ffffff">
-    <meta name="theme-color" content="#ffffff">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-
-    <!-- Bootstrap v4.3.1 CSS -->
-    <link rel="stylesheet" href="{{ url('assets-plesir/lib/bootstrap/css/bootstrap.min.css') }} ">
-    <link rel="stylesheet" href="{{ url('frontend-assets/css/owl.carousel.css') }}">
-    <link rel="stylesheet" href="{{ url('frontend-assets/css/font-awesome.css') }}">
-    <link rel="stylesheet" href="{{ url('assets-plesir/css/normalize.css') }} ">
-    <link rel="stylesheet" href="{{ url('assets-plesir/css/theme.css') }} ">
-
-    <!-- Slick CSS -->
-    <link rel="stylesheet" type="text/css" href="{{ url('assets-plesir/lib/slick/slick/slick.css') }} ">
-    <link rel="stylesheet" type="text/css" href="{{ url('assets-plesir/lib/slick/slick/slick-theme.css') }} ">
-    <!-- Magnific Popup core CSS file -->
-    <link rel="stylesheet" href=" {{ url('assets-plesir/lib/Magnific-Popup-master/dist/magnific-popup.css') }}">
-    <!-- Font Awesome Free 5.10.2 CSS JS -->
-    <link href="{{ url('assets-plesir/lib/fontawesome-free-5.10.2-web/css/all.css') }}" rel="stylesheet">
-    <script defer src="{{ url('assets-plesir/lib/fontawesome-free-5.10.2-web/js/brands.js') }} "></script>
-    <script defer src="{{ url('assets-plesir/lib/fontawesome-free-5.10.2-web/js/solid.js') }} "></script>
-    <script defer src="{{ url('assets-plesir/lib/fontawesome-free-5.10.2-web/js/fontawesome.js') }} "></script>
-
-    <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
-
-    @if (isset($tagManager))
-        <script async src="https://www.googletagmanager.com/gtag/js?id={{ $tagManager->codeTag }}"></script>
-        <script>
-            window.dataLayer = window.dataLayer || [];
-
-            function gtag() {
-                dataLayer.push(arguments);
-            }
-            gtag('js', new Date());
-
-            gtag('config', '{{ $tagManager->codeTag }}');
-        </script>
-    @endif
-
-    {{-- meta syukron488@gmail.com --}}
-    <title>
-        @if (trim($__env->yieldContent('title')))
-            @yield('title')
-        @endif
-    </title>
-    @if (trim($__env->yieldContent('excerpt')))
-        <meta name="description" content="@yield('excerpt')">
-    @elseif(isset($metades))
-        <meta name="description" content="{{ $metades }}">
-    @elseif(isset($seoPage) && isset($seoPage->meta_desc))
-        <meta name="description" content="{{ $seoPage->meta_desc }}">
-        {{-- @else
-        <meta name="description"
-            content="Nikmati perjalanan Jakarta-Lampung yang nyaman dan aman bersama Rama Tranz Travel. Pesan tiket sekarang dan jelajahi keindahan kedua destinasi"> --}}
-    @endif
-    @if (trim($__env->yieldContent('keyword')))
-        <meta name="keywords" content="@yield('keyword')">
-    @else
-        <meta name="keywords" content="">
-    @endif
-    <meta name="author" content="Rama Tranz Travel">
-    <meta property="og:locale" content="en_US">
-    <meta property="og:site_name" content="{{ isset($dataSeo) ? $dataSeo['site_title'] : 'Rama Tranz Travel' }}">
-    @if (trim($__env->yieldContent('image')))
-        <meta property="og:image" content="{{ Storage::disk('s3')->url('') }}@yield('image') ">
-    @else
-        <meta property="og:image"
-            content="{{ isset($seoPage->media) ? Storage::disk('s3')->url($seoPage->media) : 'https://ramatranzlampung.com/frontend-assets/img/logo-1.png' }} ">
-    @endif
-    <meta property="og:image:width" content="240">
-    <meta property="og:image:height" content="90">
-    <meta property="og:type" content="website">
-    <meta property="og:title"
-        content="@if (trim($__env->yieldContent('title'))) @yield('title')- @endif {{ isset($dataSeo) ? $dataSeo['site_title'] : 'Rama Tranz Travel' }} - {{ isset($dataSeo) ? $dataSeo['title'] : 'Travel resmi dan terpercaya' }}">
-    <meta property="og:description"
-        content="{{ isset($seoPage) ? $seoPage->meta_desc : 'Nikmati perjalanan Jakarta-Lampung yang nyaman dan aman bersama Rama Tranz Travel. Pesan tiket sekarang dan jelajahi keindahan kedua destinasi' }}">
-    <meta property="fb:app_id" content="">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="{{ isset($dataSeo) ? $dataSeo['site_title'] : 'Rama Tranz Travel' }}">
-    <meta name="twitter:title"
-        content="@if (trim($__env->yieldContent('title'))) @yield('title')- @endif {{ isset($dataSeo) ? $dataSeo['site_title'] : 'Rama Tranz Travel' }} - {{ isset($dataSeo) ? $dataSeo['title'] : 'Travel resmi dan terpercaya' }}">
-    <meta name="twitter:description"
-        content="{{ isset($seoPage) ? $seoPage->meta_desc : 'Nikmati perjalanan Jakarta-Lampung yang nyaman dan aman bersama Rama Tranz Travel. Pesan tiket sekarang dan jelajahi keindahan kedua destinasi' }}">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title"
-        content="@if (trim($__env->yieldContent('title'))) @yield('title')- @endif {{ isset($dataSeo) ? $dataSeo['site_title'] : 'Rama Tranz Travel' }} - {{ isset($dataSeo) ? $dataSeo['title'] : 'Travel resmi dan terpercaya' }}">
-    @if (trim($__env->yieldContent('image')))
-        <meta name="msapplication-TileImage" content="{{ Storage::disk('s3')->url('') }}@yield('image') ">
-    @else
-        <meta name="msapplication-TileImage"
-            content="{{ isset($seoPage->media) ? Storage::disk('s3')->url($seoPage->media) : 'https://ramatranzlampung.com/frontend-assets/img/logo-1.png' }}">
-    @endif
-    <link rel="manifest" href="{{ asset('frontend-assets') }}/favicon/manifest.json">
-    <link rel="apple-touch-icon"
-        href="{{ isset($dataSeo) ? Storage::disk('s3')->url($dataSeo['image']) : 'https://ramatranzlampung.com/frontend-assets/img/logo-1.png' }}">
-    <link rel="shortcut icon" type="image/png"
-        href="{{ isset($dataSeo) ? Storage::disk('s3')->url($dataSeo['image']) : 'https://ramatranzlampung.com/frontend-assets/favicon/favicon-96x96.png' }}">
-</head>
-
-<body class="default">
-    <!-- Preloading -->
-    <div class="preloading">
-        <div class="wrap-preload">
-            <div class="cssload-loader"></div>
-        </div>
-    </div>
-    <!-- .Preloading -->
-    <!-- Sidebar left -->
-    <nav id="sidebarleft" class="sidenav">
-        <div id="dismiss">
-            <i class="fas fa-times"></i>
-        </div>
-        <div class="sidebar-header">
-            <h3>Menu</h3>
-        </div>
-        <div class="sdprofile">
-            <div class="sdp-left">
-                <img src="{{ url('frontend-assets/img/logo-2.png') }}" alt="profile">
-            </div>
-            <div class="sdp-right">
-                {{-- <div class="sd-name">Lilia Doe</div> --}}
-                {{-- <div class="sd-status">Ramatranz Travel</div> --}}
+                        <!-- Display error message -->
+                        @if (session('error'))
+                            <div class="alert alert-danger" role="alert">
+                                {{ session('error') }}
+                            </div>
+                        @endif
+                    </div>
+                </div>
             </div>
         </div>
-        <ul class="list-unstyled components">
-            <li>
-                <a href="{{ url('/') }}"><i class="fas fa-home"></i>Beranda</a>
-            </li>
-            <li>
-                <a href="{{ url('/tarif.html') }}"><i class="fas fa-car"></i>Rute</a>
-            </li>
-            <li>
-                <a href="{{ url('/jadwal.html') }}"><i class="fas fa-receipt"></i>Jadwal</a>
-            </li>
-            <li>
-                <a href="{{ url('/blog') }}"><i class="fas fa-newspaper"></i>Blog</a>
-            </li>
-            <li>
-                <a href="{{ url('/jenis-layanan.html') }}"><i class="fas fa-envelope"></i>Layanan</a>
-            </li>
-            <li>
-                <a href="{{ url('/kontak-kami.html') }}"><i class="fas fa-star"></i>Kontak</a>
-            </li>
-            <li>
-                <a href="{{ url('/tentang-kami.html') }}"><i class="fas fa-car"></i>Tentang Kami</a>
-            </li>
-            {{-- <li>
-                <a href="#pagemybooking" data-toggle="collapse" aria-expanded="false"><i class="fas fa-receipt"></i>My Bookings <span><i class="fas fa-caret-down"></i></span></a>
-                <ul class="collapse collapsible-body" id="pagemybooking">
-                    <li>
-                        <a href="my_rides.html">My rides</a>
-                    </li>
-                    <li>
-                        <a href="cart.html">Cart</a>
-                    </li>
-                    <li>
-                        <a href="checkout.html">Checkout</a>
-                    </li>
-                </ul>
-            </li> --}}
-        </ul>
-    </nav>
-    <!-- .Sidebar left -->
-    <!-- Sidebar right -->
-    <nav id="sidebarright" class="sidenav">
-        <div id="dismiss">
-            <i class="fas fa-times"></i>
+        <!-- slider -->
+        <div class="img-hero ">
+            @foreach ($carousel as $slider)
+                <div class="d-flex justify-content-center align-items-center">
+                    <img src="{{ Storage::disk('s3')->url($slider->image) }}" alt="slider" class="img-fluid"
+                        loading="lazy">
+                </div>
+            @endforeach
         </div>
-        <div class="sidebar-header">
-            <h3>Notifications</h3>
-        </div>
-        <ul class="right-menu">
+        <!-- .slider -->
 
-            <li class="right-menu-item">
-                <a href="#">
-                    <i class="fas fa-envelope"></i>
-                    <div class="ntitle">Your transaction was successful</div>
-                    <div class="desc">lorem ipsum dolor sit amet...</div>
-                </a>
-            </li>
-            <li class="right-menu-item">
-                <a href="#">
-                    <i class="fas fa-star"></i>
-                    <div class="ntitle">You have received an award</div>
-                    <div class="desc">lorem ipsum dolor sit amet...</div>
-                </a>
-            </li>
-            <li class="right-menu-item">
-                <a href="#">
-                    <i class="fas fa-car-alt"></i>
-                    <div class="ntitle">Your tour schedule</div>
-                    <div class="desc">lorem ipsum dolor sit amet...</div>
-                </a>
-            </li>
-            <li class="right-menu-item">
-                <a href="#">
-                    <i class="fas fa-ticket-alt"></i>
-                    <div class="ntitle">Promo offer for you today</div>
-                    <div class="desc">lorem ipsum dolor sit amet...</div>
-                </a>
-            </li>
-            <li class="right-menu-item">
-                <a href="#">
-                    <i class="fas fa-envelope"></i>
-                    <div class="ntitle">You get a point</div>
-                    <div class="desc">lorem ipsum dolor sit amet...</div>
-                </a>
-            </li>
-
-        </ul>
-    </nav>
-    <!-- .Sidebar right-->
-    <!-- Header  -->
-    @include('frontend.layouts.header-plesir')
-    <!-- .Header  -->
-
-    <div id="content">
-        <div class="content">
-
-            <!-- Bootstrap Modal for Notifications -->
-            <div class="modal fade" id="notificationModal" tabindex="-1" role="dialog"
-                aria-labelledby="notificationModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="notificationModalLabel">Notification</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
+        <!-- Modal Booking-->
+        <div class="modal fade" id="modalBookingIndex" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalTitle">Booking #<span id="titlelayanan"></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form action="{{ url('order-store') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
                         <div class="modal-body">
-                            <!-- Display success message -->
-                            @if (session('success'))
-                                <div class="alert alert-success" role="alert">
-                                    {{ session('success') }}
-                                </div>
-                            @endif
+                            <div id="msgError" class="alert alert-danger" style="display:none"></div>
+                            {{-- <form> --}}
+                            <div class="form-group">
+                                <label>Name</label>
+                                <input type="text" placeholder="Nama" id="name" name="name"
+                                    class="form-control" />
+                            </div>
+                            <div class="form-group">
+                                <label>No. Hp</label>
+                                <input type="number" placeholder="" id="telp" name="telp"
+                                    class="form-control newus-form-number" />
+                            </div>
+                            <div class="form-group">
+                                <label>Tanggal</label>
+                                <input type="date" id="date" name="date" class="form-control" />
+                            </div>
+                            <div class="form-group">
+                                <label>Waktu</label>
+                                <select id="time" name="time" class="form-control">
+                                    <option value="" disabled selected>--Pilih Waktu--</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Rute</label>
+                                <input type="text" id="rute" name="rute" readonly class="form-control" />
+                            </div>
+                            <div class="form-group">
+                                <label>Tempat Duduk</label>
+                                <input type="text" placeholder="Contoh : 1 Orang" id="numberorder" name="numberorder"
+                                    class="form-control" />
+                            </div>
+                            <div class="form-group">
+                                <label>Titik Jemput</label>
+                                <input type="text" id="location" name="location"
+                                    placeholder="Contoh = Permata Kost - Jl. Swakarya 1 no. H-28A Rt. 09 RW 02 Dwikora II"
+                                    class="form-control" />
+                            </div>
 
-                            <!-- Display error message -->
-                            @if (session('error'))
-                                <div class="alert alert-danger" role="alert">
-                                    {{ session('error') }}
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-success">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- End Modal -->
+
+        <!-- Modal Review -->
+        <div class="modal fade" id="modalReview" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalTitle">Form Review</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form id="formReview" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <div class="modal-body">
+                            <div id="msgError" class="alert alert-danger" style="display:none"></div>
+                            {{-- <form> --}}
+                            <div class="form-group">
+                                <label>Name</label>
+                                <input type="text" id="name_review" name="name_review" class="form-control" />
+                            </div>
+                            <div class="form-group">
+                                <label>Penilaian</label>
+                                <input type="text" id="input_review" name="input_review" class="form-control" />
+                            </div>
+                            <div class="form-group">
+                                <label>Rating</label>
+                                <br>
+                                <div class="star-rating">
+                                    <span class="star" data-rating="1"></span>
+                                    <span class="star" data-rating="2"></span>
+                                    <span class="star" data-rating="3"></span>
+                                    <span class="star" data-rating="4"></span>
+                                    <span class="star" data-rating="5"></span>
+                                    <input type="hidden" name="rating_review" id="rating_review">
                                 </div>
-                            @endif
+                            </div>
+                            <div class="form-group">
+                                <label for="image">Foto (Opsional)</label>
+                                <input type="file" id="image_review" name="image_review" class="form-control"
+                                    accept="image/*">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            {{-- <button class="btn btn-success">Kirim</button> --}}
+                            <button type="submit" class="btn btn-success" id="submitReview">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- End Modal -->
+
+        <!-- section 1 -->
+        <div class="home-icon">
+            <div class="section-home">
+                <div class="container">
+                    <div class="row">
+                        <div class="col s-icon">
+                            <a href="{{ url('/jenis-layanan.html') }}" class="homepage-icon-menu">
+                                <img src="{{ url('assets-plesir/img2/hotel.png') }}" alt="icon" loading="lazy">
+                                <div class="s-icon-text">
+                                    LAYANAN
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col s-icon">
+                            <a href="{{ url('/jadwal.html') }}" class="homepage-icon-menu">
+                                <img src="{{ url('assets-plesir/img2/cab.png') }}" alt="icon" loading="lazy">
+                                <div class="s-icon-text">
+                                    JADWAL
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col s-icon">
+                            <a href="#rute" class="homepage-icon-menu">
+                                <img src="{{ url('assets-plesir/img2/takeoff.png') }}" alt="icon" loading="lazy">
+                                <div class="s-icon-text">
+                                    RUTE
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s-icon">
+                            <a href="#blog" class="homepage-icon-menu">
+                                <img src="{{ url('assets-plesir/img2/temple.png') }}" alt="icon" loading="lazy">
+                                <div class="s-icon-text">
+                                    BLOG
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col s-icon">
+                            <a href="{{ url('/kontak-kami.html') }}" class="homepage-icon-menu">
+                                <img src="{{ url('assets-plesir/img2/hospital.png') }}" alt="icon" loading="lazy">
+                                <div class="s-icon-text">
+                                    KONTAK
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col s-icon">
+                            <a href="{{ url('/tentang-kami.html') }}" class="homepage-icon-menu">
+                                <img src="{{ url('assets-plesir/img2/cultures.png') }}" alt="icon" loading="lazy">
+                                <div class="s-icon-text">
+                                    TENTANG KAMI
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s-icon">
+                            <a class="homepage-icon-menu" data-toggle="modal" data-target="#modalReview">
+                                <img src="{{ url('assets-plesir/img2/cultures.png') }}" alt="icon" loading="lazy">
+                                <div class="s-icon-text">
+                                    Review
+                                </div>
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- slider -->
-            <div class="img-hero ">
-                @foreach ($carousel as $slider)
-                    <div class="d-flex justify-content-center align-items-center">
-                        <img src="{{ Storage::disk('s3')->url($slider->image) }}" alt="slider" class="img-fluid">
+        </div>
+        <!-- .section 1 -->
+
+        <!-- section 2 -->
+        <div class="heading-section" id="rute">
+            <div class="sa-title popcat">Pilih Rute Transportasi </div>
+            <div class="heading-info">
+                {{-- Choose your favorite car --}}
+                Membantu memudahkan mobilitas Anda
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="section-home available-car">
+            <div class="container pt-3" style="background-color: #F0F4F7">
+                <div class="row">
+                    <div class="col-md-12">
+                        <form method="get" class="form search" action="{{ route('tarif') }}">
+                            <div class="row">
+                                <div class="col-md-3 col-sm-12 mb-2">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="fas fa-map-marker"></i>
+                                            </span>
+                                        </div>
+                                        <select id="asal" name="asal" class="form-control">
+                                            <option selected disabled>Berangkat dari...</option>
+                                            @foreach ($asals as $item)
+                                                <option value="{{ $item }}">{{ $item }}</option>
+                                            @endforeach
+                                        </select>
+                                        <div class="input-group-append">
+                                            <button class="btn py-0" type="button"
+                                                style="background-color: white; border: 1px solid #ced4da; color: gray"
+                                                id="clearAsal"><span>x</span></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-12 mb-2">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="fas fa-map-marker"></i>
+                                            </span>
+                                        </div>
+                                        <select id="tujuan" name="tujuan" class="form-control">
+                                            <option selected disabled>Tujuan...</option>
+                                            @foreach ($tujuans as $item)
+                                                <option value="{{ $item }}">{{ $item }}</option>
+                                            @endforeach
+                                        </select>
+                                        <div class="input-group-append">
+                                            <button class="btn py-0" type="button"
+                                                style="background-color: white; border: 1px solid #ced4da; color: gray"
+                                                id="clearTujuan"><span>x</span></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-12 mb-2">
+                                    <div class="input-group">
+                                        <select name="jam" id="jam" class="custom-select">
+                                            <option value="" selected disabled>-- Pilih Waktu --</option>
+                                            <option value="08.00">08.00</option>
+                                            <option value="12.00">12.00</option>
+                                            <option value="15.00">15.00</option>
+                                            <option value="17.00">17.00</option>
+                                            <option value="19.00">19.00</option>
+                                            <option value="20.00">20.00</option>
+                                        </select>
+                                        <div class="input-group-append">
+                                            <button class="btn py-0" type="button"
+                                                style="background-color: white; border: 1px solid #ced4da; color: gray"
+                                                id="clearJam"><span>x</span></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-12">
+                                    <button type="submit" class="btn btn-block p-1"
+                                        style="background-color: #1BB583">Cari</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
+                </div>
+            </div>
+
+            <div class="row">
+                @foreach ($layanan as $key => $layanans)
+                    <!-- item -->
+                    <div class="col-md-4 col-sm-12 mb-1">
+                        <div class="acr-box">
+                            <div class="acr-box-in">
+                                <div class="acr-img">
+                                    <img src="{{ Storage::disk('s3')->url($layanans->image) }}" alt="you might like">
+                                </div>
+                                <div class="acr-content">
+                                    <div class="ct-name">{{ $layanans->title }}</div>
+                                    <div class="ct-cost">
+                                        <div class="jadwal-jemput">
+                                            <h4>Jadwal Jemput</h4>
+                                            <table class="tabel-jadwal-jemput">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>PAGI</td>
+                                                        <td>:</td>
+                                                        <td>{{ $layanans->jam_pagi ? $layanans->jam_pagi : '-' }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>SIANG</td>
+                                                        <td>:</td>
+                                                        <td>{{ $layanans->jam_siang ? $layanans->jam_siang : '-' }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>SORE</td>
+                                                        <td>:</td>
+                                                        <td>{{ $layanans->jam_sore ? $layanans->jam_sore : '-' }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>MALAM</td>
+                                                        <td>:</td>
+                                                        <td>{{ $layanans->jam_malam ? $layanans->jam_malam : '-' }}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                    <div class="ct-reserve">
+                                        <a class="theme-button details-button text-white" data-toggle="modal"
+                                            data-item="{{ $layanans }}" data-target="#modalBookingIndex">
+                                            Pesan
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="acr-bg">
+                                <img src="{{ Storage::disk('s3')->url($layanans->image) }}">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- .item -->
+                    @if ($key == 2)
+            </div>
+            <div class="row">
+                @endif
                 @endforeach
             </div>
-            <!-- .slider -->
 
-            <!-- Modal Booking-->
-            <div class="modal fade" id="modalBookingIndex" tabindex="-1" role="dialog"
-                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="modalTitle">Booking #<span id="titlelayanan"></h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <form action="{{ url('order-store') }}" method="POST" enctype="multipart/form-data">
-                            @csrf
-                            <div class="modal-body">
-                                <div id="msgError" class="alert alert-danger" style="display:none"></div>
-                                {{-- <form> --}}
-                                <div class="form-group">
-                                    <label>Name</label>
-                                    <input type="text" placeholder="Nama" id="name" name="name"
-                                        class="form-control" />
-                                </div>
-                                <div class="form-group">
-                                    <label>No. Hp</label>
-                                    <input type="number" placeholder="" id="telp" name="telp"
-                                        class="form-control newus-form-number" />
-                                </div>
-                                <div class="form-group">
-                                    <label>Tanggal</label>
-                                    <input type="date" id="date" name="date" class="form-control" />
-                                </div>
-                                <div class="form-group">
-                                    <label>Waktu</label>
-                                    <select id="time" name="time" class="form-control">
-                                        <option value="" disabled selected>--Pilih Waktu--</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label>Rute</label>
-                                    <input type="text" id="rute" name="rute" readonly
-                                        class="form-control" />
-                                </div>
-                                <div class="form-group">
-                                    <label>Tempat Duduk</label>
-                                    <input type="text" placeholder="Contoh : 1 Orang" id="numberorder"
-                                        name="numberorder" class="form-control" />
-                                </div>
-                                <div class="form-group">
-                                    <label>Titik Jemput</label>
-                                    <input type="text" id="location" name="location"
-                                        placeholder="Contoh = Permata Kost - Jl. Swakarya 1 no. H-28A Rt. 09 RW 02 Dwikora II"
-                                        class="form-control" />
-                                </div>
+        </div>
+        <div class="more-category text-right">
+            <a href="{{ url('/tarif.html') }}">
+                <div class="theme-button mcbutton">Rute Lainnya</div>
+            </a>
+        </div>
+        <!-- .section 2-->
 
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-success">Submit</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+        {{-- Layanan --}}
+        <div class="heading-section" id="section-layanan">
+            <div class="sa-title popcat">Layanan</div>
+            <div class="heading-info">
+                Nikmati berbagai layanan Ramatrans Travel yang akan memudahkan Anda
             </div>
-            <!-- End Modal -->
-
-            <!-- Modal Review -->
-            <div class="modal fade" id="modalReview" tabindex="-1" role="dialog"
-                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="modalTitle">Form Review</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <form id="formReview" method="POST" enctype="multipart/form-data">
-                            @csrf
-                            <div class="modal-body">
-                                <div id="msgError" class="alert alert-danger" style="display:none"></div>
-                                {{-- <form> --}}
-                                <div class="form-group">
-                                    <label>Name</label>
-                                    <input type="text" id="name_review" name="name_review"
-                                        class="form-control" />
-                                </div>
-                                <div class="form-group">
-                                    <label>Penilaian</label>
-                                    <input type="text" id="input_review" name="input_review"
-                                        class="form-control" />
-                                </div>
-                                <div class="form-group">
-                                    <label>Rating</label>
-                                    <br>
-                                    <div class="star-rating">
-                                        <span class="star" data-rating="1"></span>
-                                        <span class="star" data-rating="2"></span>
-                                        <span class="star" data-rating="3"></span>
-                                        <span class="star" data-rating="4"></span>
-                                        <span class="star" data-rating="5"></span>
-                                        <input type="hidden" name="rating_review" id="rating_review">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="image">Foto (Opsional)</label>
-                                    <input type="file" id="image_review" name="image_review" class="form-control"
-                                        accept="image/*">
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                {{-- <button class="btn btn-success">Kirim</button> --}}
-                                <button type="submit" class="btn btn-success" id="submitReview">Submit</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <!-- End Modal -->
-
-            <!-- section 1 -->
-            <div class="home-icon">
-                <div class="section-home">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col s-icon">
-                                <a href="{{ url('/jenis-layanan.html') }}" class="homepage-icon-menu">
-                                    <img src="{{ url('assets-plesir/img2/hotel.png') }}" alt="icon">
-                                    <div class="s-icon-text">
-                                        LAYANAN
-                                    </div>
+            <div class="clear"></div>
+        </div>
+        <div class="section-home home-news sm-section-layanan">
+            <div class="home-news-wrap">
+                @foreach ($jenisLayanan as $item)
+                    <div class="news-item">
+                        <div class="news-content">
+                            <div class="hnw-img">
+                                <a href="{{ route('layananCategoryId', $item->slug) }}" style="color: #2450A6">
+                                    <img src="{{ Storage::disk('s3')->url($item->media) }}" alt="news" loading="lazy">
                                 </a>
                             </div>
-                            <div class="col s-icon">
-                                <a href="{{ url('/jadwal.html') }}" class="homepage-icon-menu">
-                                    <img src="{{ url('assets-plesir/img2/cab.png') }}" alt="icon">
-                                    <div class="s-icon-text">
-                                        JADWAL
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col s-icon">
-                                <a href="#rute" class="homepage-icon-menu">
-                                    <img src="{{ url('assets-plesir/img2/takeoff.png') }}" alt="icon">
-                                    <div class="s-icon-text">
-                                        RUTE
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col s-icon">
-                                <a href="#blog" class="homepage-icon-menu">
-                                    <img src="{{ url('assets-plesir/img2/temple.png') }}" alt="icon">
-                                    <div class="s-icon-text">
-                                        BLOG
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col s-icon">
-                                <a href="{{ url('/kontak-kami.html') }}" class="homepage-icon-menu">
-                                    <img src="{{ url('assets-plesir/img2/hospital.png') }}" alt="icon">
-                                    <div class="s-icon-text">
-                                        KONTAK
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col s-icon">
-                                <a href="{{ url('/tentang-kami.html') }}" class="homepage-icon-menu">
-                                    <img src="{{ url('assets-plesir/img2/cultures.png') }}" alt="icon">
-                                    <div class="s-icon-text">
-                                        TENTANG KAMI
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col s-icon">
-                                <a class="homepage-icon-menu" data-toggle="modal" data-target="#modalReview">
-                                    <img src="{{ url('assets-plesir/img2/cultures.png') }}" alt="icon">
-                                    <div class="s-icon-text">
-                                        Review
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- .section 1 -->
-
-            <!-- section 2 -->
-            <div class="heading-section" id="rute">
-                <div class="sa-title popcat">Pilih Rute Transportasi </div>
-                <div class="heading-info">
-                    {{-- Choose your favorite car --}}
-                    Membantu memudahkan mobilitas Anda
-                </div>
-                <div class="clear"></div>
-            </div>
-            <div class="section-home available-car">
-                <div class="container pt-3" style="background-color: #F0F4F7">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <form method="get" class="form search" action="{{ route('tarif') }}">
-                                <div class="row">
-                                    <div class="col-md-3 col-sm-12 mb-2">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">
-                                                    <i class="fas fa-map-marker"></i>
-                                                </span>
-                                            </div>
-                                            <select id="asal" name="asal" class="form-control">
-                                                <option selected disabled>Berangkat dari...</option>
-                                                @foreach ($asals as $item)
-                                                    <option value="{{ $item }}">{{ $item }}</option>
-                                                @endforeach
-                                            </select>
-                                            <div class="input-group-append">
-                                                <button class="btn py-0" type="button"
-                                                    style="background-color: white; border: 1px solid #ced4da; color: gray"
-                                                    id="clearAsal"><span>x</span></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 col-sm-12 mb-2">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">
-                                                    <i class="fas fa-map-marker"></i>
-                                                </span>
-                                            </div>
-                                            <select id="tujuan" name="tujuan" class="form-control">
-                                                <option selected disabled>Tujuan...</option>
-                                                @foreach ($tujuans as $item)
-                                                    <option value="{{ $item }}">{{ $item }}</option>
-                                                @endforeach
-                                            </select>
-                                            <div class="input-group-append">
-                                                <button class="btn py-0" type="button"
-                                                    style="background-color: white; border: 1px solid #ced4da; color: gray"
-                                                    id="clearTujuan"><span>x</span></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 col-sm-12 mb-2">
-                                        <div class="input-group">
-                                            <select name="jam" id="jam" class="custom-select">
-                                                <option value="" selected disabled>-- Pilih Waktu --</option>
-                                                <option value="08.00">08.00</option>
-                                                <option value="12.00">12.00</option>
-                                                <option value="15.00">15.00</option>
-                                                <option value="17.00">17.00</option>
-                                                <option value="19.00">19.00</option>
-                                                <option value="20.00">20.00</option>
-                                            </select>
-                                            <div class="input-group-append">
-                                                <button class="btn py-0" type="button"
-                                                    style="background-color: white; border: 1px solid #ced4da; color: gray"
-                                                    id="clearJam"><span>x</span></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 col-sm-12">
-                                        <button type="submit" class="btn btn-block p-1"
-                                            style="background-color: #1BB583">Cari</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    @foreach ($layanan as $key => $layanans)
-                        <!-- item -->
-                        <div class="col-md-4 col-sm-12 mb-1">
-                            <div class="acr-box">
-                                <div class="acr-box-in">
-                                    <div class="acr-img">
-                                        <img src="{{ Storage::disk('s3')->url($layanans->image) }}"
-                                            alt="you might like">
-                                    </div>
-                                    <div class="acr-content">
-                                        <div class="ct-name">{{ $layanans->title }}</div>
-                                        <div class="ct-cost">
-                                            <div class="jadwal-jemput">
-                                                <h4>Jadwal Jemput</h4>
-                                                <table class="tabel-jadwal-jemput">
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>PAGI</td>
-                                                            <td>:</td>
-                                                            <td>{{ $layanans->jam_pagi ? $layanans->jam_pagi : '-' }}
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>SIANG</td>
-                                                            <td>:</td>
-                                                            <td>{{ $layanans->jam_siang ? $layanans->jam_siang : '-' }}
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>SORE</td>
-                                                            <td>:</td>
-                                                            <td>{{ $layanans->jam_sore ? $layanans->jam_sore : '-' }}
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>MALAM</td>
-                                                            <td>:</td>
-                                                            <td>{{ $layanans->jam_malam ? $layanans->jam_malam : '-' }}
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-
-                                        <div class="ct-reserve">
-                                            <a class="theme-button details-button text-white" data-toggle="modal"
-                                                data-item="{{ $layanans }}" data-target="#modalBookingIndex">
-                                                Pesan
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="acr-bg">
-                                    <img src="{{ Storage::disk('s3')->url($layanans->image) }}">
-                                </div>
-                            </div>
-                        </div>
-                        <!-- .item -->
-                        @if ($key == 2)
-                </div>
-                <div class="row">
-                    @endif
-                    @endforeach
-                </div>
-
-            </div>
-            <div class="more-category text-right">
-                <a href="{{ url('/tarif.html') }}">
-                    <div class="theme-button mcbutton">Rute Lainnya</div>
-                </a>
-            </div>
-            <!-- .section 2-->
-
-            {{-- Layanan --}}
-            <div class="heading-section" id="section-layanan">
-                <div class="sa-title popcat">Layanan</div>
-                <div class="heading-info">
-                    Nikmati berbagai layanan Ramatrans Travel yang akan memudahkan Anda
-                </div>
-                <div class="clear"></div>
-            </div>
-            <div class="section-home home-news sm-section-layanan">
-                <div class="home-news-wrap">
-                    @foreach ($jenisLayanan as $item)
-                        <div class="news-item">
-                            <div class="news-content">
-                                <div class="hnw-img">
+                            <div class="hnw-desc">
+                                <div class="hnw-title">
                                     <a href="{{ route('layananCategoryId', $item->slug) }}" style="color: #2450A6">
-                                        <img src="{{ Storage::disk('s3')->url($item->media) }}" alt="news">
+                                        {{ $item->title }}
                                     </a>
                                 </div>
-                                <div class="hnw-desc">
-                                    <div class="hnw-title">
-                                        <a href="{{ route('layananCategoryId', $item->slug) }}"
-                                            style="color: #2450A6">
-                                            {{ $item->title }}
-                                        </a>
-                                    </div>
-                                    <div class="hnw-text">
-                                        {!! Str::words($item->content, 50, '...') !!}
-                                        <a href="{{ route('layananCategoryId', $item->slug) }}"
-                                            style="color: #2450A6" class="more">Selengkapnya</a>
-                                    </div>
+                                <div class="hnw-text">
+                                    {!! Str::words($item->content, 50, '...') !!}
+                                    <a href="{{ route('layananCategoryId', $item->slug) }}" style="color: #2450A6"
+                                        class="more">Selengkapnya</a>
                                 </div>
                             </div>
                         </div>
-                    @endforeach
-                    <div class=" more-category">
-                        <a href="{{ url('/jenis-layanan.html') }}">
-                            <div class="theme-button mcbutton">Selengkapnya</div>
-                        </a>
                     </div>
-                </div>
-            </div>
-            {{-- End Layanan --}}
-
-            <!-- section 3 -->
-            <div class="heading-section">
-                <div class="sa-title popcat">Loket Ramatranz Travel
-                </div>
-                <div class="heading-info">
-                    Loket Ramatranz Travel tersebar di beberapa provinsi untuk memudahkan mobilitas Anda
-                </div>
-                <div class="clear"></div>
-            </div>
-            <div class="section-home vacation-destination">
-                <div class="default-carousel vs-carousel">
-                    <!-- item -->
-                    @foreach ($parentOutlet as $outlet)
-                        <div class="item">
-                            <div class="vs-box">
-                                <div class="vsb-top">
-                                    <div class="vsb-rating">
-                                    </div>
-                                    <div class="vsbt-img">
-                                        <a href="{{ route('locationId', $outlet->slug) }}">
-                                            <img src="{{ Storage::disk('s3')->url($outlet->image) }}" alt="img">
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="vsb-middle">
-                                    <div class="vsbm-left">
-                                        <a href="{{ route('locationId', $outlet->slug) }}" style="color:#2450A6">
-                                            {{ $outlet->nama_provinsi }}
-                                        </a>
-                                    </div>
-                                    <div class="vsbm-right">
-                                        <a href="{{ route('locationId', $outlet->slug) }}">Details</a> <i
-                                            class="fas fa-star"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                    <!-- .item -->
-                </div>
-            </div>
-            <!-- .section 3 -->
-
-            <!-- section 4 -->
-            <div class="heading-section" id="blog">
-                <div class="sa-title popcat">Blog </div>
-                <div class="heading-info">
-                    {{-- Travel quicker, cheaper and smarter --}}
-                </div>
-                <div class="clear"></div>
-            </div>
-            <div class="section-home home-news">
-                <div class="home-news-wrap">
-                    @foreach ($blogs as $blog)
-                        <div class="news-item">
-                            <div class="news-content">
-                                <div class="hnw-img">
-                                    <a href="{{ route('detail-blog.blogId', $blog->slug) }}" style="color: #2450A6">
-                                        <img src="{{ Storage::disk('s3')->url($blog->image) }}" alt="news">
-                                    </a>
-                                </div>
-                                <div class="hnw-desc">
-                                    <div class="hnw-title">
-                                        <a href="{{ route('detail-blog.blogId', $blog->slug) }}"
-                                            style="color: #2450A6">
-                                            {{ $blog->title }}
-                                        </a>
-                                    </div>
-                                    <div class="hnw-text">
-                                        {{ Str::limit($blog->excerpt, 95, '...') }}<span
-                                            class="more">Selengkapnya</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                    <div class=" more-category">
-                        <a href="{{ url('/blog') }}">
-                            <div class="theme-button mcbutton">Selengkapnya</div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <!-- .section 4 -->
-            <!-- testimonials section-->
-            <section class="section-home home-news cws_prlx_section bg-blue-40" style="background-color: #040b16">
-                <div class="container">
-                    <div class="row" data-aos="fade-right" data-aos-duration="500">
-                        <div class="col-md-12">
-                            <h6 class="title-section-top font-4">Feedback</h6>
-                            <h2 class="title-section alt-2"><span>Review</span> Pelanggan</h2>
-                            <div class="cws_divider mb-25 mt-5"></div>
-                        </div>
-                    </div>
-                    <div class="row" data-aos="fade-left" data-aos-duration="500">
-                        <!-- testimonial carousel-->
-                        <div class="owl-three-item">
-                            <!-- testimonial item-->
-                            @foreach ($feedback as $feedItem)
-                                <div class="testimonial-item">
-                                    <div class="testimonial-top">
-                                        @if ($feedItem->image)
-                                            <div class="author">
-                                                <img src="{{ Storage::disk('s3')->url($feedItem->image) }}"
-                                                    data-at2x="{{ Storage::disk('s3')->url($feedItem->image) }}"
-                                                    alt="" style="width: 120px;height: 120px;">
-                                            </div>
-                                        @endif
-                                    </div>
-                                    <!-- testimonial content-->
-                                    <div class="testimonial-body">
-                                        <h5 class="title"><span>{{ $feedItem->title }}</span></h5>
-                                        <div class="stars stars-{{ $feedItem->rating }}"></div>
-                                        <p class="align-center">{{ $feedItem->desc }}</p>
-                                    </div>
-                                </div>
-                            @endforeach
-
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <!-- ! testimonials section-->
-            {{-- Gallery --}}
-            <div class="heading-section" id="gallery-home">
-                <div class="sa-title popcat">Gallery
-                </div>
-                <div class="heading-info">
-                    Koleksi gallery foto
-                </div>
-                <div class="clear"></div>
-            </div>
-            <div class="section-home vacation-destination gallery-home">
-                <div class="sm-slider vs-carousel">
-                    @foreach ($gallery as $item)
-                        <div class="slide">
-                            <div class="item sm-items">
-                                <div class="vs-box">
-                                    <div class="vsb-top">
-                                        <div class="vsbt-img">
-                                            <img class="home-gallery" id="imageresource-{{ $item->id }}"
-                                                src="{{ Storage::disk('s3')->url($item->image) }}" alt="img">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-
+                @endforeach
                 <div class=" more-category">
-                    <a href="{{ url('/gallery.html') }}">
+                    <a href="{{ url('/jenis-layanan.html') }}">
                         <div class="theme-button mcbutton">Selengkapnya</div>
                     </a>
                 </div>
             </div>
-            {{-- End Gallery --}}
-            <!-- SUBSCRIBE -->
-            <div class="section-subscribe">
-                <div class="subcontainer">
-                    <div class="subrow">
-                        <div class="subcol">
-                            {{-- <div class="section-title">Layanan</div>
-                        <p class="textsub">Nikmati berbagai layanan Ramatrans Travel yang akan memudahkan Anda</p> --}}
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-subscribe">
-                    <img src="{{ url('assets-plesir/img/image.jpg') }}" alt="banner">
-                </div>
-            </div>
-            <!-- END SUBSCRIBE -->
-
         </div>
-    </div>
+        {{-- End Layanan --}}
 
-    <div>
-        <footer>
-            <div class="container pt-2">
-                <div class="row">
-                    <div class="col-12 col-md-3 mb-4 mb-md-0">
-                        <div class="mb-3 d-flex justify-content-center align-items-center">
-                            <a href="{{ url('/') }}" class="logo d-flex align-items-center">
-                                <img src="{{ url('frontend-assets/img/logo-2.png') }}" width="50px" alt>
-                                <span class="ml-2" style="color: white">Rama Tranz Travel</span>
-                            </a>
-                        </div>
-
-                        <div class="social-link dark d-flex justify-content-center align-items-center">
-                            <a href="#" class="btn btn-primary btn-sm mr-1">
-                                <i class="fab fa-facebook"></i>
-                            </a>
-                            <a href="#" class="btn btn-primary btn-sm mr-1">
-                                <i class="fab fa-instagram"></i>
-                            </a>
-                            <a href="https://www.youtube.com/channel/UCY7MCn80wnrJTn219ACedYQ" target="_blank"
-                                class="btn btn-primary btn-sm">
-                                <i class="fab fa-youtube"></i>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="col-12 col-md-5 mb-4 mb-md-0">
-                        <h6 style="font-family: Verdana, Geneva, Tahoma, sans-serif">Sekilas Kami</h6>
-                        <hr class="my-1 mb-3" style="border-color: #28a745; width: 80%; border-width: 2px;">
-                        <p class="text-left linkfooter">
-                            {{ company_config('tentang') }}</p>
-                    </div>
-
-                    <div class="col-12 col-md-4 mb-4 mb-md-0">
-                        <h6 style="font-family: Verdana, Geneva, Tahoma, sans-serif">Akses Cepat</h6>
-                        <hr class="my-1 mb-3" style="border-color: #28a745; width: 80%; border-width: 2px;">
-                        <div class="row d-flex justify-content-center align-items-center">
-                            <div class="col-12 col-md-5">
-                                @foreach ($menuLayanan as $item)
-                                    <a href="{{ route('layananCategoryId', $item->slug) }}" rel="tag"
-                                        class="tag linkfooter">{{ $item->title }}</a>
-                                    <br>
-                                @endforeach
+        <!-- section 3 -->
+        <div class="heading-section">
+            <div class="sa-title popcat">Loket Ramatranz Travel
+            </div>
+            <div class="heading-info">
+                Loket Ramatranz Travel tersebar di beberapa provinsi untuk memudahkan mobilitas Anda
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="section-home vacation-destination">
+            <div class="default-carousel vs-carousel">
+                <!-- item -->
+                @foreach ($parentOutlet as $outlet)
+                    <div class="item">
+                        <div class="vs-box">
+                            <div class="vsb-top">
+                                <div class="vsb-rating">
+                                </div>
+                                <div class="vsbt-img">
+                                    <a href="{{ route('locationId', $outlet->slug) }}">
+                                        <img src="{{ Storage::disk('s3')->url($outlet->image) }}" alt="img" loading="lazy">
+                                    </a>
+                                </div>
                             </div>
-                            <div class="col-12 col-md-5">
-                                <a href="{{ route('tarif') }}" rel="tag" class="tag linkfooter">Tarif</a><br>
-                                <a href="{{ route('kontak-kami') }}" rel="tag"
-                                    class="tag linkfooter">Kontak</a><br>
-                                <a href="{{ route('tentang-kami') }}" rel="tag" class="tag linkfooter">Tentang
-                                    Kami</a><br>
+                            <div class="vsb-middle">
+                                <div class="vsbm-left">
+                                    <a href="{{ route('locationId', $outlet->slug) }}" style="color:#2450A6">
+                                        {{ $outlet->nama_provinsi }}
+                                    </a>
+                                </div>
+                                <div class="vsbm-right">
+                                    <a href="{{ route('locationId', $outlet->slug) }}">Details</a> <i
+                                        class="fas fa-star"></i>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                @endforeach
+                <!-- .item -->
+            </div>
+        </div>
+        <!-- .section 3 -->
 
-                <div class="d-flex flex-column flex-sm-row justify-content-between py-3 my-1 border-top">
-                    <p>&copy; Copyright 2023 RAMATRANZ | All Rights Reserved.</p>
-                    <ul class="list-unstyled d-flex">
-                        <li class="ms-3"><a class="link-body-emphasis" href="#"><i
-                                    class="fab fa-twitter"></i></a></li>
-                        <li class="ms-3"><a class="link-body-emphasis" href="#"><i
-                                    class="fab fa-instagram"></i></a></li>
-                        <li class="ms-3"><a class="link-body-emphasis" href="#"><i
-                                    class="fab fa-facebook"></i></a></li>
-                    </ul>
+        <!-- section 4 -->
+        <div class="heading-section" id="blog">
+            <div class="sa-title popcat">Blog </div>
+            <div class="heading-info">
+                {{-- Travel quicker, cheaper and smarter --}}
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="section-home home-news">
+            <div class="home-news-wrap">
+                @foreach ($blogs as $blog)
+                    <div class="news-item">
+                        <div class="news-content">
+                            <div class="hnw-img">
+                                <a href="{{ route('detail-blog.blogId', $blog->slug) }}" style="color: #2450A6">
+                                    <img src="{{ Storage::disk('s3')->url($blog->image) }}" alt="news" loading="lazy">
+                                </a>
+                            </div>
+                            <div class="hnw-desc">
+                                <div class="hnw-title">
+                                    <a href="{{ route('detail-blog.blogId', $blog->slug) }}" style="color: #2450A6">
+                                        {{ $blog->title }}
+                                    </a>
+                                </div>
+                                <div class="hnw-text">
+                                    {{ Str::limit($blog->excerpt, 95, '...') }}<span class="more">Selengkapnya</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+                <div class=" more-category">
+                    <a href="{{ url('/blog') }}">
+                        <div class="theme-button mcbutton">Selengkapnya</div>
+                    </a>
                 </div>
             </div>
-        </footer>
+        </div>
+        <!-- .section 4 -->
+        <!-- testimonials section-->
+        <section class="section-home home-news cws_prlx_section bg-blue-40" style="background-color: #040b16">
+            <div class="container">
+                <div class="row" data-aos="fade-right" data-aos-duration="500">
+                    <div class="col-md-12">
+                        <h6 class="title-section-top font-4">Feedback</h6>
+                        <h2 class="title-section alt-2"><span>Review</span> Pelanggan</h2>
+                        <div class="cws_divider mb-25 mt-5"></div>
+                    </div>
+                </div>
+                <div class="row" data-aos="fade-left" data-aos-duration="500">
+                    <!-- testimonial carousel-->
+                    <div class="owl-three-item">
+                        <!-- testimonial item-->
+                        @foreach ($feedback as $feedItem)
+                            <div class="testimonial-item">
+                                <div class="testimonial-top">
+                                    @if ($feedItem->image)
+                                        <div class="author">
+                                            <img src="{{ Storage::disk('s3')->url($feedItem->image) }}" loading="lazy"
+                                                data-at2x="{{ Storage::disk('s3')->url($feedItem->image) }}"
+                                                alt="" style="width: 120px;height: 120px;">
+                                        </div>
+                                    @endif
+                                </div>
+                                <!-- testimonial content-->
+                                <div class="testimonial-body">
+                                    <h5 class="title"><span>{{ $feedItem->title }}</span></h5>
+                                    <div class="stars stars-{{ $feedItem->rating }}"></div>
+                                    <p class="align-center">{{ $feedItem->desc }}</p>
+                                </div>
+                            </div>
+                        @endforeach
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- ! testimonials section-->
+        {{-- Gallery --}}
+        <div class="heading-section" id="gallery-home">
+            <div class="sa-title popcat">Gallery
+            </div>
+            <div class="heading-info">
+                Koleksi gallery foto
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="section-home vacation-destination gallery-home">
+            <div class="sm-slider vs-carousel">
+                @foreach ($gallery as $item)
+                    <div class="slide">
+                        <div class="item sm-items">
+                            <div class="vs-box">
+                                <div class="vsb-top">
+                                    <div class="vsbt-img">
+                                        <img class="home-gallery" id="imageresource-{{ $item->id }}" loading="lazy"
+                                            src="{{ Storage::disk('s3')->url($item->image) }}" alt="img">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+
+            <div class=" more-category">
+                <a href="{{ url('/gallery.html') }}">
+                    <div class="theme-button mcbutton">Selengkapnya</div>
+                </a>
+            </div>
+        </div>
+        {{-- End Gallery --}}
+        <!-- SUBSCRIBE -->
+        <div class="section-subscribe">
+            <div class="subcontainer">
+                <div class="subrow">
+                    <div class="subcol">
+                        {{-- <div class="section-title">Layanan</div>
+                    <p class="textsub">Nikmati berbagai layanan Ramatrans Travel yang akan memudahkan Anda</p> --}}
+                    </div>
+                </div>
+            </div>
+            <div class="bg-subscribe">
+                <img src="{{ url('assets-plesir/img/image.jpg') }}" alt="banner" loading="lazy">
+            </div>
+        </div>
+        <!-- END SUBSCRIBE -->
 
     </div>
 
-    <!-- Botom Panel  -->
-    <div class="bottom-panel">
-        <div class="bp-col">
-            <a href="{{ url('/') }}">
-                <div class="bp-icon"><img src="{{ url('assets-plesir/img2/menu-bottom/home.png') }}"
-                        alt="icon">
+@endsection
+{{-- modal --}}
+<div id="gallery-modal">
+    @foreach ($gallery as $item)
+        <div class="modal fade" id="imageresource-{{ $item->id }}" tabindex="-1" role="dialog"
+            aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body" id="sm-section-modal-gallery">
+                        <img src="{{ Storage::disk('s3')->url($item->image) }}" id="imagepreview" loading="lazy"
+                            style="width: 100%; height: 264px;">
+                    </div>
                 </div>
-                <div class="bp-text">Beranda</div>
-            </a>
+            </div>
         </div>
-        <div class="bp-col">
-            <a href="{{ url('/tarif.html') }}">
-                <div class="bp-icon"><img src="{{ url('assets-plesir/img2/menu-bottom/rute.png') }}"
-                        alt="icon">
-                </div>
-                <div class="bp-text">Rute</div>
-            </a>
-        </div>
-        <div class="bp-col">
-            <a href="{{ url('/gallery.html') }}">
-                <div class="bp-icon"><img src="{{ url('assets-plesir/img2/menu-bottom/gallery.png') }}"
-                        alt="icon"></div>
-                <div class="bp-text">Gallery</div>
-            </a>
-        </div>
-        <div class="bp-col">
-            <a href="{{ url('/jadwal.html') }}">
-                <div class="bp-icon"><img src="{{ url('assets-plesir/img2/menu-bottom/jadwal-removebg.png') }}"
-                        alt="icon"></div>
-                <div class="bp-text">Jadwal</div>
-            </a>
-        </div>
-        <div class="bp-col">
-            <a
-                href="https://api.whatsapp.com/send?phone=628117298168&text=Hallo%2C%20Saya%20ingin%20memesan%20tiket%20perjalanan%20di%20Rama%20Trans%20Travel.%20Untuk%20pemesanannya%20bagaimana%20ya%3F">
-                <div class="bp-icon"><img src="{{ url('assets-plesir/img2/menu-bottom/wa.png') }}" alt="icon">
-                </div>
-                <div class="bp-text">Chat</div>
-            </a>
-        </div>
-    </div>
-    <!-- .Bottom Panel  -->
-    <div class="overlay"></div>
-    <script src="https://www.youtube.com/player_api"></script>
-    <script type="text/javascript" src="{{ url('frontend-assets/js/jquery.min.js') }}"></script>
-    <script type="text/javascript" src="{{ url('frontend-assets/js/jquery-ui.min.js') }}"></script>
-    <script type="text/javascript" src="{{ url('frontend-assets/js/bootstrap.js') }}"></script>
-    <script type="text/javascript" src="{{ url('frontend-assets/js/owl.carousel.js') }}"></script>
-    <script type="text/javascript" src="{{ url('frontend-assets/js/jquery.sticky.js') }}"></script>
-    <script type="text/javascript" src="{{ url('frontend-assets/js/TweenMax.min.js') }}"></script>
-    <script type="text/javascript" src="{{ url('frontend-assets/js/cws_parallax.js') }}"></script>
-    <script type="text/javascript" src="{{ url('frontend-assets/js/jquery.fancybox.pack.js') }}"></script>
-    <script type="text/javascript" src="{{ url('frontend-assets/js/jquery.fancybox-media.js') }}"></script>
-    <script type="text/javascript" src="{{ url('frontend-assets/js/isotope.pkgd.min.js') }}"></script>
-    <script type="text/javascript" src="{{ url('frontend-assets/js/imagesloaded.pkgd.min.js') }}"></script>
-    <script type="text/javascript" src="{{ url('frontend-assets/js/masonry.pkgd.min.js') }}"></script>
-    <script type="text/javascript" src="{{ url('frontend-assets/rs-plugin/js/jquery.themepunch.tools.min.js') }}">
-    </script>
-    <script type="text/javascript" src="{{ url('frontend-assets/rs-plugin/js/jquery.themepunch.revolution.min.js') }}">
-    </script>
-    <script type="text/javascript"
-        src="{{ url('frontend-assets/rs-plugin/js/extensions/revolution.extension.slideanims.min.js') }}"></script>
-    <script type="text/javascript"
-        src="{{ url('frontend-assets/rs-plugin/js/extensions/revolution.extension.layeranimation.min.js') }}"></script>
-    <script type="text/javascript"
-        src="{{ url('frontend-assets/rs-plugin/js/extensions/revolution.extension.navigation.min.js') }}"></script>
-    <script type="text/javascript"
-        src="{{ url('frontend-assets/rs-plugin/js/extensions/revolution.extension.parallax.min.js') }}"></script>
-    <script type="text/javascript"
-        src="{{ url('frontend-assets/rs-plugin/js/extensions/revolution.extension.video.min.js') }}"></script>
-    <script type="text/javascript"
-        src="{{ url('frontend-assets/rs-plugin/js/extensions/revolution.extension.actions.min.js') }}"></script>
-    <script type="text/javascript"
-        src="{{ url('frontend-assets/rs-plugin/js/extensions/revolution.extension.kenburn.min.js') }}"></script>
-    <script type="text/javascript"
-        src="{{ url('frontend-assets/rs-plugin/js/extensions/revolution.extension.migration.min.js') }}"></script>
-    <script type="text/javascript" src="{{ url('frontend-assets/js/jquery.validate.min.js') }}"></script>
-    <script type="text/javascript" src="{{ url('frontend-assets/js/jquery.form.min.js') }}"></script>
-    <script type="text/javascript" src="{{ url('frontend-assets/js/script.js') }}"></script>
-    <script type="text/javascript" src="{{ url('frontend-assets/js/bg-video/cws_self_vimeo_bg.js') }}"></script>
-    <script type="text/javascript" src="{{ url('frontend-assets/js/bg-video/jquery.vimeo.api.min.js') }}"></script>
-    <script type="text/javascript" src="{{ url('frontend-assets/js/bg-video/cws_YT_bg.js') }}"></script>
-    <script type="text/javascript" src="{{ url('frontend-assets/js/jquery.tweet.js') }}"></script>
-    <script type="text/javascript" src="{{ url('frontend-assets/js/jquery.scrollTo.min.js') }}"></script>
-    <script type="text/javascript" src="{{ url('frontend-assets/js/jquery.flexslider.js') }}"></script>
-    <script type="text/javascript" src="{{ url('frontend-assets/js/retina.min.js') }}"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        AOS.init();
-    </script>
+    @endforeach
+</div>
+{{-- end modal --}}
 
+@section('script')
     <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
     <script>
         $(document).ready(function() {
@@ -1249,39 +820,4 @@
         });
     </script>
 
-    {{-- JS --}}
-    <script>
-        //<meta property="og:url" content="https://localhost/newus/ramatranzlampung/">
-        var link = document.createElement('meta');
-        link.setAttribute('property', 'og:url');
-        link.content = document.location;
-        document.getElementsByTagName('head')[0].appendChild(link);
-
-        // <link rel="canonical" href="https://localhost/newus/ramatranzlampung">
-        var canonical = document.createElement('link');
-        canonical.setAttribute('rel', 'canonical')
-        canonical.href = document.location
-        document.getElementsByTagName('head')[0].appendChild(canonical);
-
-        // <link rel="alternate" href="https://localhost/newus/ramatranzlampung/" hreflang="en-US">
-        var alternate = document.createElement('link');
-        alternate.setAttribute('rel', 'alternate')
-        alternate.href = document.location
-        alternate.setAttribute('hreflang', 'en-US')
-        document.getElementsByTagName('head')[0].appendChild(alternate);
-    </script>
-    <!-- Optional JavaScript -->
-    <!-- jQuery v3.4.1 -->
-    <script src="{{ url('assets-plesir/lib/jquery/jquery-3.4.1.min.js') }}"></script>
-    <!--  Bootstrap v4.3.1 JS -->
-    <script src="{{ url('assets-plesir/lib/bootstrap/js/bootstrap.min.js') }} "></script>
-    <!-- Magnific Popup core JS file -->
-    <script src="{{ url('assets-plesir/lib/Magnific-Popup-master/dist/jquery.magnific-popup.js') }} "></script>
-    <!-- Slick JS -->
-    <script src="{{ url('assets-plesir/lib/slick/slick/slick.min.js') }} "></script>
-    <!--  Custom JS -->
-    <script src="{{ url('assets-plesir/js/theme.js') }} "></script>
-    @yield('script')
-</body>
-
-</html>
+@endsection

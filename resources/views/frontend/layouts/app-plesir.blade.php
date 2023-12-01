@@ -4,7 +4,7 @@
 <head>
     <!-- Google Tag Manager -->
     @if (isset($gtagManager))
-        <script>
+        <script async>
             (function(w, d, s, l, i) {
                 w[l] = w[l] || [];
                 w[l].push({
@@ -396,7 +396,7 @@
     </div>
     <!-- .Bottom Panel  -->
     <div class="overlay"></div>
-    <script src="https://www.youtube.com/player_api"></script>
+    <script defer src="https://www.youtube.com/player_api"></script>
     <script type="text/javascript" src="{{ url('frontend-assets/js/jquery.min.js') }}"></script>
     <script type="text/javascript" src="{{ url('frontend-assets/js/jquery-ui.min.js') }}"></script>
     <script type="text/javascript" src="{{ url('frontend-assets/js/bootstrap.js') }}"></script>
@@ -438,8 +438,8 @@
     <script type="text/javascript" src="{{ url('frontend-assets/js/jquery.scrollTo.min.js') }}"></script>
     <script type="text/javascript" src="{{ url('frontend-assets/js/jquery.flexslider.js') }}"></script>
     <script type="text/javascript" src="{{ url('frontend-assets/js/retina.min.js') }}"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
+    <script defer src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script defer>
         AOS.init();
     </script>
 
