@@ -125,7 +125,8 @@
     <meta property="og:locale" content="en_US">
     <meta property="og:site_name" content="{{ isset($dataSeo) ? $dataSeo['site_title'] : 'Rama Tranz Travel' }}">
     @if (trim($__env->yieldContent('image')))
-        <meta property="og:image" content="{{ Storage::disk('s3')->url('') }}@yield('image') ">
+        <meta property="og:image"
+            content="{{ !empty(trim($__env->yieldContent('image'))) ? Storage::disk('s3')->url($__env->yieldContent('image')) : '' }}">
     @else
         <meta property="og:image"
             content="{{ isset($seoPage->media) ? Storage::disk('s3')->url($seoPage->media) : 'https://ramatranzlampung.com/frontend-assets/img/logo-1.png' }} ">
@@ -149,7 +150,8 @@
     <meta name="apple-mobile-web-app-title"
         content="@if (trim($__env->yieldContent('title'))) @yield('title')- @endif {{ isset($dataSeo) ? $dataSeo['site_title'] : 'Rama Tranz Travel' }} - {{ isset($dataSeo) ? $dataSeo['title'] : 'Travel resmi dan terpercaya' }}">
     @if (trim($__env->yieldContent('image')))
-        <meta name="msapplication-TileImage" content="{{ Storage::disk('s3')->url('') }}@yield('image') ">
+        <meta name="msapplication-TileImage"
+            content="{{ !empty(trim($__env->yieldContent('image'))) ? Storage::disk('s3')->url($__env->yieldContent('image')) : '' }}">
     @else
         <meta name="msapplication-TileImage"
             content="{{ isset($seoPage->media) ? Storage::disk('s3')->url($seoPage->media) : 'https://ramatranzlampung.com/frontend-assets/img/logo-1.png' }}">
