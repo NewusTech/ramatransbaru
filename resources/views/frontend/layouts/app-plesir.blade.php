@@ -2,40 +2,6 @@
 <html>
 
 <head>
-    <!-- Google Tag Manager -->
-    @if (isset($gtagManager))
-        <script async>
-            (function(w, d, s, l, i) {
-                w[l] = w[l] || [];
-                w[l].push({
-                    'gtm.start': new Date().getTime(),
-                    event: 'gtm.js'
-                });
-                var f = d.getElementsByTagName(s)[0],
-                    j = d.createElement(s),
-                    dl = l != 'dataLayer' ? '&l=' + l : '';
-                j.async = true;
-                j.src =
-                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-                f.parentNode.insertBefore(j, f);
-            })(window, document, 'script', 'dataLayer', '{{ $gtagManager->code }}');
-        </script>
-    @endif
-    <!-- End Google Tag Manager -->
-    {{-- Analytics --}}
-    @if (isset($analytics))
-        <script async src="https://www.googletagmanager.com/gtag/js?id={{ $analytics->code }}"></script>
-        <script async>
-            window.dataLayer = window.dataLayer || [];
-
-            function gtag() {
-                dataLayer.push(arguments);
-            }
-            gtag('js', new Date());
-            gtag('config', '{{ $analytics->code }}');
-        </script>
-    @endif
-    {{-- End Analytics --}}
     <meta charset="utf-8">
     <link rel="apple-touch-icon" sizes="57x57" href="{{ asset('frontend-assets') }}/favicon/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="{{ asset('frontend-assets') }}/favicon/apple-icon-60x60.png">
@@ -81,21 +47,6 @@
 
     <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
-
-    @if (isset($tagManager))
-        <script async src="https://www.googletagmanager.com/gtag/js?id={{ $tagManager->codeTag }}"></script>
-        <script async>
-            window.dataLayer = window.dataLayer || [];
-
-            function gtag() {
-                dataLayer.push(arguments);
-            }
-            gtag('js', new Date());
-
-            gtag('config', '{{ $tagManager->codeTag }}');
-        </script>
-    @endif
 
     {{-- meta syukron488@gmail.com --}}
     <title>
@@ -464,6 +415,54 @@
     <script src="{{ url('assets-plesir/lib/slick/slick/slick.min.js') }} "></script>
     <!--  Custom JS -->
     <script src="{{ url('assets-plesir/js/theme.js') }} "></script>
+    <!-- Google Tag Manager -->
+    @if (isset($gtagManager))
+        <script async>
+            (function(w, d, s, l, i) {
+                w[l] = w[l] || [];
+                w[l].push({
+                    'gtm.start': new Date().getTime(),
+                    event: 'gtm.js'
+                });
+                var f = d.getElementsByTagName(s)[0],
+                    j = d.createElement(s),
+                    dl = l != 'dataLayer' ? '&l=' + l : '';
+                j.async = true;
+                j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+                f.parentNode.insertBefore(j, f);
+            })(window, document, 'script', 'dataLayer', '{{ $gtagManager->code }}');
+        </script>
+    @endif
+    <!-- End Google Tag Manager -->
+    {{-- Analytics --}}
+    @if (isset($analytics))
+        <script async src="https://www.googletagmanager.com/gtag/js?id={{ $analytics->code }}"></script>
+        <script async>
+            window.dataLayer = window.dataLayer || [];
+
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+            gtag('config', '{{ $analytics->code }}');
+        </script>
+    @endif
+
+    @if (isset($tagManager))
+        <script async src="https://www.googletagmanager.com/gtag/js?id={{ $tagManager->codeTag }}"></script>
+        <script async>
+            window.dataLayer = window.dataLayer || [];
+
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+
+            gtag('config', '{{ $tagManager->codeTag }}');
+        </script>
+    @endif
+    {{-- End Analytics --}}
     @yield('script')
 </body>
 
