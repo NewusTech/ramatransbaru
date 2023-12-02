@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 @extends('frontend.layouts.app-plesir')
 @section('title', 'Travel dari Jakarta ke Lampung yang Termurah dan Terpercaya')
-@section('content')
-
-    <link rel="canonical" href="{{ url('') }}" />
+@section('content')    
 
     <!-- Content Wrap  -->
     <div class="content">
@@ -41,8 +39,8 @@
         <div class="img-hero ">
             @foreach ($carousel as $slider)
                 <div class="d-flex justify-content-center align-items-center">
-                    <img data-src="{{ Storage::disk('s3')->url($slider->image) }}" alt="slider" class="img-fluid lazy-load"
-                        loading="lazy">
+                    <img data-src="{{ Storage::disk('s3')->url($slider->image) }}" alt="slider"
+                        class="img-fluid lazy-load" loading="lazy">
                 </div>
             @endforeach
         </div>
@@ -209,8 +207,8 @@
                         </div>
                         <div class="col s-icon">
                             <a href="{{ url('/kontak-kami.html') }}" class="homepage-icon-menu">
-                                <img data-src="{{ url('assets-plesir/img2/hospital.png') }}" alt="icon" loading="lazy"
-                                    class="lazy-load">
+                                <img data-src="{{ url('assets-plesir/img2/hospital.png') }}" alt="icon"
+                                    loading="lazy" class="lazy-load">
                                 <div class="s-icon-text">
                                     KONTAK
                                 </div>
@@ -218,8 +216,8 @@
                         </div>
                         <div class="col s-icon">
                             <a href="{{ url('/tentang-kami.html') }}" class="homepage-icon-menu">
-                                <img data-src="{{ url('assets-plesir/img2/cultures.png') }}" alt="icon" loading="lazy"
-                                    class="lazy-load">
+                                <img data-src="{{ url('assets-plesir/img2/cultures.png') }}" alt="icon"
+                                    loading="lazy" class="lazy-load">
                                 <div class="s-icon-text">
                                     TENTANG KAMI
                                 </div>
@@ -229,8 +227,8 @@
                     <div class="row">
                         <div class="col s-icon">
                             <a class="homepage-icon-menu" data-toggle="modal" data-target="#modalReview">
-                                <img data-src="{{ url('assets-plesir/img2/cultures.png') }}" alt="icon" loading="lazy"
-                                    class="lazy-load">
+                                <img data-src="{{ url('assets-plesir/img2/cultures.png') }}" alt="icon"
+                                    loading="lazy" class="lazy-load">
                                 <div class="s-icon-text">
                                     Review
                                 </div>
@@ -578,9 +576,8 @@
                             <div class="vs-box">
                                 <div class="vsb-top">
                                     <div class="vsbt-img">
-                                        <img class="home-gallery lazy-load" id="imageresource-{{ $item->id }}"
-                                            loading="lazy" data-src="{{ Storage::disk('s3')->url($item->image) }}"
-                                            alt="img">
+                                        <img class="home-gallery" id="imageresource-{{ $item->id }}" loading="lazy"
+                                            src="{{ Storage::disk('s3')->url($item->image) }}" alt="img">
                                     </div>
                                 </div>
                             </div>
@@ -596,21 +593,6 @@
             </div>
         </div>
         {{-- End Gallery --}}
-        <!-- SUBSCRIBE -->
-        <div class="section-subscribe">
-            <div class="subcontainer">
-                <div class="subrow">
-                    <div class="subcol">
-                        {{-- <div class="section-title">Layanan</div>
-                    <p class="textsub">Nikmati berbagai layanan Ramatrans Travel yang akan memudahkan Anda</p> --}}
-                    </div>
-                </div>
-            </div>
-            <div class="bg-subscribe">
-                <img data-src="{{ url('assets-plesir/img/image.jpg') }}" alt="banner" loading="lazy" class="lazy-load">
-            </div>
-        </div>
-        <!-- END SUBSCRIBE -->
 
     </div>
 
@@ -623,8 +605,8 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-body" id="sm-section-modal-gallery">
-                        <img data-src="{{ Storage::disk('s3')->url($item->image) }}" id="imagepreview" loading="lazy"
-                            class="lazy-load" style="width: 100%; height: 264px;">
+                        <img data-src="{{ Storage::disk('s3')->url($item->image) }}" id="imagepreview"
+                            loading="lazy" class="lazy-load" style="width: 100%; height: 264px;">
                     </div>
                 </div>
             </div>
@@ -634,8 +616,8 @@
 {{-- end modal --}}
 
 @section('script')
-    <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
-    <script>
+    <script async src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+    <script async>
         $(document).ready(function() {
             var asalSelect = document.getElementById('asal');
             var tujuanSelect = document.getElementById('tujuan');
@@ -850,6 +832,7 @@
                 lazyLoad(img);
             });
         });
+        
     </script>
 
 @endsection
