@@ -417,7 +417,7 @@
     <script src="{{ url('assets-plesir/js/theme.js') }} "></script>
     <!-- Google Tag Manager -->
     @if (isset($gtagManager))
-        <script async>
+        <script defer>
             (function(w, d, s, l, i) {
                 w[l] = w[l] || [];
                 w[l].push({
@@ -437,8 +437,8 @@
     <!-- End Google Tag Manager -->
     {{-- Analytics --}}
     @if (isset($analytics))
-        <script async src="https://www.googletagmanager.com/gtag/js?id={{ $analytics->code }}"></script>
-        <script async>
+        <script defer src="https://www.googletagmanager.com/gtag/js?id={{ $analytics->code }}"></script>
+        <script defer>
             window.dataLayer = window.dataLayer || [];
 
             function gtag() {
@@ -450,8 +450,8 @@
     @endif
 
     @if (isset($tagManager))
-        <script async src="https://www.googletagmanager.com/gtag/js?id={{ $tagManager->codeTag }}"></script>
-        <script async>
+        <script defer src="https://www.googletagmanager.com/gtag/js?id={{ $tagManager->codeTag }}"></script>
+        <script defer>
             window.dataLayer = window.dataLayer || [];
 
             function gtag() {
