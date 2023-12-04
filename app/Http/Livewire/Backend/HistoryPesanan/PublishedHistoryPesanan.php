@@ -26,6 +26,12 @@ class PublishedHistoryPesanan extends DataTableComponent
             Column::make('Rute', 'rute')->searchable()->format(function ($value, $column) {
                 return Str::limit($value, 30, '...');
             })->asHtml(), 
+            Column::make('Tanggal', 'date')->format(function ($value, $column) {
+                return \Carbon\Carbon::parse($value)->format('d M Y');
+            })->asHtml(), 
+            Column::make('Telepon', 'telp')->searchable()->format(function ($value, $column) {
+                return \Illuminate\Support\Str::limit($value, 15);
+            })->asHtml(), 
         ];
     }
 

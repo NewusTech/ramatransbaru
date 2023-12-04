@@ -3,6 +3,13 @@
         <a href="{{ route('dashboard') }}" class="nav-link"><i class="fas fa-fire"></i><span>Dashboard</span></a>
     </li>
 
+    <li class="nav-item @if (in_array(request()->route()->getName(),
+            ['history-pesanan'])) active @endif">
+        <a href="{{ route('history-pesanan') }}" class="nav-link"><i class="fas fa-users" aria-hidden="true"></i>
+            <span>{{ __('Riwayat Pesanan') }}</span></a>
+
+    </li>
+
     <li class="menu-header">Kelola Blog</li>
 
     <li class="nav-item @if (in_array(request()->route()->getName(),
@@ -67,13 +74,6 @@
             ['data-unggulan'])) active @endif">
         <a href="{{ route('data-unggulan') }}" class="nav-link"><i class="fa fa-star" aria-hidden="true"></i>
             <span>{{ __('Unggulan Layanan') }}</span></a>
-
-    </li>
-
-    <li class="nav-item @if (in_array(request()->route()->getName(),
-            ['history-pesanan'])) active @endif">
-        <a href="{{ route('history-pesanan') }}" class="nav-link"><i class="fas fa-users" aria-hidden="true"></i>
-            <span>{{ __('Riwayat Pesanan') }}</span></a>
 
     </li>
 

@@ -188,3 +188,77 @@
     </div>
 
 @endif
+
+<script>
+    $(document).ready(function() {
+        $(".details-button").on("click", function() {
+            var itemId = $(this).data("item");
+            $("#titlelayanan").text(itemId.title);
+            $('#rute').val(itemId.title);
+            var selectElement = $("#time");
+            selectElement.empty();
+
+            if (itemId.jam_pagi) {
+                selectElement.append($("<option></option>").attr("value", itemId.jam_pagi).text(itemId
+                    .jam_pagi));
+            }
+            if (itemId.jam_siang) {
+                selectElement.append($("<option></option>").attr("value", itemId.jam_siang).text(itemId
+                    .jam_siang));
+            }
+            if (itemId.jam_sore) {
+                selectElement.append($("<option></option>").attr("value", itemId.jam_sore).text(itemId
+                    .jam_sore));
+            }
+            if (itemId.jam_malam) {
+                selectElement.append($("<option></option>").attr("value", itemId.jam_malam).text(itemId
+                    .jam_malam));
+            }
+            // formSubmitIndex(itemId.id);
+            $("#modalBookingIndex button.btn-success").on("click", function() {
+                formSubmitIndex(itemId.id);
+            });
+            console.log(itemId)
+        });
+    });
+
+    function formSubmitIndex(idForm) {
+        var name = $('#name').val();
+        var telp = $('#telp').val();
+        var date = $('#date').val();
+        var time = $('#time').find(":selected").val();
+        var rute = $('#rute').val();
+
+        var numberorder = $('#numberorder').val();
+        var location = $('#location').val();
+
+        if (name.trim() == '') {
+            alert('Silakan isi nama terlebih dahulu.');
+            $('#name').focus();
+            return false;
+        }
+
+        if (telp.trim() == '') {
+            alert('Silakan isi nomor hp terlebih dahulu.');
+            $('#telp').focus();
+            return false;
+        }
+
+        if (date.trim() == '') {
+            alert('Silakan isi tanggal berangkat terlebih dahulu.');
+            $('#date').focus();
+            return false;
+        }
+
+        if (location.trim() == '') {
+            alert('Silakan isi titik jemput terlebih dahulu.');
+            $('#location').focus();
+            return false;
+        }
+
+        window.open('https://api.whatsapp.com/send?phone=628117298168' + '&text=Nama%3A%20' + name +
+            '+%20%0ANo.%20hp%3A%20' + telp + '%20%0ATanggal%20%3A%20' +
+            date + '%20%20%0Awaktu%20%20%3A%20' + time + '%20%0ARute%20%3A%20' + rute +
+            '%20%20%0ATempat%20Duduk%3A%20' + numberorder + '%0ATitik%20Jemput%3A%20' + location + '')
+    }
+</script>
