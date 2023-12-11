@@ -1,14 +1,31 @@
 <!DOCTYPE html>
 @extends('frontend.layouts.app-plesir')
-@section('title', 'Travel dari Jakarta ke Lampung yang Termurah dan Terpercaya')
-@section('content')    
+@section('title', env('APP_NAME', 'Default Name') . ', Agen Perjalanan Termurah dan Ternyaman')
+@section('content')
+    {{-- modal --}}
+    <div id="gallery-modal">
+        @foreach ($gallery as $item)
+            <div class="modal fade" id="imageresource-{{ $item->id }}" tabindex="-1" role="dialog"
+                aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-body" id="sm-section-modal-gallery">
+                            <img data-src="{{ Storage::disk('s3')->url($item->image) }}" id="imagepreview" loading="lazy"
+                                class="lazy-load" style="width: 100%; height: 264px;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    </div>
+    {{-- end modal --}}
 
     <!-- Content Wrap  -->
     <div class="content">
         <h1 style="display: none;">Rama Tranz Travel adalah agen jasa travel terbaik</h1>
         <!-- Bootstrap Modal for Notifications -->
-        <div class="modal fade" id="notificationModal" tabindex="-1" role="dialog" aria-labelledby="notificationModalLabel"
-            aria-hidden="true">
+        <div class="modal fade" id="notificationModal" tabindex="-1" role="dialog"
+            aria-labelledby="notificationModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -57,7 +74,8 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="{{ url('order-store') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ url('order-store') }}" method="POST" enctype="multipart/form-data"
+                        onsubmit="return formSubmitIndex()">
                         @csrf
                         <div class="modal-body">
                             <div id="msgError" class="alert alert-danger" style="display:none"></div>
@@ -109,59 +127,6 @@
         </div>
         <!-- End Modal -->
 
-        <!-- Modal Review -->
-        <div class="modal fade" id="modalReview" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="modalTitle">Form Review</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <form id="formReview" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        <div class="modal-body">
-                            <div id="msgError" class="alert alert-danger" style="display:none"></div>
-                            {{-- <form> --}}
-                            <div class="form-group">
-                                <label>Name</label>
-                                <input type="text" id="name_review" name="name_review" class="form-control" />
-                            </div>
-                            <div class="form-group">
-                                <label>Penilaian</label>
-                                <input type="text" id="input_review" name="input_review" class="form-control" />
-                            </div>
-                            <div class="form-group">
-                                <label>Rating</label>
-                                <br>
-                                <div class="star-rating">
-                                    <span class="star" data-rating="1"></span>
-                                    <span class="star" data-rating="2"></span>
-                                    <span class="star" data-rating="3"></span>
-                                    <span class="star" data-rating="4"></span>
-                                    <span class="star" data-rating="5"></span>
-                                    <input type="hidden" name="rating_review" id="rating_review">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="image">Foto (Opsional)</label>
-                                <input type="file" id="image_review" name="image_review" class="form-control"
-                                    accept="image/*">
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                            {{-- <button class="btn btn-success">Kirim</button> --}}
-                            <button type="submit" class="btn btn-success" id="submitReview">Submit</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <!-- End Modal -->
-
         <!-- section 1 -->
         <div class="home-icon">
             <div class="section-home">
@@ -187,8 +152,8 @@
                         </div>
                         <div class="col s-icon">
                             <a href="#rute" class="homepage-icon-menu">
-                                <img data-src="{{ url('assets-plesir/img2/takeoff.png') }}" alt="icon" loading="lazy"
-                                    class="lazy-load">
+                                <img data-src="{{ url('assets-plesir/img2/takeoff.png') }}" alt="icon"
+                                    loading="lazy" class="lazy-load">
                                 <div class="s-icon-text">
                                     RUTE
                                 </div>
@@ -226,7 +191,7 @@
                     </div>
                     <div class="row">
                         <div class="col s-icon">
-                            <a class="homepage-icon-menu" data-toggle="modal" data-target="#modalReview">
+                            <a href="{{ url('/review') }}" class="homepage-icon-menu">
                                 <img data-src="{{ url('assets-plesir/img2/cultures.png') }}" alt="icon"
                                     loading="lazy" class="lazy-load">
                                 <div class="s-icon-text">
@@ -596,24 +561,9 @@
 
     </div>
 
+
+
 @endsection
-{{-- modal --}}
-<div id="gallery-modal">
-    @foreach ($gallery as $item)
-        <div class="modal fade" id="imageresource-{{ $item->id }}" tabindex="-1" role="dialog"
-            aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-body" id="sm-section-modal-gallery">
-                        <img data-src="{{ Storage::disk('s3')->url($item->image) }}" id="imagepreview"
-                            loading="lazy" class="lazy-load" style="width: 100%; height: 264px;">
-                    </div>
-                </div>
-            </div>
-        </div>
-    @endforeach
-</div>
-{{-- end modal --}}
 
 @section('script')
     <script async src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
@@ -683,19 +633,9 @@
                 if (itemId.jam_malam) {
                     selectElement.append($("<option></option>").attr("value", itemId.jam_malam).text(itemId
                         .jam_malam));
-                }
-                // formSubmitIndex(itemId.id);
-                $("#modalBookingIndex button.btn-success").on("click", function() {
-                    formSubmitIndex(itemId.id);
-                });
+                }               
                 console.log(itemId)
             });
-        });
-
-        $(".home-gallery").on("click", function(e) {
-            $('#' + e.target.id).modal(
-                'show'
-            ); // imagemodal is the id attribute assigned to the bootstrap modal, then i use the show function
         });
 
         function formSubmitIndex(idForm) {
@@ -738,6 +678,12 @@
                 '%20%20%0ATempat%20Duduk%3A%20' + numberorder + '%0ATitik%20Jemput%3A%20' + location + '')
         }
 
+        $(".home-gallery").on("click", function(e) {
+            $('#' + e.target.id).modal(
+                'show'
+            ); // imagemodal is the id attribute assigned to the bootstrap modal, then i use the show function
+        });
+
         window.onload = function() {
             $('.sm-slider').slick({
                 autoplay: true,
@@ -750,51 +696,6 @@
                 slidesToScroll: 1
             });
         };
-
-        $(document).ready(function() {
-            // Tangkap event submit formulir
-            $('#formReview').submit(function(e) {
-                e.preventDefault(); // Menghentikan aksi bawaan formulir
-
-                var formData = new FormData(this);
-
-                var name_review = $('#name_review').val();
-                var input_review = $('#input_review').val();
-                var rating_review = $('#rating_review').val();
-
-                if (name_review.trim() == '') {
-                    alert('Silakan isi nama terlebih dahulu.');
-                    $('#name_review').focus();
-                    return false;
-                }
-                if (input_review.trim() == '') {
-                    alert('Silakan isi kolom penilaian terlebih dahulu.');
-                    $('#input_review').focus();
-                    return false;
-                }
-                if (rating_review.trim() == '') {
-                    alert('Silakan isi rating terlebih dahulu.');
-                    $('#rating_review').focus();
-                    return false;
-                }
-
-                $.ajax({
-                    type: 'POST',
-                    url: '{{ url('input-review') }}', // Ganti dengan rute yang sesuai
-                    data: formData,
-                    contentType: false,
-                    processData: false,
-                    success: function(data) {
-                        alert('Review berhasil disimpan!');
-                    },
-                    error: function(error) {
-                        console.log(error);
-
-                        alert('Terjadi kesalahan saat menyimpan review.');
-                    }
-                });
-            });
-        });
 
         $(document).ready(function() {
             // Star rating selection
@@ -832,7 +733,6 @@
                 lazyLoad(img);
             });
         });
-        
     </script>
 
 @endsection

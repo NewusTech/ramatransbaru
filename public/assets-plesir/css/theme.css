@@ -1979,12 +1979,13 @@ a[data-toggle="collapse"] {
   position: relative;
   overflow: hidden;
   z-index: 1;
-  height: 170px;
+  height: 182px;
 }
 
 .available-car .acr-box .acr-box-in .acr-content {
-  padding: 20px 20px;
+  padding: 15px 15px;
   width: 100%;
+  height: 100%;
 }
 
 .available-car .acr-box .acr-box-in .acr-content .ct-name {
@@ -2046,6 +2047,8 @@ a[data-toggle="collapse"] {
 .available-car .acr-box .acr-box-in .acr-content .ct-reserve {
   display: block;
   clear: both;
+  position: absolute;
+  bottom: 10px;
 }
 
 .available-car .acr-box .acr-box-in .acr-img {

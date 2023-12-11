@@ -6,22 +6,19 @@
         <div class="container page">
             <!-- section portfolio item-->
             <section class="page-section mb-0 pt-0 pb-50">
-                <div id="flex-slider" class="flexslider">
-                    <ul class="slides">
+                <div id="flex-slider" class="flexslider row">
+                    {{-- <ul class="slides"> --}}
+                    <div class="col-md-12">
                         <img src="{{ Storage::disk('s3')->url($jenisLayanan->media) }}" alt="">
-                    </ul>
+                        {{-- </ul> --}}
+                    </div>
                 </div>
-                <h4 class="mb-20 mt-30" style="font-size: 26px; color: #040b16">Layanan
+                <h4 class="mb-20 mt-4" style="font-size: 26px; color: #040b16">Layanan
                     {{ $jenisLayanan->title }}
                 </h4>
                 <div class="row">
                     <div class="col-md-12">
-                        {{-- <p class="mb-20 mt-3"><i class="flaticon-suntour-calendar"></i>&ensp;{{ date('d M Y',
-                        strtotime($detailBlog->published_at)); }}
-                    </p> --}}
-                        {{-- <p class="mb-15" style="color: #040b16; font-weight: 600">{{$detailBlog->excerpt}} </p> --}}
                         <p class="mb-15">{!! $jenisLayanan->content !!}</p>
-
                     </div>
                 </div>
             </section>

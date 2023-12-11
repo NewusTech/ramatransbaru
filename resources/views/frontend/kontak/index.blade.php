@@ -1,5 +1,5 @@
 @extends('frontend.layouts.app-plesir')
-@section('title', 'Hubungi Rama Tranz Travel Untuk Mendapatkan Tiket Murah')
+@section('title', 'Hubungi ' . env('APP_NAME', 'Default Name') . ' Untuk Mendapatkan Tiket Murah')
 @section('content')
 
     <div class="content-wrap page-kontak">

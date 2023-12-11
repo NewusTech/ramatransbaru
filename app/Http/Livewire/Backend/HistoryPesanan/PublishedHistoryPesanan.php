@@ -6,10 +6,15 @@ use App\Models\ListOrder;
 use Illuminate\Database\Eloquent\Builder;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
+use Rappasoft\LaravelLivewireTables\Views\Filter;
+use Carbon\Carbon;
 use Illuminate\Support\Str;
 
 class PublishedHistoryPesanan extends DataTableComponent
-{
+{   
+    public $startDate;
+    public $endDate;
+
     public function columns(): array
     {
         return [
@@ -27,16 +32,37 @@ class PublishedHistoryPesanan extends DataTableComponent
                 return Str::limit($value, 30, '...');
             })->asHtml(), 
             Column::make('Tanggal', 'date')->format(function ($value, $column) {
-                return \Carbon\Carbon::parse($value)->format('d M Y');
+                return Carbon::parse($value)->format('d M Y');
             })->asHtml(), 
             Column::make('Telepon', 'telp')->searchable()->format(function ($value, $column) {
-                return \Illuminate\Support\Str::limit($value, 15);
+                return Str::limit($value, 15);
             })->asHtml(), 
+        ];
+    }    
+
+    public function filters(): array
+    {
+        return [
+            'startDate' => Filter::make('Start Date')->date(),
+            'endDate' => Filter::make('End Date')->date(),
         ];
     }
 
     public function query(): Builder
-    {
-        return ListOrder::query();
-    }
+    {     
+        $query = ListOrder::query();
+
+        if ($this->filters['startDate']) {
+            $startDate = Carbon::parse($this->filters['startDate'])->format('Y-m-d');
+            $query->whereDate('date', '>=', $startDate);
+        }
+    
+        if ($this->filters['endDate']) {
+            $endDate = Carbon::parse($this->filters['endDate'])->format('Y-m-d');
+            $query->whereDate('date', '<=', $endDate);
+        }
+
+        return $query;
+    }    
+
 }

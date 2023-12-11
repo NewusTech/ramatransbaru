@@ -70,7 +70,7 @@ class FormLayanan extends Component
         $this->validate();
         if (!$this->layanan->image) {
             $this->validate([
-                'gambar'    => 'required|image|mimes:jpg,jpeg,png|max:300',
+                'gambar'    => 'required|image|mimes:jpg,jpeg,png,webp|max:250',
             ]);
         }
 

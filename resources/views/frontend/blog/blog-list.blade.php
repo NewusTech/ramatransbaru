@@ -2,9 +2,10 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Rama Tranz Travel Terpercaya, Kunjungi Kami di Blog - {{ $title2 }}</title>
+    <title>{!! env('APP_NAME', 'Default Name') !!} Terpercaya, Kunjungi Kami di Blog - {{ $title2 }}</title>
     <meta name="author" content="Rama Tranz Travel">
-    <meta name="description" content='Rama Tranz Travel Penyedia Agen Perjalanan, Baca Artikel ke {{ $title2 }}'>
+    <meta name="description"
+        content='{{ env('APP_NAME', 'Default Name') }} Penyedia Agen Perjalanan, Baca Artikel ke {{ $title2 }}'>
     <link rel="apple-touch-icon" sizes="57x57" href="{{ asset('frontend-assets') }}/favicon/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="{{ asset('frontend-assets') }}/favicon/apple-icon-60x60.png">
     <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('frontend-assets') }}/favicon/apple-icon-72x72.png">

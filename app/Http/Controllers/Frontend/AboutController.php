@@ -21,7 +21,7 @@ class AboutController extends Controller
         $data['intro'] = 'Rama Trans adalah jasa Transportasi Terbaik.';
         $data['type'] = 'Tentang Kami';
         $data['url'] = URL::current();
-        $metades = "Perjalanan nyaman dan mudah hanya dengan Rama Tranz Travel. Dengan harga murah sudah bisa pulang kampung";
+        $metades = "Perjalanan nyaman dan mudah hanya dengan " . env('APP_NAME', 'Default Name') . " Dengan harga murah sudah bisa pulang kampung";
 
         $menuLayanan = JenisLayanan::select(['id', 'title', 'slug'])->orderBy('slug', 'ASC')->get();
         $tentang = Page::get()->first();

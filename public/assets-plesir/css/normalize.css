@@ -39,7 +39,7 @@ body {
   color: #1bb583;
   text-transform: uppercase;
   font-weight: 400;
-  margin: 0;
+  margin: 0 ;
 }
 
 .font-4 {
@@ -284,6 +284,66 @@ h1 {
   font-size: 2em;
   margin: 0.67em 0;
 }
+
+.page-section {
+  padding: 90px 0;
+}
+
+/*
+- DIVIDER
+*/
+.cws_divider_wrapper {
+  margin: 0;
+  line-height: 0;
+}
+
+.cws_divider_wrapper.align-center {
+  text-align: center;
+}
+
+.cws_divider_wrapper.align-left {
+  text-align: left;
+}
+
+.cws_divider_wrapper.align-right {
+  text-align: right;
+}
+
+.cws_divider.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cws_divider,
+hr {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  border-bottom: 2px solid #1bb583;
+}
+
+.cws_divider.short,
+hr.short {
+  width: 70px;
+}
+
+.divider-slash {
+  margin-left: 40px;
+  display: inline-block;
+  border-left: 2px solid #1bb583;
+  width: 3px;
+  height: 50px;
+  -webkit-transform: skew(-15deg);
+  -moz-transform: skew(-15deg);
+  -ms-transform: skew(-15deg);
+  -o-transform: skew(-15deg);
+  transform: skew(-15deg);
+}
+
+/*
+- \DIVIDER
 
 /* Grouping content
    ========================================================================== */

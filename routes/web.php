@@ -6,6 +6,7 @@ use App\Http\Controllers\Frontend\AboutController;
 use App\Http\Controllers\Frontend\BlogController;
 use App\Http\Controllers\Frontend\ContactController;
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Frontend\ReviewController;
 use App\Http\Controllers\Frontend\LayananController;
 use App\Http\Controllers\Frontend\LocationController;
 use App\Http\Controllers\Frontend\JadwalController;
@@ -39,7 +40,9 @@ Route::get('/', [HomeController::class, 'portal'])->name('beranda');
 
 Route::post('/order-store', [HomeController::class, 'store']);
 
-Route::post('/input-review', [HomeController::class, 'inputreview']);
+Route::get('/review', [ReviewController::class, 'index', 'review']);
+
+Route::post('/input-review', [ReviewController::class, 'inputreview', 'inputreview']);
 
 Route::get('/tentang-kami.html', [AboutController::class, 'index'])->name('tentang-kami');
 
@@ -56,6 +59,7 @@ Route::prefix('tarif.html')->group(function () {
 });
 
 Route::get('/jenis-layanan.html', [LayananController::class, 'indexJenisLayanan'])->name('jenis-layanan');
+
 
 Route::prefix('detail-jasa-transportasi')->group(function () {
     Route::get('/{slug}.html', [LayananController::class, 'detailJasaTransportasi'])->name('detail-jasa-transportasi.jasaId');

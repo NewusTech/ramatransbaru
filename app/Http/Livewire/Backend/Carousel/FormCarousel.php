@@ -41,7 +41,7 @@ class FormCarousel extends Component
         $this->validate();
         if (!$this->carousel->image) {
             $this->validate([
-                'gambar'    => 'required|image|mimes:jpg,jpeg,png|max:200',
+                'gambar'    => 'required|image|mimes:jpg,jpeg,png,webp|max:250',
             ]);
         }
 

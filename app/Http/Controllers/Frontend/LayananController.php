@@ -45,8 +45,8 @@ class LayananController extends Controller
         }
     
         // Menjalankan kueri dan mengambil hasilnya
-        $metades = "Rama Tranz Travel menyediakan kenyamanan dan keamanan untuk perjalanan anda. Jangan ragu percayakan perjalananmu dengan kami";
-        $layanan = $layananQuery->latest()->paginate(10)->withQueryString();        
+        $metades = env('APP_NAME', 'Default Name') . " menyediakan kenyamanan dan keamanan untuk perjalanan anda. Jangan ragu percayakan perjalananmu dengan kami";
+        $layanan = $layananQuery->latest()->paginate(12)->withQueryString();        
         $asals = DB::table('layanans')->select('asal')->distinct()->get()->pluck('asal');
         $tujuans = DB::table('layanans')->select('tujuan')->distinct()->get()->pluck('tujuan');
         $jenis_l = DB::table('layanans')->select('jenis_layanan_id')->distinct()->get()->pluck('jenis_layanan_id');
@@ -76,7 +76,7 @@ class LayananController extends Controller
                     ->orWhere('jam_siang', 'LIKE', "%$query3%")
                     ->orWhere('jam_sore', 'LIKE', "%$query3%")
                     ->orWhere('jam_malam', 'LIKE', "%$query3%");
-            })->paginate(10);
+            })->paginate(12);
 
         return view('frontend.layanan.layananAll-list', compact('layanan', 'title2'));
     }
@@ -138,11 +138,11 @@ class LayananController extends Controller
         $data['type'] = 'Layanan Ramatranz';
         $data['url'] = URL::current();
 
-        $jenisLayanan = JenisLayanan::select(['id', 'title', 'slug','media','content'])->get();
+        $jenisLayanan = JenisLayanan::select(['id', 'title', 'slug','media','content', 'excerpt'])->get();
         $tagManager = TagManager::first();
         $seoPage = Page::where('slug', '=', 'jadwal')->first();
         $gtagManager = GtagManager::first();
-        $metades = "Rama Tranz Travel memiliki jenis layanan yang dapat memudahkan para pelanggan. Door to door, point to point, dan charter adalah layanan yang unggul.";
+        $metades = env('APP_NAME', 'Default Name') . " memiliki jenis layanan yang dapat memudahkan para pelanggan. Door to door, point to point, dan charter adalah layanan yang unggul.";
         $analytics = Analytics::first();
         $tentang = Page::get()->first();
         $menuLayanan = JenisLayanan::select(['id', 'title', 'slug'])->orderBy('slug', 'ASC')->get();

@@ -31,7 +31,6 @@ use Illuminate\Support\Facades\Storage;
 
 class HomeController extends Controller
 {
-   
     public function index()
     {
         $data['title'] = company_config('name');
@@ -83,7 +82,7 @@ class HomeController extends Controller
         $jenis_l = DB::table('layanans')->select('jenis_layanan_id')->distinct()->get()->pluck('jenis_layanan_id');
         $jenisLayanan = JenisLayanan::select(['id', 'title', 'slug','media','content'])->get();
         $layanan = Layanan::latest()->paginate(6)->withQueryString();
-        $metades = "Rama Tranz Travel adalah agen perjalanan  yang terbaik dan terpercaya. Lebih dari 11 tahun melayani para pelanggan dengan pelayanan yang terbaik.";
+        $metades = env('APP_NAME', 'Default Name') . " adalah agen perjalanan yang terbaik dan terpercaya. Lebih dari 11 tahun melayani para pelanggan dengan pelayanan yang terbaik.";
         $tagManager = TagManager::first();
         $gtagManager = GtagManager::first();
         $analytics = Analytics::first();
@@ -128,27 +127,5 @@ class HomeController extends Controller
             return redirect()->back()->with('error', 'Failed to order. Please try again.');
         }
     }
-
-    public function inputreview(Request $request)
-    {        
-        $request->validate([
-            'name_review' => 'required|string',
-            'input_review' => 'required|string',
-        ]);
-        
-        $review = new Feedback();
-        $review->title = $request->input('name_review');
-        $review->desc = $request->input('input_review');
-        $review->rating = $request->input('rating_review');
-        if ($request->file('image_review')) {
-            $gambarPath = $request->file('image_review')->store('ramatrans/feedback', 's3');
-            $review->image = $gambarPath;
-        }     
-        $review->save();
-
-        // Tanggapan sukses (jika diperlukan)
-        return response()->json(['message' => 'Review berhasil disimpan!']);
-    }
-
    
 }

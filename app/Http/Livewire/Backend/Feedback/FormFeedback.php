@@ -40,7 +40,7 @@ class FormFeedback extends Component
         $this->validate();
         if (!$this->feedback->image) {
             $this->validate([
-                'gambar'    => 'required|image|mimes:jpg,jpeg,png|max:2048',
+                'gambar'    => 'required|image|mimes:jpg,jpeg,png,webp|max:250',
             ]);
         }
 

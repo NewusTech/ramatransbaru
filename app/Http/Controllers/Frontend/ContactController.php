@@ -21,7 +21,7 @@ class ContactController extends Controller
         $data['intro'] = 'Rama Trans adalah jasa Transportasi Terbaik.';
         $data['type'] = 'Kontak Kami';
         $data['url'] = URL::current();
-        $metades = "Percayakan perjalananmu hanya dengan Rama Tranz Travel. Terdapat fasilitas yang lengkap dengan harga yang murah.";
+        $metades = "Percayakan perjalananmu hanya dengan " . env('APP_NAME', 'Default Name') . ". Terdapat fasilitas yang lengkap dengan harga yang murah.";
 
         $contacts = Kontak::where('id', 1)->first();
         $menuLayanan = JenisLayanan::select(['id', 'title', 'slug'])->orderBy('slug', 'ASC')->get();

@@ -30,7 +30,7 @@ class BlogController extends Controller
         $tentang = Page::get()->first();
         $tagManager = TagManager::first();
         $seoPage = Page::where('slug', '=', 'blog')->first();
-        $metades = "Bepergian dengan cepat dan aman hanya dapat ditemukan di Rama Tranz Travel. Tidak perlu diragukan adalah jasa travel terbaik.";
+        $metades = "Bepergian dengan cepat dan aman hanya dapat ditemukan di " . env('APP_NAME', 'Default Name') . ". Tidak perlu diragukan adalah jasa travel terbaik.";
         $gtagManager = GtagManager::first();
         $analytics = Analytics::first();
         return view('frontend.blog.index', compact('data', 'blogs', 'contacts', 'tentang', 'menuLayanan','tagManager','seoPage', 'metades','gtagManager','analytics'));
