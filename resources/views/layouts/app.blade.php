@@ -1,11 +1,16 @@
 <!DOCTYPE html>
-<?php header("Access-Control-Allow-Origin: *"); ?>
+<?php header('Access-Control-Allow-Origin: *'); ?>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
     <title>{{ config('app.name', 'Pasar Kredit Murah lampung') }}</title>
+    @if (env('APP_NAME') == 'Rama Tranz Travel')
+        <meta name="google-site-verification" content="DsgOXo1zazrQkBMSsxO0Pgs2AG-reAQ2Q0SHeyxXtfc" />
+    @else
+        <meta name="google-site-verification" content="YxkQct7gDfQb2sFOt5Wsa7aCUiOB6j4YV3nS168kVLo" />
+    @endif
 
     <!-- General CSS Files -->
 
@@ -23,9 +28,12 @@
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('frontend-assets') }}/favicon/apple-icon-180x180.png">
     <link rel="icon" type="image/png" sizes="192x192"
         href="{{ asset('frontend-assets') }}/favicon/android-icon-192x192.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('frontend-assets') }}/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="{{ asset('frontend-assets') }}/favicon/favicon-96x96.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('frontend-assets') }}/favicon/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32"
+        href="{{ asset('frontend-assets') }}/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96"
+        href="{{ asset('frontend-assets') }}/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16"
+        href="{{ asset('frontend-assets') }}/favicon/favicon-16x16.png">
     <link rel="manifest" href="{{ asset('frontend-assets') }}/favicon/manifest.json">
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="{{ asset('frontend-assets') }}/favicon/ms-icon-144x144.png">
@@ -33,10 +41,8 @@
     <!-- CSS Libraries -->
     <link rel="stylesheet" href="{{ asset('vendor/iziToast/iziToast.min.css') }}">
     <!-- Template CSS -->
-    <link rel="stylesheet"
-    href="{{ url('/css/app.css') }}?_{!! substr(str_shuffle('0123456789AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz'),1,12) !!}">
-    <link rel="stylesheet"
-    href="{{ url('/css/components.css') }}?_{!! substr(str_shuffle('0123456789AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz'),1,12) !!}">
+    <link rel="stylesheet" href="{{ url('/css/app.css') }}?_{!! substr(str_shuffle('0123456789AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz'), 1, 12) !!}">
+    <link rel="stylesheet" href="{{ url('/css/components.css') }}?_{!! substr(str_shuffle('0123456789AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz'), 1, 12) !!}">
 
 
     <link href="{{ asset('vendor/EasyAutocomplete-1.3.5/easy-autocomplete.min.css') }}" rel="stylesheet" />
@@ -95,9 +101,9 @@
     <!-- JS Libraies -->
 
     <!-- Template JS File -->
-    <script src="{{ url('/js/app.js') }}?v={{ rand(1,1000)}}"></script>
-    @if(\Illuminate\Support\Facades\Route::currentRouteName() !== 'profile.show')
-    <script id="themejs" src="{{ url('/js/theme.js')}}?v={{ rand(1,1000)}}"></script>
+    <script src="{{ url('/js/app.js') }}?v={{ rand(1, 1000) }}"></script>
+    @if (\Illuminate\Support\Facades\Route::currentRouteName() !== 'profile.show')
+        <script id="themejs" src="{{ url('/js/theme.js') }}?v={{ rand(1, 1000) }}"></script>
     @endif
     <script src="{{ asset('vendor/iziToast/iziToast.min.js') }}"></script>
     <script src="{{ asset('vendor/EasyAutocomplete-1.3.5/jquery.easy-autocomplete.min.js') }}"></script>

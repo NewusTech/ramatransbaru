@@ -39,6 +39,12 @@
     <script defer src="{{ url('assets-plesir/lib/fontawesome-free-5.10.2-web/js/solid.js') }} "></script>
     <script defer src="{{ url('assets-plesir/lib/fontawesome-free-5.10.2-web/js/fontawesome.js') }} "></script>
 
+    @if (env('APP_NAME') == 'Rama Tranz Travel')
+        <meta name="google-site-verification" content="DsgOXo1zazrQkBMSsxO0Pgs2AG-reAQ2Q0SHeyxXtfc" />
+    @else
+        <meta name="google-site-verification" content="YxkQct7gDfQb2sFOt5Wsa7aCUiOB6j4YV3nS168kVLo" />
+    @endif
+
     {{-- meta syukron488@gmail.com --}}
     <title>
         Percayakan {!! env('APP_NAME', 'Default Name') !!} untuk berlibur bersama keluarga.

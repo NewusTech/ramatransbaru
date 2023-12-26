@@ -28,7 +28,12 @@ class PublishedFeedback extends DataTableComponent
             Column::make('Penilaian', 'desc')->format(function ($value, $column) {
                 return Str::limit($value, 30, '...');
             })->asHtml(),
-
+            Column::make('Rating', 'rating')->format(function ($value, $column) {
+                return Str::limit($value, 30, '...');
+            })->asHtml(),
+            Column::make('Telepon', 'no_hp')->searchable()->format(function ($value, $column) {
+                return Str::limit($value, 15);
+            })->asHtml(), 
         ];
     }
 
