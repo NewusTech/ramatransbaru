@@ -6,6 +6,7 @@ use App\Http\Controllers\Frontend\AboutController;
 use App\Http\Controllers\Frontend\BlogController;
 use App\Http\Controllers\Frontend\ContactController;
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Frontend\ReviewController;
 use App\Http\Controllers\Frontend\LayananController;
 use App\Http\Controllers\Frontend\LocationController;
 use App\Http\Controllers\Frontend\JadwalController;
@@ -33,9 +34,15 @@ Route::get('/link', function () {
 //frontend routes
 // Route::get('/', [HomeController::class, 'index'])->name('homescreen');
 
-Route::get('sitemap.xml', [SitemapController::class, 'index']);
+Route::get('/sitemap.xml', [SitemapController::class, 'index']);
 
 Route::get('/', [HomeController::class, 'portal'])->name('beranda');
+
+Route::post('/order-store', [HomeController::class, 'store']);
+
+Route::get('/review', [ReviewController::class, 'index', 'review']);
+
+Route::post('/input-review', [ReviewController::class, 'inputreview', 'inputreview']);
 
 Route::get('/tentang-kami.html', [AboutController::class, 'index'])->name('tentang-kami');
 
@@ -46,9 +53,13 @@ Route::get('/filterGallery', [GalleryController::class, 'filterGallery'])->name(
 
 Route::get('/kontak-kami.html', [ContactController::class, 'index'])->name('kontak-kami');
 
-Route::get('/tarif.html', [LayananController::class, 'layananAll'])->name('tarif');
+Route::prefix('tarif.html')->group(function () {
+    Route::get('/', [LayananController::class, 'layananAll'])->name('tarif');    
+    Route::get('/search', [LayananController::class, 'liveSearch'])->name('search-rute');
+});
 
 Route::get('/jenis-layanan.html', [LayananController::class, 'indexJenisLayanan'])->name('jenis-layanan');
+
 
 Route::prefix('detail-jasa-transportasi')->group(function () {
     Route::get('/{slug}.html', [LayananController::class, 'detailJasaTransportasi'])->name('detail-jasa-transportasi.jasaId');
@@ -65,19 +76,8 @@ Route::prefix('layanan')->group(function () {
 Route::prefix('blog')->group(function () {
     Route::get('/', [BlogController::class, 'index'])->name('blog');
     Route::get('/{slug}.html', [BlogController::class, 'detailBlog'])->name('detail-blog.blogId');
+    Route::get('/search', [BlogController::class, 'liveSearch']);
 });
-
-Route::get('/searchblog', [BlogController::class, 'liveSearch']);
-
-
-Route::prefix('search')->group(function () {
-    Route::get('/', [LayananController::class, 'searchLayanan'])->name('search-layanan');
-});
-
-// Route::get('sitemap.xml', function() {
-//     dd(Storage::putFile('sitemap', 'sitemap.xml'));
-//     // return response()->('sitemap.xml');
-// });
 
 //backend routes
 Route::middleware(['auth:web', 'verified'])->prefix('dashboard')->group(function () {
@@ -155,6 +155,11 @@ Route::middleware(['auth:web', 'verified'])->prefix('dashboard')->group(function
         Route::get('/create', App\Http\Livewire\Backend\Unggulan\FormUnggulan::class)->name('create-unggulan');
         Route::get('/edit/{id}', App\Http\Livewire\Backend\Unggulan\FormUnggulan::class)->name('edit-unggulan');
         Route::get('/{id}', App\Http\Livewire\Backend\Unggulan\DetailUnggulan::class)->name('detail-unggulan');
+    });
+
+    Route::prefix('history-pesanan')->group(function () {
+        Route::get('/', App\Http\Livewire\Backend\HistoryPesanan\HistoryPesanan::class)->name('history-pesanan');
+        Route::get('/{id}', App\Http\Livewire\Backend\HistoryPesanan\DetailHistoryPesanan::class)->name('detail-history-pesanan');
     });
 
     Route::prefix('faq')->group(function () {

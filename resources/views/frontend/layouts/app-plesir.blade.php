@@ -2,40 +2,6 @@
 <html>
 
 <head>
-    <!-- Google Tag Manager -->
-    @if (isset($gtagManager))
-        <script>
-            (function(w, d, s, l, i) {
-                w[l] = w[l] || [];
-                w[l].push({
-                    'gtm.start': new Date().getTime(),
-                    event: 'gtm.js'
-                });
-                var f = d.getElementsByTagName(s)[0],
-                    j = d.createElement(s),
-                    dl = l != 'dataLayer' ? '&l=' + l : '';
-                j.async = true;
-                j.src =
-                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-                f.parentNode.insertBefore(j, f);
-            })(window, document, 'script', 'dataLayer', '{{ $gtagManager->code }}');
-        </script>
-    @endif
-    <!-- End Google Tag Manager -->
-    {{-- Analytics --}}
-    @if (isset($analytics))
-        <script async src="https://www.googletagmanager.com/gtag/js?id={{ $analytics->code }}"></script>
-        <script>
-            window.dataLayer = window.dataLayer || [];
-
-            function gtag() {
-                dataLayer.push(arguments);
-            }
-            gtag('js', new Date());
-            gtag('config', '{{ $analytics->code }}');
-        </script>
-    @endif
-    {{-- End Analytics --}}
     <meta charset="utf-8">
     <link rel="apple-touch-icon" sizes="57x57" href="{{ asset('frontend-assets') }}/favicon/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="{{ asset('frontend-assets') }}/favicon/apple-icon-60x60.png">
@@ -54,27 +20,17 @@
         href="{{ asset('frontend-assets') }}/favicon/favicon-96x96.png">
     <link rel="icon" type="image/png" sizes="16x16"
         href="{{ asset('frontend-assets') }}/favicon/favicon-16x16.png">
+
+    <!-- Tag canonical untuk halaman utama -->
+    <link rel="canonical" href="{{ url('') }}" />
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="theme-color" content="#ffffff">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
-    {{-- <link rel="stylesheet" href="{{url('frontend-assets/css/reset.css')}}"> --}}
     <!-- Bootstrap v4.3.1 CSS -->
     <link rel="stylesheet" href="{{ url('assets-plesir/lib/bootstrap/css/bootstrap.min.css') }} ">
     <link rel="stylesheet" href="{{ url('frontend-assets/css/owl.carousel.css') }}">
     <link rel="stylesheet" href="{{ url('frontend-assets/css/font-awesome.css') }}">
-    {{-- <link rel="stylesheet" href="{{ url('frontend-assets/css/bootstrap.css') }}"> --}}
-    {{-- <link rel="stylesheet" href="{{url('frontend-assets/css/font-awesome.css')}}">
-    <link rel="stylesheet" href="{{url('frontend-assets/css/owl.carousel.css')}}">
-    <link rel="stylesheet" href="{{url('frontend-assets/css/jquery.fancybox.css')}}">
-    <link rel="stylesheet" href="{{url('frontend-assets/fonts/fi/flaticon.css')}}"> --}}
-    {{-- <link rel="stylesheet" href="{{url('frontend-assets/css/flexslider.css')}}">
-    <link rel="stylesheet" href="{{url('frontend-assets/css/main.css')}}">
-    <link rel="stylesheet" href="{{url('frontend-assets/css/indent.css')}}"> --}}
-    {{-- <link rel="stylesheet" href="{{url('frontend-assets/rs-plugin/css/settings.css')}}">
-    <link rel="stylesheet" href="{{url('frontend-assets/rs-plugin/css/layers.css')}}">
-    <link rel="stylesheet" href="{{url('frontend-assets/rs-plugin/css/navigation.css')}}"> --}}
-    {{-- <link rel="stylesheet" href="{{url('frontend-assets/css/custom.css')}}"> --}}
     <link rel="stylesheet" href="{{ url('assets-plesir/css/normalize.css') }} ">
     <link rel="stylesheet" href="{{ url('assets-plesir/css/theme.css') }} ">
 
@@ -92,21 +48,11 @@
     <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
-
-    @if (isset($tagManager))
-        <script async src="https://www.googletagmanager.com/gtag/js?id={{ $tagManager->codeTag }}"></script>
-        <script>
-            window.dataLayer = window.dataLayer || [];
-
-            function gtag() {
-                dataLayer.push(arguments);
-            }
-            gtag('js', new Date());
-
-            gtag('config', '{{ $tagManager->codeTag }}');
-        </script>
+    @if (env('APP_NAME') == 'Rama Tranz Travel')
+        <meta name="google-site-verification" content="DsgOXo1zazrQkBMSsxO0Pgs2AG-reAQ2Q0SHeyxXtfc" />
+    @else
+        <meta name="google-site-verification" content="YxkQct7gDfQb2sFOt5Wsa7aCUiOB6j4YV3nS168kVLo" />
     @endif
-
     {{-- meta syukron488@gmail.com --}}
     <title>
         @if (trim($__env->yieldContent('title')))
@@ -115,9 +61,13 @@
     </title>
     @if (trim($__env->yieldContent('excerpt')))
         <meta name="description" content="@yield('excerpt')">
-    @else
+    @elseif(isset($metades))
+        <meta name="description" content="{{ $metades }}">
+    @elseif(isset($seoPage) && isset($seoPage->meta_desc))
+        <meta name="description" content="{{ $seoPage->meta_desc }}">
+        {{-- @else
         <meta name="description"
-            content="{{ isset($seoPage) ? $seoPage->meta_desc : 'Nikmati perjalanan Jakarta-Lampung yang nyaman dan aman bersama Rama Tranz Travel. Pesan tiket sekarang dan jelajahi keindahan kedua destinasi' }}">
+            content="Nikmati perjalanan Jakarta-Lampung yang nyaman dan aman bersama Rama Tranz Travel. Pesan tiket sekarang dan jelajahi keindahan kedua destinasi"> --}}
     @endif
     @if (trim($__env->yieldContent('keyword')))
         <meta name="keywords" content="@yield('keyword')">
@@ -128,10 +78,11 @@
     <meta property="og:locale" content="en_US">
     <meta property="og:site_name" content="{{ isset($dataSeo) ? $dataSeo['site_title'] : 'Rama Tranz Travel' }}">
     @if (trim($__env->yieldContent('image')))
-        <meta property="og:image" content="{{ Storage::disk('public')->url('') }}@yield('image') ">
+        <meta property="og:image"
+            content="{{ !empty(trim($__env->yieldContent('image'))) ? Storage::disk('s3')->url($__env->yieldContent('image')) : '' }}">
     @else
         <meta property="og:image"
-            content="{{ isset($seoPage->media) ? Storage::disk('public')->url($seoPage->media) : 'https://ramatranzlampung.com/frontend-assets/img/logo-1.png' }} ">
+            content="{{ isset($seoPage->media) ? Storage::disk('s3')->url($seoPage->media) : 'https://ramatranzlampung.com/frontend-assets/img/logo-1.png' }} ">
     @endif
     <meta property="og:image:width" content="240">
     <meta property="og:image:height" content="90">
@@ -152,16 +103,17 @@
     <meta name="apple-mobile-web-app-title"
         content="@if (trim($__env->yieldContent('title'))) @yield('title')- @endif {{ isset($dataSeo) ? $dataSeo['site_title'] : 'Rama Tranz Travel' }} - {{ isset($dataSeo) ? $dataSeo['title'] : 'Travel resmi dan terpercaya' }}">
     @if (trim($__env->yieldContent('image')))
-        <meta name="msapplication-TileImage" content="{{ Storage::disk('public')->url('') }}@yield('image') ">
+        <meta name="msapplication-TileImage"
+            content="{{ !empty(trim($__env->yieldContent('image'))) ? Storage::disk('s3')->url($__env->yieldContent('image')) : '' }}">
     @else
         <meta name="msapplication-TileImage"
-            content="{{ isset($seoPage->media) ? Storage::disk('public')->url($seoPage->media) : 'https://ramatranzlampung.com/frontend-assets/img/logo-1.png' }}">
+            content="{{ isset($seoPage->media) ? Storage::disk('s3')->url($seoPage->media) : 'https://ramatranzlampung.com/frontend-assets/img/logo-1.png' }}">
     @endif
     <link rel="manifest" href="{{ asset('frontend-assets') }}/favicon/manifest.json">
     <link rel="apple-touch-icon"
-        href="{{ isset($dataSeo) ? Storage::disk('public')->url($dataSeo['image']) : 'https://ramatranzlampung.com/frontend-assets/img/logo-1.png' }}">
+        href="{{ isset($dataSeo) ? Storage::disk('s3')->url($dataSeo['image']) : 'https://ramatranzlampung.com/frontend-assets/img/logo-1.png' }}">
     <link rel="shortcut icon" type="image/png"
-        href="{{ isset($dataSeo) ? Storage::disk('public')->url($dataSeo['image']) : 'https://ramatranzlampung.com/frontend-assets/favicon/favicon-96x96.png' }}">
+        href="{{ isset($dataSeo) ? Storage::disk('s3')->url($dataSeo['image']) : 'https://ramatranzlampung.com/frontend-assets/favicon/favicon-96x96.png' }}">
 </head>
 
 <body class="default">
@@ -182,7 +134,7 @@
         </div>
         <div class="sdprofile">
             <div class="sdp-left">
-                <img src="{{ url('frontend-assets/img/logo-2.png') }}" alt="profile">
+                <img src="{{ url('frontend-assets/img/logo-2.png') }}" alt="profile" loading="lazy">
             </div>
             <div class="sdp-right">
                 {{-- <div class="sd-name">Lilia Doe</div> --}}
@@ -211,20 +163,6 @@
             <li>
                 <a href="{{ url('/tentang-kami.html') }}"><i class="fas fa-car"></i>Tentang Kami</a>
             </li>
-            {{-- <li>
-                <a href="#pagemybooking" data-toggle="collapse" aria-expanded="false"><i class="fas fa-receipt"></i>My Bookings <span><i class="fas fa-caret-down"></i></span></a>
-                <ul class="collapse collapsible-body" id="pagemybooking">
-                    <li>
-                        <a href="my_rides.html">My rides</a>
-                    </li>
-                    <li>
-                        <a href="cart.html">Cart</a>
-                    </li>
-                    <li>
-                        <a href="checkout.html">Checkout</a>
-                    </li>
-                </ul>
-            </li> --}}
         </ul>
     </nav>
     <!-- .Sidebar left -->
@@ -291,18 +229,20 @@
         <footer>
             <div class="container pt-2">
                 <div class="row">
-                    <div class="col-3">
-                        <div class="mb-3">
-                            <a href="{{ url('/') }}" class="logo">
-                                <img src="{{ url('frontend-assets/img/logo-2.png') }}" width="50px" alt>
-                                <span style="color: white">Rama Tranz Travel</span>
+                    <div class="col-12 col-md-3 mb-4 mb-md-0">
+                        <div class="mb-3 d-flex justify-content-center align-items-center">
+                            <a href="{{ url('/') }}" class="logo d-flex align-items-center">
+                                <img src="{{ url('frontend-assets/img/logo-2.png') }}" width="50px" alt
+                                    loading="lazy">
+                                <span class="ml-2" style="color: white">Rama Tranz Travel</span>
                             </a>
                         </div>
-                        <div class="social-link dark">
-                            <a href="#" class="btn btn-primary btn-sm mr-2">
+
+                        <div class="social-link dark d-flex justify-content-center align-items-center">
+                            <a href="#" class="btn btn-primary btn-sm mr-1">
                                 <i class="fab fa-facebook"></i>
                             </a>
-                            <a href="#" class="btn btn-primary btn-sm mr-2">
+                            <a href="#" class="btn btn-primary btn-sm mr-1">
                                 <i class="fab fa-instagram"></i>
                             </a>
                             <a href="https://www.youtube.com/channel/UCY7MCn80wnrJTn219ACedYQ" target="_blank"
@@ -311,75 +251,66 @@
                             </a>
                         </div>
                     </div>
-                    <div class="col-1"></div>
 
-                    <div class="col-3">
+                    <div class="col-12 col-md-5 mb-4 mb-md-0">
                         <h6 style="font-family: Verdana, Geneva, Tahoma, sans-serif">Sekilas Kami</h6>
                         <hr class="my-1 mb-3" style="border-color: #28a745; width: 80%; border-width: 2px;">
                         <p class="text-left linkfooter">
                             {{ company_config('tentang') }}</p>
                     </div>
-                    <div class="col-1"></div>
 
-                    <div class="col-4">
+                    <div class="col-12 col-md-4 mb-4 mb-md-0">
                         <h6 style="font-family: Verdana, Geneva, Tahoma, sans-serif">Akses Cepat</h6>
                         <hr class="my-1 mb-3" style="border-color: #28a745; width: 80%; border-width: 2px;">
-                        <div class="row">
-                            <div class="col-1"></div>
-                            <div class="col-5">
+                        <div class="row d-flex justify-content-center align-items-center">
+                            <div class="col-12 col-md-5">
                                 @foreach ($menuLayanan as $item)
                                     <a href="{{ route('layananCategoryId', $item->slug) }}" rel="tag"
                                         class="tag linkfooter">{{ $item->title }}</a>
                                     <br>
                                 @endforeach
                             </div>
-                            <div class="col-5">
+                            <div class="col-12 col-md-5">
                                 <a href="{{ route('tarif') }}" rel="tag" class="tag linkfooter">Tarif</a><br>
                                 <a href="{{ route('kontak-kami') }}" rel="tag"
                                     class="tag linkfooter">Kontak</a><br>
                                 <a href="{{ route('tentang-kami') }}" rel="tag" class="tag linkfooter">Tentang
                                     Kami</a><br>
                             </div>
-                            <div class="col-1"></div>
                         </div>
                     </div>
-
                 </div>
 
                 <div class="d-flex flex-column flex-sm-row justify-content-between py-3 my-1 border-top">
                     <p>&copy; Copyright 2023 RAMATRANZ | All Rights Reserved.</p>
                     <ul class="list-unstyled d-flex">
-                        <li class="ms-3"><a class="link-body-emphasis" href="#"><svg class="bi"
-                                    width="24" height="24">
-                                    <use xlink:href="#twitter" />
-                                </svg></a></li>
-                        <li class="ms-3"><a class="link-body-emphasis" href="#"><svg class="bi"
-                                    width="24" height="24">
-                                    <use xlink:href="#instagram" />
-                                </svg></a></li>
-                        <li class="ms-3"><a class="link-body-emphasis" href="#"><svg class="bi"
-                                    width="24" height="24">
-                                    <use xlink:href="#facebook" />
-                                </svg></a></li>
+                        <li class="ms-3"><a class="link-body-emphasis" href="#"><i
+                                    class="fab fa-twitter"></i></a></li>
+                        <li class="ms-3"><a class="link-body-emphasis" href="#"><i
+                                    class="fab fa-instagram"></i></a></li>
+                        <li class="ms-3"><a class="link-body-emphasis" href="#"><i
+                                    class="fab fa-facebook"></i></a></li>
                     </ul>
                 </div>
-
             </div>
         </footer>
+
     </div>
 
     <!-- Botom Panel  -->
     <div class="bottom-panel">
         <div class="bp-col">
             <a href="{{ url('/') }}">
-                <div class="bp-icon"><img src="{{ url('assets-plesir/img2/menu-bottom/home.png') }}" alt="icon">
+                <div class="bp-icon"><img src="{{ url('assets-plesir/img2/menu-bottom/home.png') }}" alt="icon"
+                        loading="lazy">
                 </div>
                 <div class="bp-text">Beranda</div>
             </a>
         </div>
         <div class="bp-col">
             <a href="{{ url('/tarif.html') }}">
-                <div class="bp-icon"><img src="{{ url('assets-plesir/img2/menu-bottom/rute.png') }}" alt="icon">
+                <div class="bp-icon"><img src="{{ url('assets-plesir/img2/menu-bottom/rute.png') }}" alt="icon"
+                        loading="lazy">
                 </div>
                 <div class="bp-text">Rute</div>
             </a>
@@ -387,21 +318,22 @@
         <div class="bp-col">
             <a href="{{ url('/gallery.html') }}">
                 <div class="bp-icon"><img src="{{ url('assets-plesir/img2/menu-bottom/gallery.png') }}"
-                        alt="icon"></div>
+                        alt="icon" loading="lazy"></div>
                 <div class="bp-text">Gallery</div>
             </a>
         </div>
         <div class="bp-col">
             <a href="{{ url('/jadwal.html') }}">
                 <div class="bp-icon"><img src="{{ url('assets-plesir/img2/menu-bottom/jadwal-removebg.png') }}"
-                        alt="icon"></div>
+                        alt="icon" loading="lazy"></div>
                 <div class="bp-text">Jadwal</div>
             </a>
         </div>
         <div class="bp-col">
             <a
                 href="https://api.whatsapp.com/send?phone=628117298168&text=Hallo%2C%20Saya%20ingin%20memesan%20tiket%20perjalanan%20di%20Rama%20Trans%20Travel.%20Untuk%20pemesanannya%20bagaimana%20ya%3F">
-                <div class="bp-icon"><img src="{{ url('assets-plesir/img2/menu-bottom/wa.png') }}" alt="icon">
+                <div class="bp-icon"><img src="{{ url('assets-plesir/img2/menu-bottom/wa.png') }}" alt="icon"
+                        loading="lazy">
                 </div>
                 <div class="bp-text">Chat</div>
             </a>
@@ -409,7 +341,7 @@
     </div>
     <!-- .Bottom Panel  -->
     <div class="overlay"></div>
-    <script src="https://www.youtube.com/player_api"></script>
+    <script defer src="https://www.youtube.com/player_api"></script>
     <script type="text/javascript" src="{{ url('frontend-assets/js/jquery.min.js') }}"></script>
     <script type="text/javascript" src="{{ url('frontend-assets/js/jquery-ui.min.js') }}"></script>
     <script type="text/javascript" src="{{ url('frontend-assets/js/bootstrap.js') }}"></script>
@@ -483,11 +415,59 @@
     <!--  Bootstrap v4.3.1 JS -->
     <script src="{{ url('assets-plesir/lib/bootstrap/js/bootstrap.min.js') }} "></script>
     <!-- Magnific Popup core JS file -->
-    <script src="{{ url('assets-plesir/lib/Magnific-Popup-master/dist/jquery.magnific-popup.js') }} "></script>
+    <script defer src="{{ url('assets-plesir/lib/Magnific-Popup-master/dist/jquery.magnific-popup.js') }} "></script>
     <!-- Slick JS -->
     <script src="{{ url('assets-plesir/lib/slick/slick/slick.min.js') }} "></script>
     <!--  Custom JS -->
     <script src="{{ url('assets-plesir/js/theme.js') }} "></script>
+    <!-- Google Tag Manager -->
+    @if (isset($gtagManager))
+        <script defer>
+            (function(w, d, s, l, i) {
+                w[l] = w[l] || [];
+                w[l].push({
+                    'gtm.start': new Date().getTime(),
+                    event: 'gtm.js'
+                });
+                var f = d.getElementsByTagName(s)[0],
+                    j = d.createElement(s),
+                    dl = l != 'dataLayer' ? '&l=' + l : '';
+                j.async = true;
+                j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+                f.parentNode.insertBefore(j, f);
+            })(window, document, 'script', 'dataLayer', '{{ $gtagManager->code }}');
+        </script>
+    @endif
+    <!-- End Google Tag Manager -->
+    {{-- Analytics --}}
+    @if (isset($analytics))
+        <script defer src="https://www.googletagmanager.com/gtag/js?id={{ $analytics->code }}"></script>
+        <script defer>
+            window.dataLayer = window.dataLayer || [];
+
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+            gtag('config', '{{ $analytics->code }}');
+        </script>
+    @endif
+
+    @if (isset($tagManager))
+        <script defer src="https://www.googletagmanager.com/gtag/js?id={{ $tagManager->codeTag }}"></script>
+        <script defer>
+            window.dataLayer = window.dataLayer || [];
+
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+
+            gtag('config', '{{ $tagManager->codeTag }}');
+        </script>
+    @endif
+    {{-- End Analytics --}}
     @yield('script')
 </body>
 

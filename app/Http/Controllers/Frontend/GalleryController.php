@@ -20,10 +20,11 @@ class GalleryController extends Controller
         $data['url'] = URL::current();
         $menuLayanan = JenisLayanan::select(['id', 'title', 'slug'])->orderBy('slug', 'ASC')->get();
         $jenisLayanan = JenisLayanan::select(['id', 'title', 'slug','media','content'])->get();
+        $metades = env('APP_NAME', 'Default Name') . " adalah jasa transportasi berkualitas. Gunakan jasa transportasi hanya disini";
 
         $gallery = Gallery::get();
         $tagManager = TagManager::first();       
-        return view('frontend.gallery.index', compact('gallery','tagManager', 'menuLayanan', 'jenisLayanan'));
+        return view('frontend.gallery.index', compact('gallery','tagManager', 'menuLayanan', 'jenisLayanan', 'metades'));
     }
 
     public function filterGallery(Request $request){

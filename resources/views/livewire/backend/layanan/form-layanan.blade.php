@@ -160,8 +160,8 @@
 
                                 <div class="form-group" wire:ignore>
                                     <label for="">Isi Konten</label>
-                                    <textarea name="" id="" class="form-control tinyMCE @error('layanan.content') is-invalid @enderror"
-                                        data-model="layanan.content" wire:model="layanan.content">{{ $layanan ? $layanan->content : '' }}</textarea>
+                                    <textarea class="form-control tinyMCE @error('layanan.content') is-invalid @enderror" data-model="layanan.content"
+                                        wire:model="layanan.content">{{ $layanan ? $layanan->content : '' }}</textarea>
                                     @error('layanan.content')
                                         <span class='invalid-feedback'>
                                             <strong>{{ $message }} </strong>
@@ -266,38 +266,6 @@
 
 @push('scripts')
     <script>
-        window.initSummernote = () => {
-            $(".wysiwyg").summernote({
-                toolbar: [
-                    ['style', ['style']],
-                    ['font', ['bold', 'underline', 'clear']],
-                    ['fontname', ['fontname']],
-                    ['color', ['color']],
-                    ['para', ['ul', 'ol', 'paragraph']],
-                    ['table', ['table']],
-                    ['insert', ['link', 'picture', 'video']],
-                    ['view', ['fullscreen', 'help']],
-                ],
-                height: 200,
-                dialogsInBody: true
-            });
-        }
-
-        initSummernote();
-        window.livewire.on('summernote', () => {
-            initSummernote();
-        });
-
-        window.addEventListener('summernote', function() {
-            initSummernote();
-        })
-
-        $(".wysiwyg").on('summernote.blur', function() {
-            val = $(this).val();
-            @this.set($(this).data('model'), val);
-            console.log(val);
-        })
-
         // Add the following code if you want the name of the file appear on select
         $(".custom-file-input").on("change", function() {
             var fileName = $(this).val().split("\\").pop();

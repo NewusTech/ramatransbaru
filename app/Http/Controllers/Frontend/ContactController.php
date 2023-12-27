@@ -21,6 +21,7 @@ class ContactController extends Controller
         $data['intro'] = 'Rama Trans adalah jasa Transportasi Terbaik.';
         $data['type'] = 'Kontak Kami';
         $data['url'] = URL::current();
+        $metades = "Percayakan perjalananmu hanya dengan " . env('APP_NAME', 'Default Name') . ". Terdapat fasilitas yang lengkap dengan harga yang murah.";
 
         $contacts = Kontak::where('id', 1)->first();
         $menuLayanan = JenisLayanan::select(['id', 'title', 'slug'])->orderBy('slug', 'ASC')->get();
@@ -29,6 +30,6 @@ class ContactController extends Controller
         $seoPage = Page::where('slug', '=', 'kontak')->first();
         $gtagManager = GtagManager::first();
         $analytics = Analytics::first();
-        return view('frontend.kontak.index', compact('data', 'contacts', 'menuLayanan', 'tentang','tagManager','seoPage','gtagManager','analytics'));
+        return view('frontend.kontak.index', compact('data', 'metades', 'contacts', 'menuLayanan', 'tentang','tagManager','seoPage','gtagManager','analytics'));
     }
 }

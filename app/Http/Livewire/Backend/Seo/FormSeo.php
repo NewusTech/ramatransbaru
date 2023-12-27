@@ -50,7 +50,7 @@ class FormSeo extends Component
         $this->validate();
         if (!$this->seo_tools->image) {
             $this->validate([
-                'gambar'    => 'required|image|mimes:jpg,jpeg,png|max:2048',
+                'gambar'    => 'required|image|mimes:jpg,jpeg,png,webp|max:250',
             ]);
         }
 

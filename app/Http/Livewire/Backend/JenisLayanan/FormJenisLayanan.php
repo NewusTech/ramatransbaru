@@ -19,6 +19,7 @@ class FormJenisLayanan extends Component
 
     protected $rules = [
         'jenisLayanan.title'        => 'required',
+        'jenisLayanan.excerpt'      => 'required',
         'jenisLayanan.slug'         => 'required',
         'jenisLayanan.content'         => '',
     ];
@@ -50,6 +51,7 @@ class FormJenisLayanan extends Component
         $this->validate();
         $this->validate([
             'jenisLayanan.slug' => 'required|unique:jenis_layanans,slug,' . $this->jenisLayanan->id,
+            'gambar'    => 'required|image|mimes:jpg,jpeg,png,webp|max:250',
         ]);
 
         if ($this->gambar) {            

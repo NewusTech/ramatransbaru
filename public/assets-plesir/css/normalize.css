@@ -15,6 +15,10 @@ html {
   -webkit-text-size-adjust: 100%; /* 2 */
 }
 
+.blog-image {
+  max-width: 100px;
+}
+
 /* Sections
    ========================================================================== */
 
@@ -35,7 +39,7 @@ body {
   color: #1bb583;
   text-transform: uppercase;
   font-weight: 400;
-  margin: 0;
+  margin: 0 ;
 }
 
 .font-4 {
@@ -245,35 +249,13 @@ article,
 aside,
 /* footer, */
 
-a.footera{
-  color: white;
-}
-
 footer {
-  background-color: #333; /* Warna latar belakang */
-  color: #fff; /* Warna teks */
+  background-color: #333333; /* Warna latar belakang */
+  color: #ffffff; /* Warna teks */
   
   text-align: center; /* Posisi teks di tengah */
   margin-bottom: 60px;
   
-}
-h5.footerhead {
-  border-bottom: 2px solid green;
-  color: white; /* Mengatur warna teks menjadi putih */
-  font-family: Arial, sans-serif; /* Mengatur jenis font yang Anda inginkan */
-  font-size: 17px; /* Mengatur ukuran font */
-  text-transform: uppercase;
-}
-
-small.smallfooter{
-  color: white; /* Mengatur warna teks menjadi putih */
-  font-family: Arial, sans-serif; /* Mengatur jenis font yang Anda inginkan */
-  font-size: 12px; /* Mengatur ukuran font */
-}
-
-p.footerisi{
-  font-family: Arial, sans-serif; /* Mengatur jenis font yang Anda inginkan */
-  font-size: 14px; /* Mengatur ukuran font */
 }
 
 .tag.linkfooter:hover {
@@ -302,6 +284,66 @@ h1 {
   font-size: 2em;
   margin: 0.67em 0;
 }
+
+.page-section {
+  padding: 90px 0;
+}
+
+/*
+- DIVIDER
+*/
+.cws_divider_wrapper {
+  margin: 0;
+  line-height: 0;
+}
+
+.cws_divider_wrapper.align-center {
+  text-align: center;
+}
+
+.cws_divider_wrapper.align-left {
+  text-align: left;
+}
+
+.cws_divider_wrapper.align-right {
+  text-align: right;
+}
+
+.cws_divider.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cws_divider,
+hr {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  border-bottom: 2px solid #1bb583;
+}
+
+.cws_divider.short,
+hr.short {
+  width: 70px;
+}
+
+.divider-slash {
+  margin-left: 40px;
+  display: inline-block;
+  border-left: 2px solid #1bb583;
+  width: 3px;
+  height: 50px;
+  -webkit-transform: skew(-15deg);
+  -moz-transform: skew(-15deg);
+  -ms-transform: skew(-15deg);
+  -o-transform: skew(-15deg);
+  transform: skew(-15deg);
+}
+
+/*
+- \DIVIDER
 
 /* Grouping content
    ========================================================================== */
@@ -734,12 +776,17 @@ template {
     vertical-align: middle;
 }
 
+.star:hover,
+.star.active {
+    color: #FFA500; /* Set the star color on hover or when selected */
+}
+
 .star-rating:before,
 .stars:before {
     color: #f2b90f;
 }
 
-.star-rating:before,
+/* .star-rating:before, */
 .star-rating > span:before,
 .stars:before,
 .stars .stars-active {
@@ -765,12 +812,12 @@ template {
     content: "\f005\f005\f005";
 }
 
-/* .stars.stars-4:before {
-    content: "\f005\f005\f005\f005";
-} */
 .stars.stars-4:before {
-    content: "";
+    content: "\f005\f005\f005\f005";
 }
+/* .stars.stars-4:before {
+    content: "";
+} */
 
 .stars.stars-5:before {
     content: "\f005\f005\f005\f005\f005";
