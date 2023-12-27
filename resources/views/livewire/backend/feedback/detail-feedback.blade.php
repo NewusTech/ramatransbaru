@@ -45,9 +45,23 @@
                                             <td style="font-weight: 700">Gambar</td>
                                             <td>
                                                 <div>
-                                                    <img src="{{ Storage::disk('s3')->url($detailFeedback->image) }}"
-                                                        alt="" class="img-thumbnail" width="150">
+                                                    @if ($detailFeedback->image)
+                                                        <img src="{{ Storage::disk('s3')->url($detailFeedback->image) }}"
+                                                            alt="" class="img-thumbnail" width="150">
+                                                    @endif
                                                 </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="font-weight: 700">Rating</td>
+                                            <td>
+                                                <div>{!! $detailFeedback->rating !!}</div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="font-weight: 700">No. HP</td>
+                                            <td>
+                                                <div>{!! $detailFeedback->no_hp !!}</div>
                                             </td>
                                         </tr>
 

@@ -18,6 +18,7 @@ class FormParentArea extends Component
     protected $rules = [
         'parentArea.nama_provinsi'   => 'required',
         'parentArea.slug'            => 'required',
+        'parentArea.excerpt'      => 'required',
     ];
 
     public function mount($id = null)
@@ -52,7 +53,7 @@ class FormParentArea extends Component
         $this->validate();
         if (!$this->parentArea->image) {
             $this->validate([
-                'gambar'    => 'required|image|mimes:jpg,jpeg,png|max:2048',
+                'gambar'    => 'required|image|mimes:jpg,jpeg,png,webp|max:250',
             ]);
         }
 

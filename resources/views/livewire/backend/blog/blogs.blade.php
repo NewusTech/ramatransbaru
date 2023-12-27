@@ -33,8 +33,8 @@
 
                                 <li class="nav-pill ml-auto">
                                     @can('users.create')
-                                    <a class="nav-link active" href="{{ route('create-blog') }}" data-toggle="tooltip"
-                                        title="{{ __('Add New') }}"><i class="fa fa-plus" aria-hidden="true"></i></a>
+                                        <a class="nav-link active" href="{{ route('create-blog') }}" data-toggle="tooltip"
+                                            title="{{ __('Add New') }}"><i class="fa fa-plus" aria-hidden="true"></i></a>
                                     @endcan
 
                                 </li>
@@ -77,20 +77,20 @@
 </div>
 
 @push('scripts')
-<script>
-    $("body").on('click', ".btnAction", function() {
-    let id = $(this).data('id');
-    let action = $(this).data('action');
-    let mode = $(this).data('mode');
-    let force = $(this).data('force');
+    <script>
+        $("body").on('click', ".btnAction", function() {
+            let id = $(this).data('id');
+            let action = $(this).data('action');
+            let mode = $(this).data('mode');
+            let force = $(this).data('force');
 
-    if (mode) {
-        window.livewire.emit(action, mode, id);
-    } else if (force) {
-        window.livewire.emit(action, id, false, true);
-    } else {
-        window.livewire.emit(action, id);
-    }
-});
-</script>
+            if (mode) {
+                window.livewire.emit(action, mode, id);
+            } else if (force) {
+                window.livewire.emit(action, id, false, true);
+            } else {
+                window.livewire.emit(action, id);
+            }
+        });
+    </script>
 @endpush

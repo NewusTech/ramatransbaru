@@ -30,8 +30,14 @@ class JadwalController extends Controller
         $seoPage = Page::where('slug', '=', 'jadwal')->first();
         $gtagManager = GtagManager::first();
         $analytics = Analytics::first();
-        $rute = Layanan::latest()->get();
-        return view('frontend.jadwal.index', compact('data','dataJadwal','contacts','tentang','menuLayanan','tagManager','seoPage','gtagManager','analytics','rute'));
+        $metades = env('APP_NAME', 'Default Name') . " memiliki jadwal yang  fleksibel dan keberangkatan yang tepat waktu.";
+        $rute1 = Layanan::latest()->get();
+
+        // Kelompokkan data berdasarkan kolom "asal" setelah mendapatkan hasil
+        $rute = $rute1->sortBy(function ($item) {
+            return $item->asal;
+        });
+        return view('frontend.jadwal.index', compact('metades', 'data','dataJadwal','contacts','tentang','menuLayanan','tagManager','seoPage','gtagManager','analytics','rute', 'rute1'));
     }
 
 }

@@ -1,19 +1,69 @@
+<!DOCTYPE html>
 @extends('frontend.layouts.app-plesir')
-@section('title', 'Beranda')
+@section('title', env('APP_NAME', 'Default Name') . ', Agen Perjalanan Termurah dan Ternyaman')
 @section('content')
+    {{-- modal --}}
+    <div id="gallery-modal">
+        @foreach ($gallery as $item)
+            <div class="modal fade" id="imageresource-{{ $item->id }}" tabindex="-1" role="dialog"
+                aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-body" id="sm-section-modal-gallery">
+                            <img data-src="{{ Storage::disk('s3')->url($item->image) }}" id="imagepreview" loading="lazy"
+                                class="lazy-load" style="width: 100%; height: 264px;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    </div>
+    {{-- end modal --}}
+
     <!-- Content Wrap  -->
-    <div class="content-wrap">
+    <div class="content">
+        <h1 style="display: none;">Rama Tranz Travel adalah agen jasa travel terbaik</h1>
+        <!-- Bootstrap Modal for Notifications -->
+        <div class="modal fade" id="notificationModal" tabindex="-1" role="dialog"
+            aria-labelledby="notificationModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="notificationModalLabel">Notification</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Display success message -->
+                        @if (session('success'))
+                            <div class="alert alert-success" role="alert">
+                                {{ session('success') }}
+                            </div>
+                        @endif
+
+                        <!-- Display error message -->
+                        @if (session('error'))
+                            <div class="alert alert-danger" role="alert">
+                                {{ session('error') }}
+                            </div>
+                        @endif
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- slider -->
-        <div class="img-hero">
+        <div class="img-hero ">
             @foreach ($carousel as $slider)
-                <div>
-                    <img src="{{ Storage::disk('s3')->url($slider->image) }}" alt="slider">
+                <div class="d-flex justify-content-center align-items-center">
+                    <img data-src="{{ Storage::disk('s3')->url($slider->image) }}" alt="slider"
+                        class="img-fluid lazy-load" loading="lazy">
                 </div>
             @endforeach
         </div>
         <!-- .slider -->
 
-        <!-- Modal -->
+        <!-- Modal Booking-->
         <div class="modal fade" id="modalBookingIndex" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -24,51 +74,52 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form id="orderForm" {{-- action="{{ route('order-store') }}" --}} method="POST" enctype="multipart/form-data">
+                    <form action="{{ url('order-store') }}" method="POST" enctype="multipart/form-data"
+                        onsubmit="return formSubmitIndex()">
+                        @csrf
                         <div class="modal-body">
                             <div id="msgError" class="alert alert-danger" style="display:none"></div>
                             {{-- <form> --}}
-                            @csrf
                             <div class="form-group">
                                 <label>Name</label>
-                                <input type="text" placeholder="Ibrahim" id="name" class="form-control" />
+                                <input type="text" placeholder="Nama" id="name" name="name"
+                                    class="form-control" />
                             </div>
                             <div class="form-group">
                                 <label>No. Hp</label>
-                                <input type="number" placeholder="087987654321" id="telp"
+                                <input type="number" placeholder="" id="telp" name="telp"
                                     class="form-control newus-form-number" />
                             </div>
                             <div class="form-group">
                                 <label>Tanggal</label>
-                                <input type="date" id="date" class="form-control" />
+                                <input type="date" id="date" name="date" class="form-control" />
                             </div>
                             <div class="form-group">
                                 <label>Waktu</label>
-                                <select id="time" class="form-control">
+                                <select id="time" name="time" class="form-control">
                                     <option value="" disabled selected>--Pilih Waktu--</option>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label>Rute</label>
-                                <input type="text" id="rute" readonly class="form-control" />
+                                <input type="text" id="rute" name="rute" readonly class="form-control" />
                             </div>
                             <div class="form-group">
                                 <label>Tempat Duduk</label>
-                                <input type="text" placeholder="Contoh : 1 Orang" id="numberorder"
+                                <input type="text" placeholder="Contoh : 1 Orang" id="numberorder" name="numberorder"
                                     class="form-control" />
                             </div>
                             <div class="form-group">
                                 <label>Titik Jemput</label>
-                                <input type="text" id="location"
-                                    placeholder="Permata Kost - Jl. Swakarya 1 no. H-28A Rt. 09 RW 02 Dwikora II"
+                                <input type="text" id="location" name="location"
+                                    placeholder="Contoh = Permata Kost - Jl. Swakarya 1 no. H-28A Rt. 09 RW 02 Dwikora II"
                                     class="form-control" />
                             </div>
 
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal"
-                                onclick="resetBookingIndex()">Close</button>
-                            <button type="submit" class="btn btn-success" form="orderForm">Pesan</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-success">Submit</button>
                         </div>
                     </form>
                 </div>
@@ -83,7 +134,8 @@
                     <div class="row">
                         <div class="col s-icon">
                             <a href="{{ url('/jenis-layanan.html') }}" class="homepage-icon-menu">
-                                <img src="{{ url('assets-plesir/img2/hotel.png') }}" alt="icon">
+                                <img data-src="{{ url('assets-plesir/img2/hotel.png') }}" alt="icon" loading="lazy"
+                                    class="lazy-load">
                                 <div class="s-icon-text">
                                     LAYANAN
                                 </div>
@@ -91,7 +143,8 @@
                         </div>
                         <div class="col s-icon">
                             <a href="{{ url('/jadwal.html') }}" class="homepage-icon-menu">
-                                <img src="{{ url('assets-plesir/img2/cab.png') }}" alt="icon">
+                                <img data-src="{{ url('assets-plesir/img2/cab.png') }}" alt="icon" loading="lazy"
+                                    class="lazy-load">
                                 <div class="s-icon-text">
                                     JADWAL
                                 </div>
@@ -99,7 +152,8 @@
                         </div>
                         <div class="col s-icon">
                             <a href="#rute" class="homepage-icon-menu">
-                                <img src="{{ url('assets-plesir/img2/takeoff.png') }}" alt="icon">
+                                <img data-src="{{ url('assets-plesir/img2/takeoff.png') }}" alt="icon"
+                                    loading="lazy" class="lazy-load">
                                 <div class="s-icon-text">
                                     RUTE
                                 </div>
@@ -109,7 +163,8 @@
                     <div class="row">
                         <div class="col s-icon">
                             <a href="#blog" class="homepage-icon-menu">
-                                <img src="{{ url('assets-plesir/img2/temple.png') }}" alt="icon">
+                                <img data-src="{{ url('assets-plesir/img2/temple.png') }}" alt="icon" loading="lazy"
+                                    class="lazy-load">
                                 <div class="s-icon-text">
                                     BLOG
                                 </div>
@@ -117,7 +172,8 @@
                         </div>
                         <div class="col s-icon">
                             <a href="{{ url('/kontak-kami.html') }}" class="homepage-icon-menu">
-                                <img src="{{ url('assets-plesir/img2/hospital.png') }}" alt="icon">
+                                <img data-src="{{ url('assets-plesir/img2/hospital.png') }}" alt="icon"
+                                    loading="lazy" class="lazy-load">
                                 <div class="s-icon-text">
                                     KONTAK
                                 </div>
@@ -125,9 +181,21 @@
                         </div>
                         <div class="col s-icon">
                             <a href="{{ url('/tentang-kami.html') }}" class="homepage-icon-menu">
-                                <img src="{{ url('assets-plesir/img2/cultures.png') }}" alt="icon">
+                                <img data-src="{{ url('assets-plesir/img2/cultures.png') }}" alt="icon"
+                                    loading="lazy" class="lazy-load">
                                 <div class="s-icon-text">
                                     TENTANG KAMI
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s-icon">
+                            <a href="{{ url('/review') }}" class="homepage-icon-menu">
+                                <img data-src="{{ url('assets-plesir/img2/cultures.png') }}" alt="icon"
+                                    loading="lazy" class="lazy-load">
+                                <div class="s-icon-text">
+                                    Review
                                 </div>
                             </a>
                         </div>
@@ -150,9 +218,9 @@
             <div class="container pt-3" style="background-color: #F0F4F7">
                 <div class="row">
                     <div class="col-md-12">
-                        <form method="get" class="form search" action="{{ route('search-layanan') }}">
+                        <form method="get" class="form search" action="{{ route('tarif') }}">
                             <div class="row">
-                                <div class="col-md-3 col-sm-12">
+                                <div class="col-md-3 col-sm-12 mb-2">
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">
@@ -165,9 +233,14 @@
                                                 <option value="{{ $item }}">{{ $item }}</option>
                                             @endforeach
                                         </select>
+                                        <div class="input-group-append">
+                                            <button class="btn py-0" type="button"
+                                                style="background-color: white; border: 1px solid #ced4da; color: gray"
+                                                id="clearAsal"><span>x</span></button>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-md-3 col-sm-12">
+                                <div class="col-md-3 col-sm-12 mb-2">
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">
@@ -180,9 +253,14 @@
                                                 <option value="{{ $item }}">{{ $item }}</option>
                                             @endforeach
                                         </select>
+                                        <div class="input-group-append">
+                                            <button class="btn py-0" type="button"
+                                                style="background-color: white; border: 1px solid #ced4da; color: gray"
+                                                id="clearTujuan"><span>x</span></button>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-md-3 col-sm-12">
+                                <div class="col-md-3 col-sm-12 mb-2">
                                     <div class="input-group">
                                         <select name="jam" id="jam" class="custom-select">
                                             <option value="" selected disabled>-- Pilih Waktu --</option>
@@ -193,6 +271,11 @@
                                             <option value="19.00">19.00</option>
                                             <option value="20.00">20.00</option>
                                         </select>
+                                        <div class="input-group-append">
+                                            <button class="btn py-0" type="button"
+                                                style="background-color: white; border: 1px solid #ced4da; color: gray"
+                                                id="clearJam"><span>x</span></button>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-md-3 col-sm-12">
@@ -208,7 +291,7 @@
             <div class="row">
                 @foreach ($layanan as $key => $layanans)
                     <!-- item -->
-                    <div class="col-md-4">
+                    <div class="col-md-4 col-sm-12 mb-1">
                         <div class="acr-box">
                             <div class="acr-box-in">
                                 <div class="acr-img">
@@ -218,7 +301,7 @@
                                     <div class="ct-name">{{ $layanans->title }}</div>
                                     <div class="ct-cost">
                                         <div class="jadwal-jemput">
-                                            <h4>Jadwal Jemputan</h4>
+                                            <h4>Jadwal Jemput</h4>
                                             <table class="tabel-jadwal-jemput">
                                                 <tbody>
                                                     <tr>
@@ -290,7 +373,8 @@
                         <div class="news-content">
                             <div class="hnw-img">
                                 <a href="{{ route('layananCategoryId', $item->slug) }}" style="color: #2450A6">
-                                    <img src="{{ Storage::disk('s3')->url($item->media) }}" alt="news">
+                                    <img data-src="{{ Storage::disk('s3')->url($item->media) }}" alt="news"
+                                        loading="lazy" class="lazy-load">
                                 </a>
                             </div>
                             <div class="hnw-desc">
@@ -337,7 +421,8 @@
                                 </div>
                                 <div class="vsbt-img">
                                     <a href="{{ route('locationId', $outlet->slug) }}">
-                                        <img src="{{ Storage::disk('s3')->url($outlet->image) }}" alt="img">
+                                        <img data-src="{{ Storage::disk('s3')->url($outlet->image) }}" alt="img"
+                                            class="lazy-load" loading="lazy">
                                     </a>
                                 </div>
                             </div>
@@ -375,7 +460,8 @@
                         <div class="news-content">
                             <div class="hnw-img">
                                 <a href="{{ route('detail-blog.blogId', $blog->slug) }}" style="color: #2450A6">
-                                    <img src="{{ Storage::disk('s3')->url($blog->image) }}" alt="news">
+                                    <img data-src="{{ Storage::disk('s3')->url($blog->image) }}" alt="news"
+                                        class="lazy-load" loading="lazy">
                                 </a>
                             </div>
                             <div class="hnw-desc">
@@ -416,20 +502,23 @@
                         @foreach ($feedback as $feedItem)
                             <div class="testimonial-item">
                                 <div class="testimonial-top">
-                                    <div class="author">
-                                        <img src="{{ Storage::disk('s3')->url($feedItem->image) }}"
-                                            data-at2x="{{ Storage::disk('s3')->url($feedItem->image) }}" alt=""
-                                            style="width: 120px;height: 120px;">
-                                    </div>
+                                    @if ($feedItem->image)
+                                        <div class="author">
+                                            <img src="{{ Storage::disk('s3')->url($feedItem->image) }}"
+                                                data-at2x="{{ Storage::disk('s3')->url($feedItem->image) }}"
+                                                alt="" style="width: 120px;height: 120px;">
+                                        </div>
+                                    @endif
                                 </div>
                                 <!-- testimonial content-->
                                 <div class="testimonial-body">
                                     <h5 class="title"><span>{{ $feedItem->title }}</span></h5>
-                                    <div class="stars stars-5"></div>
+                                    <div class="stars stars-{{ $feedItem->rating }}"></div>
                                     <p class="align-center">{{ $feedItem->desc }}</p>
                                 </div>
                             </div>
                         @endforeach
+
                     </div>
                 </div>
             </div>
@@ -452,7 +541,7 @@
                             <div class="vs-box">
                                 <div class="vsb-top">
                                     <div class="vsbt-img">
-                                        <img class="home-gallery" id="imageresource-{{ $item->id }}"
+                                        <img class="home-gallery" id="imageresource-{{ $item->id }}" loading="lazy"
                                             src="{{ Storage::disk('s3')->url($item->image) }}" alt="img">
                                     </div>
                                 </div>
@@ -469,53 +558,58 @@
             </div>
         </div>
         {{-- End Gallery --}}
-        <!-- SUBSCRIBE -->
-        <div class="section-subscribe">
-            <div class="subcontainer">
-                <div class="subrow">
-                    <div class="subcol">
-                        {{-- <div class="section-title">Layanan</div>
-                    <p class="textsub">Nikmati berbagai layanan Ramatrans Travel yang akan memudahkan Anda</p> --}}
-                    </div>
-                </div>
-            </div>
-            <div class="bg-subscribe">
-                <img src="{{ url('assets-plesir/img/image.jpg') }}" alt="banner">
-            </div>
-        </div>
-        <!-- END SUBSCRIBE -->
 
     </div>
 
+
+
 @endsection
-{{-- modal --}}
-{{-- <div id="gallery-modal">
-    @foreach (File::files(public_path('storage/gallery')) as $item)
-        <div class="modal fade" id="{{ $item }}" tabindex="-1" role="dialog"
-            aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content"> --}}
-{{-- <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-          </div> --}}
-{{-- <div class="modal-body" id="sm-section-modal-gallery">
-                        <img src="{{ asset('storage/gallery/' . $item->getFilename()) }}" id="imagepreview"
-                            style="width: 100%; height: 264px;">
-                    </div> --}}
-{{-- <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          </div> --}}
-{{-- </div>
-            </div>
-        </div>
-    @endforeach
-</div> --}}
-{{-- end modal --}}
 
 @section('script')
-    <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+    <script async src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+    <script async>
+        $(document).ready(function() {
+            var asalSelect = document.getElementById('asal');
+            var tujuanSelect = document.getElementById('tujuan');
+            var jamSelect = document.getElementById('jam');
 
-    <script>
+            $('#clearTujuan').on('click', function() {
+                // Clear the selected option
+                tujuanSelect.selectedIndex = 0;
+                $(tujuanSelect).change();
+
+                fetch_data();
+            });
+
+            $('#clearAsal').on('click', function() {
+                // Clear the selected option
+                asalSelect.selectedIndex = 0;
+                $(asalSelect).change();
+
+                fetch_data();
+            });
+
+            $('#clearJam').on('click', function() {
+                // Clear the selected option
+                jamSelect.selectedIndex = 0;
+                $(jamSelect).change();
+
+            });
+
+            asalSelect.addEventListener('change', function() {
+                fetch_data();
+            });
+
+            tujuanSelect.addEventListener('change', function() {
+                fetch_data();
+            });
+
+            jamSelect.addEventListener('change', function() {
+                fetch_data();
+            });
+
+        });
+
         $(document).ready(function() {
             $(".details-button").on("click", function() {
                 var itemId = $(this).data("item");
@@ -539,19 +633,15 @@
                 if (itemId.jam_malam) {
                     selectElement.append($("<option></option>").attr("value", itemId.jam_malam).text(itemId
                         .jam_malam));
-                }
-                // formSubmitIndex(itemId.id);
-                $("#modalBookingIndex button.btn-success").on("click", function() {
-                    formSubmitIndex(itemId.id);
-                });
+                }               
                 console.log(itemId)
             });
         });
 
         function formSubmitIndex(idForm) {
             var name = $('#name').val();
-            var noHp = $('#telp').val();
-            var tglBerangkat = $('#date').val();
+            var telp = $('#telp').val();
+            var date = $('#date').val();
             var time = $('#time').find(":selected").val();
             var rute = $('#rute').val();
 
@@ -564,13 +654,13 @@
                 return false;
             }
 
-            if (noHp.trim() == '') {
+            if (telp.trim() == '') {
                 alert('Silakan isi nomor hp terlebih dahulu.');
                 $('#telp').focus();
                 return false;
             }
 
-            if (tglBerangkat.trim() == '') {
+            if (date.trim() == '') {
                 alert('Silakan isi tanggal berangkat terlebih dahulu.');
                 $('#date').focus();
                 return false;
@@ -583,19 +673,15 @@
             }
 
             window.open('https://api.whatsapp.com/send?phone=628117298168' + '&text=Nama%3A%20' + name +
-                '+%20%0ANo.%20hp%3A%20' + noHp + '%20%0ATanggal%20%3A%20' +
-                tglBerangkat + '%20%20%0Awaktu%20%20%3A%20' + time + '%20%0ARute%20%3A%20' + rute +
+                '+%20%0ANo.%20hp%3A%20' + telp + '%20%0ATanggal%20%3A%20' +
+                date + '%20%20%0Awaktu%20%20%3A%20' + time + '%20%0ARute%20%3A%20' + rute +
                 '%20%20%0ATempat%20Duduk%3A%20' + numberorder + '%0ATitik%20Jemput%3A%20' + location + '')
         }
 
         $(".home-gallery").on("click", function(e) {
-            var imageUrl = $(this).attr("src");
-            // console.log(imageUrl)
-
-            // Ubah URL gambar dalam modal
-            $("#imagemodal img").attr("src", imageUrl);
-            // Tampilkan modal
-            $('#imagemodal').modal("show");
+            $('#' + e.target.id).modal(
+                'show'
+            ); // imagemodal is the id attribute assigned to the bootstrap modal, then i use the show function
         });
 
         window.onload = function() {
@@ -610,5 +696,43 @@
                 slidesToScroll: 1
             });
         };
+
+        $(document).ready(function() {
+            // Star rating selection
+            $('.star-rating .star').on('click', function() {
+                var rating = $(this).data('rating');
+                $('#rating_review').val(rating);
+
+                // Set active state for selected stars
+                $(this).addClass('active').prevAll().addClass('active');
+                $(this).nextAll().removeClass('active');
+            });
+
+            // Rest of your existing script...
+        });
+
+        document.addEventListener("DOMContentLoaded", function() {
+            var lazyImages = document.querySelectorAll('.lazy-load');
+
+            var lazyLoad = function(target) {
+                var io = new IntersectionObserver(function(entries, observer) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            var img = entry.target;
+                            img.src = img.dataset.src;
+                            img.classList.remove('lazy-load');
+                            observer.disconnect();
+                        }
+                    });
+                });
+
+                io.observe(target);
+            };
+
+            lazyImages.forEach(function(img) {
+                lazyLoad(img);
+            });
+        });
     </script>
+
 @endsection

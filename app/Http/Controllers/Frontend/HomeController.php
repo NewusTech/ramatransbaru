@@ -21,6 +21,7 @@ use App\Models\ParentArea;
 use App\Models\Unggulan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Log;
 use DB;
 use App\Models\Landing;
 use App\Models\SearchConsole;
@@ -81,6 +82,7 @@ class HomeController extends Controller
         $jenis_l = DB::table('layanans')->select('jenis_layanan_id')->distinct()->get()->pluck('jenis_layanan_id');
         $jenisLayanan = JenisLayanan::select(['id', 'title', 'slug','media','content'])->get();
         $layanan = Layanan::latest()->paginate(6)->withQueryString();
+        $metades = env('APP_NAME', 'Default Name') . " adalah agen perjalanan yang terbaik dan terpercaya. Lebih dari 11 tahun melayani para pelanggan dengan pelayanan yang terbaik.";
         $tagManager = TagManager::first();
         $gtagManager = GtagManager::first();
         $analytics = Analytics::first();
@@ -90,14 +92,13 @@ class HomeController extends Controller
         $dataSeo['title'] = $seoTools->home_title;
         $dataSeo['description'] = $seoTools->site_description;
         $dataSeo['keywords'] = $seoTools->keywords;
-        $dataSeo['image'] = $seoTools->image;
-
+        $dataSeo['image'] = $seoTools->image;        
         // data seo Home
-        $seoPage = Page::where('slug', '=', 'home')->first();
+        $seoPage = Page::where('slug', '=', 'home')->first();        
         $blogs = Blog::latest()->paginate(3)->withQueryString();
-        $gallery = Gallery::latest()->get();
+        $gallery = Gallery::take(10)->latest()->get();
         return view('frontend.beranda.index2', compact(
-                                                      'data', 'layananTarif', 'carousel', 
+                                                      'data', 'layananTarif', 'carousel', 'metades',
                                                       'youtube', 'unggulan', 'feedback', 
                                                       'hq', 'contacts', 
                                                       'jenisLayanan', 'tentang', 'parentOutlet', 
@@ -106,6 +107,25 @@ class HomeController extends Controller
                                                       'gtagManager','analytics','blogs','gallery'
                                                      )
                    );
+    }
+
+    public function store(Request $request)
+    {
+        try {                   
+            $order = new ListOrder();        
+            $order->name = $request->input('name');
+            $order->telp = $request->input('telp');
+            $order->date = $request->input('date');
+            $order->location = $request->input('location');
+            $order->time = $request->input('time');
+            $order->rute = $request->input('rute');
+            $order->numberorder = $request->input('numberorder');
+            $order->save();
+                
+            return redirect()->back()->with('success', 'Link pesan ke WA sudah digenerate');
+        } catch (\Exception $e) {            
+            return redirect()->back()->with('error', 'Failed to order. Please try again.');
+        }
     }
    
 }

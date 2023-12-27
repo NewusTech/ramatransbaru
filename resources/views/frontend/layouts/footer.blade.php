@@ -6,11 +6,9 @@
                 <div class="logo-soc clearfix">
                     <div class="footer-logo"><a href="{{ route('beranda') }}">
                             <h4 class="text-uppercase">RamaTrans Travel
-
                             </h4>
                             <br>
                             <small>Lampung - Palembang - Jakarta - Bogor - Bekasi</small>
-
                         </a>
                     </div>
                 </div>
@@ -29,13 +27,6 @@
             <!-- widget footer-->
             <div class="col-md-3 col-sm-6 mb-sm-30">
                 <div class="widget-footer">
-                    <!-- <h4>Dukungan</h4>
-                    <div class="widget-tags-wrap">
-                        {{-- <a href="#" rel="tag" class="tag">Cara Pemesanan</a>
-                        <a href="#" rel="tag" class="tag">Cara Pembayaran</a> --}}
-                        <a href="#" rel="tag" class="tag">Syarat & Ketentuan</a>
-                        <a href="#" rel="tag" class="tag">Kebijakan Privasi</a>
-                    </div> -->
                 </div>
             </div>
             <!-- end widget footer-->

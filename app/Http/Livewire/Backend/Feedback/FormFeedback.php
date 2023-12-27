@@ -17,6 +17,8 @@ class FormFeedback extends Component
     protected $rules = [
         'feedback.title'                    => 'required',
         'feedback.desc'                     => 'required',
+        'feedback.no_hp'                     => 'required',
+        'feedback.rating'                     => 'required',
 
     ];
 
@@ -40,7 +42,7 @@ class FormFeedback extends Component
         $this->validate();
         if (!$this->feedback->image) {
             $this->validate([
-                'gambar'    => 'required|image|mimes:jpg,jpeg,png|max:2048',
+                'gambar'    => 'image|mimes:jpg,jpeg,png,webp|max:250',
             ]);
         }
 

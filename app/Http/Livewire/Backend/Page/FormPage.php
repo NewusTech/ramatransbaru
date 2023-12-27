@@ -51,6 +51,7 @@ class FormPage extends Component
         $this->validate();
         $this->validate([
             'pages.slug'      => 'required|unique:pages,slug,' . $this->pages->id,
+            'gambar'    => 'required|image|mimes:jpg,jpeg,png,webp|max:250',
         ]);
 
         $this->pages->author_id = auth()->user()->id;

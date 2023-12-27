@@ -1,6 +1,29 @@
 @extends('frontend.layouts.app-plesir')
-@section('title', 'Gallery')
+@section('title', env('APP_NAME', 'Default Name') . ' memiliki banyak unit mobil yang terawat.')
 @section('content')
+    {{-- modal --}}
+    <div id="gallery-modal">
+        @foreach ($gallery as $item)
+            <div class="modal fade" id="imageresource-{{ $item->id }}" tabindex="-1" role="dialog"
+                aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        {{-- <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        </div> --}}
+                        <div class="modal-body" id="sm-section-modal-gallery">
+                            <img src="{{ Storage::disk('s3')->url($item->image) }}" id="imagepreview"
+                                style="width: 100%; height: 264px;">
+                        </div>
+                        {{-- <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div> --}}
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    </div>
+    {{-- end modal --}}
     <div class="content-wrap page-gallery">
         <div class="subsite">
             <div class="row">
@@ -43,29 +66,6 @@
     </div>
 @endsection
 
-{{-- modal --}}
-<div id="gallery-modal">
-    @foreach ($gallery as $item)
-        <div class="modal fade" id="imageresource-{{ $item->id }}" tabindex="-1" role="dialog"
-            aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    {{-- <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        </div> --}}
-                    <div class="modal-body" id="sm-section-modal-gallery">
-                        <img src="{{ Storage::disk('s3')->url($item->image) }}" id="imagepreview"
-                            style="width: 100%; height: 264px;">
-                    </div>
-                    {{-- <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div> --}}
-                </div>
-            </div>
-        </div>
-    @endforeach
-</div>
-{{-- end modal --}}
 @section('script')
 
     <script type="text/javascript">
