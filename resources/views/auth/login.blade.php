@@ -62,10 +62,15 @@
                 kenangan seumur hidup.</p>
 
             <div class="text-center mb-3">
-                <img style="max-width:300px" src="{{ asset('img/logo.png') }}" alt="{{ company_config('name') }}">
+                @if (env('APP_NAME') === 'Rama Tranz Travel')
+                    <img style="max-width:300px" src="{{ asset('img/logo.png') }}" alt="{{ company_config('name') }}">
+                @else
+                    <img style="max-width:300px" src="{{ url('frontend-assets/img/logo-rasya-dark.png') }}"
+                        alt="{{ company_config('name') }}">
+                @endif
             </div>
             <p class="text-center">
-                Selamat datang di website {{ company_config('name') ?? config('app.name') }}
+                Selamat datang di website {{ env('APP_NAME') }}
             </p>
             <x-jet-validation-errors class="mb-3" />
 

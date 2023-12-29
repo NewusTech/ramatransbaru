@@ -49,9 +49,13 @@ class FormPage extends Component
     public function save()
     {
         $this->validate();
+        if (!$this->pages->media) {
+            $this->validate([
+                'gambar'    => 'required|image|mimes:jpg,jpeg,png,webp|max:250',
+            ]);
+        }
         $this->validate([
             'pages.slug'      => 'required|unique:pages,slug,' . $this->pages->id,
-            'gambar'    => 'required|image|mimes:jpg,jpeg,png,webp|max:250',
         ]);
 
         $this->pages->author_id = auth()->user()->id;

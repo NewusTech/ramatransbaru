@@ -134,7 +134,11 @@
         </div>
         <div class="sdprofile">
             <div class="sdp-left">
-                <img src="{{ url('frontend-assets/img/logo-2.png') }}" alt="profile" loading="lazy">
+                @if (env('APP_NAME') === 'Rama Tranz Travel')
+                    <img src="{{ url('frontend-assets/img/logo-2.png') }}" alt="profile" loading="lazy">
+                @else
+                    <img src="{{ url('frontend-assets/img/logo-rasya-light.png') }}" alt="profile" loading="lazy">
+                @endif
             </div>
             <div class="sdp-right">
                 {{-- <div class="sd-name">Lilia Doe</div> --}}
@@ -232,9 +236,14 @@
                     <div class="col-12 col-md-3 mb-4 mb-md-0">
                         <div class="mb-3 d-flex justify-content-center align-items-center">
                             <a href="{{ url('/') }}" class="logo d-flex align-items-center">
-                                <img src="{{ url('frontend-assets/img/logo-2.png') }}" width="50px" alt
-                                    loading="lazy">
-                                <span class="ml-2" style="color: white">Rama Tranz Travel</span>
+                                @if (env('APP_NAME') === 'Rama Tranz Travel')
+                                    <img src="{{ url('frontend-assets/img/logo-2.png') }}" width="50px" alt
+                                        loading="lazy">
+                                @else
+                                    <img src="{{ url('frontend-assets/img/logo-rasya-light.png') }}" width="50px"
+                                        alt loading="lazy">
+                                @endif
+                                <span class="ml-2" style="color: white">{{ env('APP_NAME') }}</span>
                             </a>
                         </div>
 
@@ -282,7 +291,7 @@
                 </div>
 
                 <div class="d-flex flex-column flex-sm-row justify-content-between py-3 my-1 border-top">
-                    <p>&copy; Copyright 2023 RAMATRANZ | All Rights Reserved.</p>
+                    <p>&copy; Copyright 2023 {{ env('APP_NAME') }} | All Rights Reserved.</p>
                     <ul class="list-unstyled d-flex">
                         <li class="ms-3"><a class="link-body-emphasis" href="#"><i
                                     class="fab fa-twitter"></i></a></li>

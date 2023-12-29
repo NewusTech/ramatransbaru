@@ -2,10 +2,7 @@
 @section('title', 'Pilih ' . env('APP_NAME', 'Default Name') . ' Untuk Perjalanan Menyenangkan')
 @section('content')
 
-    <div class="content-wrap page-news-list" id="blog-list">
-        <div class="subsite-banner">
-            <img src="https://ramatranzlampung.com/storage/jenis-layanan/90hVpgV5oMu32B8TQNGxbpHiGxc8TYifaH24IkSY.jpg">
-        </div>
+    <div class="content-wrap page-news-list">
         <div class="subsite subsite-with-banner">
             <div class="row">
                 <div class="col-md-12">
@@ -21,13 +18,11 @@
                     <div class="search-form search-content">
                         <div class="search-wrapper ">
                             <input id="search" placeholder="Search...">
-                            {{-- <button class="ssubmit" type="submit" name="search_submit"><i
-                                    class="fas fa-search"></i></button> --}}
                         </div>
                     </div>
                 </div>
             </div>
-            <div>
+            <div id="blog-list">
                 @foreach ($blogs as $blog)
                     <div class="row news-row">
                         <div class="col-md-12">

@@ -31,7 +31,7 @@
         <div class="container page">
             <section class="page-section mb-0 pt-0 pb-3">
                 <h2 class="mt-0 mb-0">
-                    <p style="font-size: 22px">Piagam Penghargaan RamaTranz</p>
+                    <p style="font-size: 22px">Piagam Penghargaan {{ env('APP_NAME') }}</p>
                 </h2>
                 <div class="cws_divider with-plus short-3 mb-5 mt-3">
 

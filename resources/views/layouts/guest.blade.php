@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pergi Bersama Rama Tranz Travel, Harga Murah Meriah</title>
+    <title>Pergi Bersama {{ env('APP_NAME') }}, Harga Murah Meriah</title>
     <meta name="description" content="Rama Tranz Travel, Penyedia Agen Perjalanan Terbaik">
 
     <!-- Fonts -->
@@ -173,7 +173,7 @@
 
                     <div class="copy-text text-center">
                         Copyright &copy; {{ date('Y') }}
-                        <strong>{{ company_config('company') ?? '' }}
+                        <strong>{{ env('APP_NAME') }}
                         </strong>
                     </div>
                 </div>
