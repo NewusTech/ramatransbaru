@@ -72,7 +72,7 @@ class HomeController extends Controller
         $tentang = Page::get()->first();
         $youtube = LinkYoutube::where('id', 1)->first();
         $unggulan = Unggulan::take(6)->get();
-        $feedback = Feedback::take(6)->get();        
+        $feedback = Feedback::take(10)->get();        
         $contacts = Kontak::where('id', 1)->first();
         $faqs = Faq::take(6)->get();
         $parentOutlet = ParentArea::get();
@@ -95,7 +95,7 @@ class HomeController extends Controller
         $dataSeo['image'] = $seoTools->image;        
         // data seo Home
         $seoPage = Page::where('slug', '=', 'home')->first();        
-        $blogs = Blog::latest()->paginate(3)->withQueryString();
+        $blogs = Blog::latest()->where('status', '=', 'Publish')->paginate(3)->withQueryString();
         $gallery = Gallery::take(10)->latest()->get();
         return view('frontend.beranda.index2', compact(
                                                       'data', 'layananTarif', 'carousel', 'metades',
