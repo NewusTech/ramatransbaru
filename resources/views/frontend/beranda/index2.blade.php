@@ -22,7 +22,7 @@
 
     <!-- Content Wrap  -->
     <div class="content">
-        <h1 style="display: none;">Rama Tranz Travel adalah agen jasa travel terbaik</h1>
+        <h1 style="display: none;">{{ env('APP_NAME') }} adalah agen jasa travel terbaik</h1>
         <!-- Bootstrap Modal for Notifications -->
         <div class="modal fade" id="notificationModal" tabindex="-1" role="dialog"
             aria-labelledby="notificationModalLabel" aria-hidden="true">
@@ -53,7 +53,7 @@
             </div>
         </div>
         <!-- slider -->
-        <div class="img-hero ">
+        <div class="img-hero">
             @foreach ($carousel as $slider)
                 <div class="d-flex justify-content-center align-items-center">
                     <img data-src="{{ Storage::disk('s3')->url($slider->image) }}" alt="slider"
@@ -362,7 +362,7 @@
         <div class="heading-section" id="section-layanan">
             <div class="sa-title popcat">Layanan</div>
             <div class="heading-info">
-                Nikmati berbagai layanan Ramatrans Travel yang akan memudahkan Anda
+                Nikmati berbagai layanan {{ env('APP_NAME') }} yang akan memudahkan Anda
             </div>
             <div class="clear"></div>
         </div>
@@ -403,10 +403,10 @@
 
         <!-- section 3 -->
         <div class="heading-section">
-            <div class="sa-title popcat">Loket Ramatranz Travel
+            <div class="sa-title popcat">Loket {{ env('APP_NAME') }}
             </div>
             <div class="heading-info">
-                Loket Ramatranz Travel tersebar di beberapa provinsi untuk memudahkan mobilitas Anda
+                Loket {{ env('APP_NAME') }} tersebar di beberapa provinsi untuk memudahkan mobilitas Anda
             </div>
             <div class="clear"></div>
         </div>
@@ -633,7 +633,7 @@
                 if (itemId.jam_malam) {
                     selectElement.append($("<option></option>").attr("value", itemId.jam_malam).text(itemId
                         .jam_malam));
-                }               
+                }
                 console.log(itemId)
             });
         });

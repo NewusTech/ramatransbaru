@@ -5,7 +5,7 @@
             <div class="col-md-6 col-sm-12 mb-sm-30">
                 <div class="logo-soc clearfix">
                     <div class="footer-logo"><a href="{{ route('beranda') }}">
-                            <h4 class="text-uppercase">RamaTrans Travel
+                            <h4 class="text-uppercase">{{ env('APP_NAME') }}
                             </h4>
                             <br>
                             <small>Lampung - Palembang - Jakarta - Bogor - Bekasi</small>
@@ -53,7 +53,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-12">
-                    <p>© Copyright {{ date('Y') }} <span class="text-uppercase">RamaTranz</span>
+                    <p>© Copyright {{ date('Y') }} <span class="text-uppercase">{{ env('APP_NAME') }}</span>
                         &nbsp;&nbsp;|&nbsp;&nbsp; All
                         Rights
                         Reserved</p>
