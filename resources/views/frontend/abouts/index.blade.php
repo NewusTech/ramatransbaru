@@ -38,7 +38,9 @@
                 </div>
                 <div id="flex-slider" class="flexslider">
                     <ul class="slides">
-                        <li><img src="{{ url('frontend-assets/pic/flexslider/l-1.jpg') }}" alt></li>
+                        <li>
+                            <img src="{{ Storage::disk('s3')->url($seoPage->media) }}" alt>
+                        </li>
                     </ul>
                 </div>
             </section>
