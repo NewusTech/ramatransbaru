@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
+use App\Models\Kontak;
 use App\Models\GtagManager;
 use App\Models\Page;
 use App\Models\Analytics;
@@ -25,7 +26,8 @@ class ReviewController extends Controller
         $metades = "Percayakan " . env('APP_NAME', 'Default Name') . " sebagai agen perjalanan anda bersama keluarga dengan menyenangkan dan harga yang murah.";
         $gtagManager = GtagManager::first();
         $analytics = Analytics::first();
-        return view('frontend.review.index', compact('data','tagManager','seoPage', 'metades','gtagManager','analytics'));
+        $contacts = Kontak::where('id', 1)->first();
+        return view('frontend.review.index', compact('data','tagManager','seoPage', 'metades','gtagManager','analytics', 'contacts'));
     }
 
     public function inputreview(Request $request)

@@ -1134,6 +1134,13 @@ form .input-group>.form-control:not(:last-child) {
   vertical-align: middle;
 }
 
+.preloading .wrap-preload2 {
+  background-color: #007800;
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+}
+
 .preloading .cssload-loader {
   width: 49px;
   height: 49px;
@@ -1245,6 +1252,10 @@ form .input-group>.form-control:not(:last-child) {
   width: 100%;
   background-color: #2450a6;
   border-bottom: 0px solid #ddd;
+}
+
+.bg-header2 {
+  background-color: #007800;  
 }
 
 .navbar {
@@ -1405,6 +1416,10 @@ form .input-group>.form-control:not(:last-child) {
   overflow: auto;
 }
 
+#sidebarleft.rasya-tranz {
+  background-color: #007800; /* Ganti dengan warna latar belakang yang diinginkan */  
+}
+
 #sidebarleft a,
 #sidebarleft a:hover {
   color: #ffffff;
@@ -1471,6 +1486,11 @@ form .input-group>.form-control:not(:last-child) {
 #sidebarleft .sidebar-header {
   padding: 20px;
   background-color: #2450a6;
+}
+
+#sidebarleft .sidebar-header2 {
+  padding: 20px;
+  background-color: #007800;
 }
 
 #sidebarleft ul {
@@ -1669,6 +1689,11 @@ a[data-toggle="collapse"] {
   left: 0px;
   z-index: 2;
   padding: 0px 5px 5px;
+}
+
+/* Gaya khusus untuk env appname = "Rama Tranz Travel" */
+.bottom-panel2 {
+  background-color: #007800; /* Ganti dengan warna latar belakang yang diinginkan */
 }
 
 .bottom-panel .bp-col {

@@ -74,9 +74,11 @@
             $(this).addClass("active");
             var category = e.target.value
             var base_url = '{{ url('') }}'
+            console.log("asem", category)
             $.get(base_url + '/filterGallery?category=' + category, function(data) {
                 $('#list-gallery').empty();
                 $.each(data, function(index, obj) {
+                    console.log("tol", obj.image)
                     $('#list-gallery').append(
                         `
                                 <div class="gall-col gallery-img-box" >
