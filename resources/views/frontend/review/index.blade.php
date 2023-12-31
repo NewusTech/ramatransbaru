@@ -108,16 +108,20 @@
 
 <body class="default">
     <!-- Sidebar left -->
-    <nav id="sidebarleft" class="sidenav">
+    <nav id="sidebarleft" class="sidenav @if (env('APP_NAME') == 'Rasya Mandiri Tranz') rasya-tranz @endif">
         <div id="dismiss">
             <i class="fas fa-times"></i>
         </div>
-        <div class="sidebar-header">
+        <div class="sidebar-header  @if (env('APP_NAME') == 'Rasya Mandiri Tranz') sidebar-header2 @endif">
             <h3>Menu</h3>
         </div>
         <div class="sdprofile">
             <div class="sdp-left">
-                <img src="{{ url('frontend-assets/img/logo-2.png') }}" alt="profile" loading="lazy">
+                @if (env('APP_NAME') === 'Rama Tranz Travel')
+                    <img src="{{ url('frontend-assets/img/logo-2.png') }}" alt="profile" loading="lazy">
+                @else
+                    <img src="{{ url('frontend-assets/img/logo-rasya-light.png') }}" alt="profile" loading="lazy">
+                @endif
             </div>
             <div class="sdp-right">
                 {{-- <div class="sd-name">Lilia Doe</div> --}}
@@ -206,7 +210,7 @@
     <div id="content">
         <div class="content">
             <h1 class="text-center pt-3" style="font-size: 18px">Penilaian Pelayanan</h1>
-            <h2 class="text-center" style="font-size: 18px">Rama Tranz Travel</h2>
+            <h2 class="text-center" style="font-size: 18px">{{ env('APP_NAME') }}</h2>
             <p style="display: none;">
                 1. Kemudahan dan Kenyamanan
 
@@ -335,7 +339,7 @@
     <!-- End Modal -->
 
     <!-- Botom Panel  -->
-    <div class="bottom-panel pt-0">
+    <div class="bottom-panel @if (env('APP_NAME') == 'Rasya Mandiri Tranz') bottom-panel2 @endif">
         <div class="bp-col">
             <a href="{{ url('/') }}">
                 <div class="bp-icon"><img src="{{ url('assets-plesir/img2/menu-bottom/home.png') }}" alt="icon"
@@ -368,7 +372,7 @@
         </div>
         <div class="bp-col">
             <a
-                href="https://api.whatsapp.com/send?phone=628117298168&text=Hallo%2C%20Saya%20ingin%20memesan%20tiket%20perjalanan%20di%20Rama%20Trans%20Travel.%20Untuk%20pemesanannya%20bagaimana%20ya%3F">
+                href="https://api.whatsapp.com/send?phone={{ $contacts->wa_1 }}&text=Hallo%2C%20Saya%20ingin%20memesan%20tiket%20perjalanan%20di%20Rama%20Trans%20Travel.%20Untuk%20pemesanannya%20bagaimana%20ya%3F">
                 <div class="bp-icon"><img src="{{ url('assets-plesir/img2/menu-bottom/wa.png') }}" alt="icon"
                         loading="lazy">
                 </div>
