@@ -144,6 +144,7 @@ class LayananController extends Controller
         $gtagManager = GtagManager::first();
         $metades = env('APP_NAME', 'Default Name') . " memiliki jenis layanan yang dapat memudahkan para pelanggan. Door to door, point to point, dan charter adalah layanan yang unggul.";
         $analytics = Analytics::first();
+        $contacts = Kontak::where('id', 1)->first();
         $tentang = Page::get()->first();
         $menuLayanan = JenisLayanan::select(['id', 'title', 'slug'])->orderBy('slug', 'ASC')->get();
         return view('frontend.jenis-layanan.index', compact(
@@ -154,6 +155,7 @@ class LayananController extends Controller
                                                 'jenisLayanan', 
                                                 'tagManager',
                                                 'seoPage',
+                                                'contacts',
                                                 'gtagManager',
                                                 'analytics'
                                             ));
