@@ -39,15 +39,16 @@
                                     </p>
 
                                     <!-- ! accordion-->
-                                    <a href="https://api.whatsapp.com/send?phone=08117208168&text=Hallo%2C%20Saya%20ingin%20memesan%20transportasi%20ini%20di%20RamaTrans%20Travel%20%3F"
-                                        class="theme-button alt text-uppercase" style="font-size: 14px">whatsApp 1</a>
-                                    <a href="https://api.whatsapp.com/send?phone=08117298168&text=Hallo%2C%20Saya%20ingin%20memesan%20transportasi%20ini%20di%20RamaTrans%20Travel%20%3F"
-                                        class="theme-button alt text-uppercase" style="font-size: 14px">whatsApp 2</a>
-                                    <a href="tel:08117208168" class="theme-button alt gray-dark text-uppercase"
-                                        style="font-size: 14px">0811
-                                        7208 168</a>
-                                    <a href="tel:08117298168" class="theme-button alt gray-dark text-uppercase"
-                                        style="font-size: 14px">0811 7298 168</a>
+                                    <a href="https://api.whatsapp.com/send?phone={{ $contacts->wa_1 }}&text=Hallo%2C%20Saya%20ingin%20memesan%20transportasi%20ini%20di%20RamaTrans%20Travel%20%3F"
+                                        class="theme-button alt text-uppercase" style="font-size: 14px">WhatsApp 1</a>
+                                    <a href="https://api.whatsapp.com/send?phone={{ $contacts->wa_2 }}&text=Hallo%2C%20Saya%20ingin%20memesan%20transportasi%20ini%20di%20RamaTrans%20Travel%20%3F"
+                                        class="theme-button alt text-uppercase" style="font-size: 14px">WhatsApp 2</a>
+                                    <a href="tel:{{ $contacts->phone_tr_1 }}"
+                                        class="theme-button alt gray-dark text-uppercase"
+                                        style="font-size: 14px">{{ $contacts->phone_tr_1 }}</a>
+                                    <a href="tel:{{ $contacts->phone_tr_2 }}"
+                                        class="theme-button alt gray-dark text-uppercase"
+                                        style="font-size: 14px">{{ $contacts->phone_tr_2 }}</a>
                                 </div>
                             </div>
                         </div>

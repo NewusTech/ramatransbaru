@@ -16,10 +16,10 @@
                     <div class="col-lg-8 col-md-8 col-sm-12">
                         @foreach ($outlet_all->take(1) as $outlet)
                             <h6 class="title-section-top font-4">Alamat Kantor</h6>
-                            <h2 class="title-section"><span style="font-size: 22px">RamaTrans
+                            <h2 class="title-section"><span style="font-size: 22px">{{ env('APP_NAME') }}
                                     {{ $outlet->parents->nama_provinsi }}</span> </h2>
                             <div class="cws_divider mb-3 mt-2"></div>
-                            <p>Rama Trans Travel memiliki alamat kantor yang berada di {{ $outlet->kota_kab }},
+                            <p>{{ env('APP_NAME') }} memiliki alamat kantor yang berada di {{ $outlet->kota_kab }},
                                 {{ $outlet->parents->nama_provinsi }}. Lokasinya dapat dilihat melalui google maps dibawah
                                 ini.</p>
                         @endforeach

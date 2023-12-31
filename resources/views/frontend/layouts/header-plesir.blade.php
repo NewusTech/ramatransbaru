@@ -1,5 +1,5 @@
 {{-- Header --}}
-<nav class="navbar navbar-expand-lg navbar-light bg-header">
+<nav class="navbar navbar-expand-lg navbar-light bg-header @if (env('APP_NAME') == 'Rasya Mandiri Tranz') bg-header2 @endif">
     <div class="container-fluid">
         {{-- <div class="logo">Plesir</div> --}}
         <a href="{{ url('/') }}" class="logo">

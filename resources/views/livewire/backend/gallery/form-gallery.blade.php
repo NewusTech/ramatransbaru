@@ -53,7 +53,7 @@
 
                                 <div class="form-group">
                                     <label for="">Gambar</label>
-                                    <input type="file" multiple
+                                    <input type="file"
                                         class="form-control-file @error('gambar') is-invalid @enderror"
                                         wire:model="gambar" aria-describedby="fileHelpId">
                                     @error('gambar')
