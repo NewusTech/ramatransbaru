@@ -365,7 +365,7 @@
         </div>
         <div class="bp-col">
             <a href="{{ url('/jadwal.html') }}">
-                <div class="bp-icon"><img src="{{ url('assets-plesir/img2/menu-bottom/jadwal-removebg.png') }}"
+                <div class="bp-icon"><img src="{{ url('assets-plesir/img2/menu-bottom/jadwal-rasya.png') }}"
                         alt="icon" loading="lazy"></div>
                 <div class="bp-text">Jadwal</div>
             </a>
