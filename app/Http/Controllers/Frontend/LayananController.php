@@ -162,6 +162,13 @@ class LayananController extends Controller
         $data['type'] = 'Layanan Ramatranz';
         $data['url'] = URL::current();
 
+        $seoTools = Seo::first();
+        $dataSeo['site_title'] = $seoTools->site_title;
+        $dataSeo['title'] = $seoTools->home_title;
+        $dataSeo['description'] = $seoTools->site_description;
+        $dataSeo['keywords'] = $seoTools->keywords;
+        $dataSeo['image'] = $seoTools->image;  
+
         $jenisLayanan = JenisLayanan::select(['id', 'title', 'slug','media','content', 'excerpt'])->get();
         $tagManager = TagManager::first();
         $seoPage = Page::where('slug', '=', 'jadwal')->first();
@@ -172,7 +179,7 @@ class LayananController extends Controller
         $tentang = Page::get()->first();
         $menuLayanan = JenisLayanan::select(['id', 'title', 'slug'])->orderBy('slug', 'ASC')->get();
         return view('frontend.jenis-layanan.index', compact(
-                                                'data', 
+                                                'data', 'dataSeo',
                                                 'metades',
                                                 'tentang',
                                                 'menuLayanan',
