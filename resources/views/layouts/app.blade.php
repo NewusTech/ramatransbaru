@@ -12,6 +12,8 @@
         <meta name="google-site-verification" content="YxkQct7gDfQb2sFOt5Wsa7aCUiOB6j4YV3nS168kVLo" />
     @endif
 
+    <script src="https://cdn.tiny.cloud/1/02ycb6jfsha69obgdavcwnfnm8bna9ez9cthzwha1gagrflu/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+
     <!-- General CSS Files -->
 
     <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free-5.15.4-web/css/all.css') }}">
