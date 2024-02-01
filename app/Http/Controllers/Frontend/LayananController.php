@@ -10,6 +10,7 @@ use App\Models\JenisLayanan;
 use App\Models\Kontak;
 use App\Models\Layanan;
 use App\Models\Page;
+use App\Models\Seo;
 use App\Models\TagManager;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -55,11 +56,18 @@ class LayananController extends Controller
         $contacts = Kontak::where('id', 1)->first();
         $tentang = Page::get()->first();
 
+        $seoTools = Seo::first();
+        $dataSeo['site_title'] = $seoTools->site_title;
+        $dataSeo['title'] = $seoTools->home_title;
+        $dataSeo['description'] = $seoTools->site_description;
+        $dataSeo['keywords'] = $seoTools->keywords;
+        $dataSeo['image'] = $seoTools->image;  
+
         $tagManager = TagManager::first();
         $seoPage = Page::where('slug', '=', 'jadwal')->first();
         $gtagManager = GtagManager::first();
         $analytics = Analytics::first();
-        return view('frontend.layanan.layananAll', compact('data', 'metades', 'layanan', 'jenisLayanan', 'menuLayanan', 'asals', 'tujuans', 'jenis_l', 'contacts', 'tentang','tagManager','seoPage','gtagManager','analytics', 'asal', 'tujuan', 'jam'));
+        return view('frontend.layanan.layananAll', compact('data', 'dataSeo', 'metades', 'layanan', 'jenisLayanan', 'menuLayanan', 'asals', 'tujuans', 'jenis_l', 'contacts', 'tentang','tagManager','seoPage','gtagManager','analytics', 'asal', 'tujuan', 'jam'));
     }
 
     public function liveSearch(Request $request)
@@ -101,7 +109,15 @@ class LayananController extends Controller
         $tagManager = TagManager::first();
         $gtagManager = GtagManager::first();
         $analytics = Analytics::first();
-        return view('frontend.layanan.categories.layananByCategory', compact('data', 'metades', 'tentang', 'jenisLayanan', 'jenisLayanan_all', 'menuLayanan', 'asals', 'tujuans', 'jenis_l', 'contacts','tagManager','gtagManager','analytics'));
+
+        $seoTools = Seo::first();
+        $dataSeo['site_title'] = $seoTools->site_title;
+        $dataSeo['title'] = $seoTools->home_title;
+        $dataSeo['description'] = $seoTools->site_description;
+        $dataSeo['keywords'] = $seoTools->keywords;
+        $dataSeo['image'] = $seoTools->image;  
+
+        return view('frontend.layanan.categories.layananByCategory', compact('data', 'dataSeo', 'metades', 'tentang', 'jenisLayanan', 'jenisLayanan_all', 'menuLayanan', 'asals', 'tujuans', 'jenis_l', 'contacts','tagManager','gtagManager','analytics'));
     }
 
     public function detailJasaTransportasi($slug)
@@ -122,7 +138,15 @@ class LayananController extends Controller
         $tagManager = TagManager::first();
         $gtagManager = GtagManager::first();
         $analytics = Analytics::first();
-        return view('frontend.layanan.layananDetail', compact('data', 'tentang', 'detailLayanan', 'fasilitas', 'jenisLayanan', 'menuLayanan', 'contacts','tagManager','gtagManager','analytics'));
+
+        $seoTools = Seo::first();
+        $dataSeo['site_title'] = $seoTools->site_title;
+        $dataSeo['title'] = $seoTools->home_title;
+        $dataSeo['description'] = $seoTools->site_description;
+        $dataSeo['keywords'] = $seoTools->keywords;
+        $dataSeo['image'] = $seoTools->image;  
+        
+        return view('frontend.layanan.layananDetail', compact('dataSeo','data', 'tentang', 'detailLayanan', 'fasilitas', 'jenisLayanan', 'menuLayanan', 'contacts','tagManager','gtagManager','analytics'));
     }   
 
     public function store(Request $request)
