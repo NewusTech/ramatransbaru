@@ -8,6 +8,7 @@ use App\Models\GtagManager;
 use App\Models\JenisLayanan;
 use App\Models\Kontak;
 use App\Models\Page;
+use App\Models\Seo;
 use App\Models\TagManager;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
@@ -30,6 +31,14 @@ class AboutController extends Controller
         $seoPage = Page::where('slug', '=', 'tentang-kami')->first();
         $gtagManager = GtagManager::first();
         $analytics = Analytics::first();
-        return view('frontend.abouts.index', compact('data', 'tentang', 'metades', 'contacts', 'menuLayanan','tagManager','seoPage','gtagManager','analytics'));
+
+        $seoTools = Seo::first();
+        $dataSeo['site_title'] = $seoTools->site_title;
+        $dataSeo['title'] = $seoTools->home_title;
+        $dataSeo['description'] = $seoTools->site_description;
+        $dataSeo['keywords'] = $seoTools->keywords;
+        $dataSeo['image'] = $seoTools->image;  
+
+        return view('frontend.abouts.index', compact('data', 'dataSeo', 'tentang', 'metades', 'contacts', 'menuLayanan','tagManager','seoPage','gtagManager','analytics'));
     }
 }
