@@ -142,8 +142,7 @@
         });
     </script>
 
-    <script src="https://cdn.tiny.cloud/1/kk86kd53l3irctjt49c2nnfrfdnn3c78equin7aj83n08rsc/tinymce/6/tinymce.min.js"
-        referrerpolicy="origin"></script>
+    <script src="https://cdn.tiny.cloud/1/02ycb6jfsha69obgdavcwnfnm8bna9ez9cthzwha1gagrflu/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
     <script>
         tinymce.init({
             selector: 'textarea.tinyMCE', // Replace this CSS selector to match the placeholder element for TinyMCE
