@@ -164,6 +164,8 @@
             selector: 'textarea.tinyMCE', // Replace this CSS selector to match the placeholder element for TinyMCE
             plugins: 'advlist autolink lists link image charmap preview searchreplace visualblocks code codesample fullscreen insertdatetime media table wordcount',
             toolbar: 'fullscreen code preview | undo redo | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | numlist bullist | forecolor backcolor removeformat | image media link | wordcount',
+            tinycomments_mode: 'embedded',
+            tinycomments_author: 'Rama Trans',
             setup: function(editor) {
                 editor.on('init change', function() {
                     editor.save();
