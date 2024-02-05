@@ -13,15 +13,41 @@
     <link rel="apple-touch-icon" sizes="120x120" href="{{ asset('frontend-assets') }}/favicon/apple-icon-120x120.png">
     <link rel="apple-touch-icon" sizes="144x144" href="{{ asset('frontend-assets') }}/favicon/apple-icon-144x144.png">
     <link rel="apple-touch-icon" sizes="152x152" href="{{ asset('frontend-assets') }}/favicon/apple-icon-152x152.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('frontend-assets') }}/favicon/apple-icon-180x180.png">
-    <link rel="icon" type="image/png" sizes="192x192"
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('frontend-assets') }}/favicon/apple-icon-180x180.png"> 
+    {{-- <link rel="icon" type="image/png" sizes="192x192"
         href="{{ asset('frontend-assets') }}/favicon/android-icon-192x192.png">
     <link rel="icon" type="image/png" sizes="32x32"
         href="{{ asset('frontend-assets') }}/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="96x96"
         href="{{ asset('frontend-assets') }}/favicon/favicon-96x96.png">
     <link rel="icon" type="image/png" sizes="16x16"
-        href="{{ asset('frontend-assets') }}/favicon/favicon-16x16.png">
+        href="{{ asset('frontend-assets') }}/favicon/favicon-16x16.png"> --}}
+    <link rel="apple-touch-icon" sizes="57x57"
+        href="{{ isset($dataSeo) ? Storage::disk('s3')->url($dataSeo['image']) : '' }}">
+    <link rel="apple-touch-icon" sizes="60x60"
+        href="{{ isset($dataSeo) ? Storage::disk('s3')->url($dataSeo['image']) : '' }}">
+    <link rel="apple-touch-icon" sizes="72x72"
+        href="{{ isset($dataSeo) ? Storage::disk('s3')->url($dataSeo['image']) : '' }}">
+    <link rel="apple-touch-icon" sizes="76x76"
+        href="{{ isset($dataSeo) ? Storage::disk('s3')->url($dataSeo['image']) : '' }}">
+    <link rel="apple-touch-icon" sizes="114x114"
+        href="{{ isset($dataSeo) ? Storage::disk('s3')->url($dataSeo['image']) : '' }}">
+    <link rel="apple-touch-icon" sizes="120x120"
+        href="{{ isset($dataSeo) ? Storage::disk('s3')->url($dataSeo['image']) : '' }}">
+    <link rel="apple-touch-icon" sizes="144x144"
+        href="{{ isset($dataSeo) ? Storage::disk('s3')->url($dataSeo['image']) : '' }}">
+    <link rel="apple-touch-icon" sizes="152x152"
+        href="{{ isset($dataSeo) ? Storage::disk('s3')->url($dataSeo['image']) : '' }}">
+    <link rel="apple-touch-icon" sizes="180x180"
+        href="{{ isset($dataSeo) ? Storage::disk('s3')->url($dataSeo['image']) : '' }}">
+    <link rel="icon" type="image/png" sizes="192x192"
+        href="{{ isset($dataSeo) ? Storage::disk('s3')->url($dataSeo['image']) : '' }}">
+    <link rel="icon" type="image/png" sizes="32x32"
+        href="{{ isset($dataSeo) ? Storage::disk('s3')->url($dataSeo['image']) : '' }}">
+    <link rel="icon" type="image/png" sizes="96x96"
+        href="{{ isset($dataSeo) ? Storage::disk('s3')->url($dataSeo['image']) : '' }}">
+    <link rel="icon" type="image/png" sizes="16x16"
+        href="{{ isset($dataSeo) ? Storage::disk('s3')->url($dataSeo['image']) : '' }}">
 
     <!-- Tag canonical untuk halaman utama -->
     <link rel="canonical" href="{{ url('') }}" />
@@ -112,10 +138,13 @@
             content="{{ isset($seoPage->media) ? Storage::disk('s3')->url($seoPage->media) : 'https://ramatranzlampung.com/frontend-assets/img/logo-1.png' }}">
     @endif
     <link rel="manifest" href="{{ asset('frontend-assets') }}/favicon/manifest.json">
-    <link rel="apple-touch-icon"
+    {{-- <link rel="apple-touch-icon"
         href="{{ isset($dataSeo) ? Storage::disk('s3')->url($dataSeo['image']) : 'https://ramatranzlampung.com/frontend-assets/img/logo-1.png' }}">
     <link rel="shortcut icon" type="image/png"
-        href="{{ isset($dataSeo) ? Storage::disk('s3')->url($dataSeo['image']) : 'https://ramatranzlampung.com/frontend-assets/favicon/favicon-96x96.png' }}">
+        href="{{ isset($dataSeo) ? Storage::disk('s3')->url($dataSeo['image']) : 'https://ramatranzlampung.com/frontend-assets/favicon/favicon-96x96.png' }}"> --}}
+    <link rel="apple-touch-icon" href="{{ isset($dataSeo) ? Storage::disk('s3')->url($dataSeo['image']) : '' }}">
+    <link rel="shortcut icon" type="image/png"
+        href="{{ isset($dataSeo) ? Storage::disk('s3')->url($dataSeo['image']) : '' }}">
 </head>
 
 <body class="default">
@@ -335,7 +364,7 @@
         </div>
         <div class="bp-col">
             <a href="{{ url('/jadwal.html') }}">
-                <div class="bp-icon"><img src="{{ url('assets-plesir/img2/menu-bottom/jadwal-removebg.png') }}"
+                <div class="bp-icon"><img src="{{ url('assets-plesir/img2/menu-bottom/jadwal-rasya.png') }}"
                         alt="icon" loading="lazy"></div>
                 <div class="bp-text">Jadwal</div>
             </a>
