@@ -40,11 +40,11 @@
                     <div class="gallery-section">
                         <div class="row-filter">
                             <!-- filter -->
-                            <div class="filter-gallery">
+                            {{-- <div class="filter-gallery">
                                 <button data-filter="gallery-show-all" class="filter-button active">All</button>
                                 <button data-filter="exterior" value="Eksterior" class="filter-button">Exterior</button>
                                 <button data-filter="interior" value="Interior" class="filter-button">Interior</button>
-                            </div>
+                            </div> --}}
                             <!-- /filter -->
                         </div>
                         <div class="row-gallery">

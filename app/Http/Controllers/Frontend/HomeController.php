@@ -22,7 +22,7 @@ use App\Models\Unggulan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Log;
-use DB;
+use Illuminate\Support\Facades\DB;
 use App\Models\Landing;
 use App\Models\SearchConsole;
 use App\Models\Seo;

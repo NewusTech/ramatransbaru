@@ -10,6 +10,7 @@ use App\Models\JenisLayanan;
 use App\Models\Kontak;
 use App\Models\Layanan;
 use App\Models\Page;
+use App\Models\Seo;
 use App\Models\TagManager;
 use Illuminate\Support\Facades\URL;
 
@@ -33,11 +34,18 @@ class JadwalController extends Controller
         $metades = env('APP_NAME', 'Default Name') . " memiliki jadwal yang  fleksibel dan keberangkatan yang tepat waktu.";
         $rute1 = Layanan::latest()->get();
 
+        $seoTools = Seo::first();
+        $dataSeo['site_title'] = $seoTools->site_title;
+        $dataSeo['title'] = $seoTools->home_title;
+        $dataSeo['description'] = $seoTools->site_description;
+        $dataSeo['keywords'] = $seoTools->keywords;
+        $dataSeo['image'] = $seoTools->image;     
+
         // Kelompokkan data berdasarkan kolom "asal" setelah mendapatkan hasil
         $rute = $rute1->sortBy(function ($item) {
             return $item->asal;
         });
-        return view('frontend.jadwal.index', compact('metades', 'data','dataJadwal','contacts','tentang','menuLayanan','tagManager','seoPage','gtagManager','analytics','rute', 'rute1'));
+        return view('frontend.jadwal.index', compact('metades', 'data', 'dataSeo','dataJadwal','contacts','tentang','menuLayanan','tagManager','seoPage','gtagManager','analytics','rute', 'rute1'));
     }
 
 }

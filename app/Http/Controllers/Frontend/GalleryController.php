@@ -5,11 +5,11 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\JenisLayanan;
 use App\Models\Gallery;
-use App\Models\SEO;
 use App\Models\Kontak;
 use App\Models\TagManager;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
+use App\Models\Seo;
 
 
 class GalleryController extends Controller
