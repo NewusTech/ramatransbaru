@@ -5,11 +5,12 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\JenisLayanan;
 use App\Models\Gallery;
+use App\Models\Kontak;
 use App\Models\TagManager;
 use Illuminate\Http\Request;
-use App\Models\Kontak;
 use Illuminate\Support\Facades\URL;
 use App\Models\Seo;
+
 
 class GalleryController extends Controller
 {
@@ -21,20 +22,19 @@ class GalleryController extends Controller
         $data['type'] = 'Gallery';
         $data['url'] = URL::current();
         $menuLayanan = JenisLayanan::select(['id', 'title', 'slug'])->orderBy('slug', 'ASC')->get();
-        $jenisLayanan = JenisLayanan::select(['id', 'title', 'slug','media','content'])->get();
+        $jenisLayanan = JenisLayanan::select(['id', 'title', 'slug','media','content'])->get(); 
         $metades = env('APP_NAME', 'Default Name') . " adalah jasa transportasi berkualitas. Gunakan jasa transportasi hanya disini";
-        $contacts = Kontak::where('id', 1)->first();
-        // data SEO
         $seoTools = Seo::first();
         $dataSeo['site_title'] = $seoTools->site_title;
         $dataSeo['title'] = $seoTools->home_title;
         $dataSeo['description'] = $seoTools->site_description;
         $dataSeo['keywords'] = $seoTools->keywords;
-        $dataSeo['image'] = $seoTools->image;       
+        $dataSeo['image'] = $seoTools->image;
+        $contacts = Kontak::where('id', 1)->first();
 
         $gallery = Gallery::get();
         $tagManager = TagManager::first();       
-        return view('frontend.gallery.index', compact('gallery', 'contacts','dataSeo','tagManager', 'menuLayanan', 'jenisLayanan', 'metades'));
+        return view('frontend.gallery.index', compact('gallery', 'contacts', 'dataSeo','tagManager', 'menuLayanan', 'jenisLayanan', 'metades'));
     }
 
     public function filterGallery(Request $request){
