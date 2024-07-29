@@ -2,6 +2,7 @@
 @extends('frontend.layouts.app-plesir')
 @section('title', env('APP_NAME', 'Default Name') . ', Agen Perjalanan Termurah dan Ternyaman')
 @section('content')
+
     {{-- modal --}}
     <div id="gallery-modal">
         @foreach ($gallery as $item)

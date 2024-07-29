@@ -32,26 +32,30 @@ class MailConfigProvider extends ServiceProvider
             if (Schema::hasTable('smtps')) {
                 $mail = DB::table('smtps')->first();
                 if ($mail) {
-                    $config = array(
+                    return [
                         'driver' => $mail->driver,
                         'port' => $mail->port,
                         'host' => $mail->host,
-                        'from' => array('address'   => $mail->sender_email, 'name'  => $mail->sender_name),
+                        'from' => ['address' => $mail->sender_email, 'name' => $mail->sender_name],
                         'encryption' => $mail->encryption,
                         'username' => $mail->username,
                         'password' => $mail->password,
                         'sendmail' => '/usr/sbin/sendmail -bs',
-                        'pretend'   => false
-                    );
-                    return $config;
+                        'pretend' => false,
+                    ];
                 }
             }
+            return []; // Mengembalikan array kosong jika tidak ada hasil dari query
         });
 
-
+        // Pastikan $settings adalah array yang valid
+        if (!is_array($settings)) {
+            $settings = [];
+        }
 
         config()->set('settings', $settings); // optional
 
+        // Merge konfigurasi mail yang ada dengan $settings
         config()->set('mail', array_merge(config('mail'), $settings));
     }
 }

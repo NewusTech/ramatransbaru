@@ -12,6 +12,7 @@ use App\Models\Layanan;
 use App\Models\Page;
 use App\Models\Seo;
 use App\Models\TagManager;
+use App\Models\SearchConsole;
 use Illuminate\Support\Facades\URL;
 
 class JadwalController extends Controller
@@ -33,6 +34,7 @@ class JadwalController extends Controller
         $analytics = Analytics::first();
         $metades = env('APP_NAME', 'Default Name') . " memiliki jadwal yang  fleksibel dan keberangkatan yang tepat waktu.";
         $rute1 = Layanan::latest()->get();
+        $searchConsole = SearchConsole::first();
 
         $seoTools = Seo::first();
         $dataSeo['site_title'] = $seoTools->site_title;

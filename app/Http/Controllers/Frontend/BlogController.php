@@ -10,6 +10,7 @@ use App\Models\JenisLayanan;
 use App\Models\Kontak;
 use App\Models\Page;
 use App\Models\TagManager;
+use App\Models\SearchConsole;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -41,6 +42,7 @@ class BlogController extends Controller
         $metades = "Bepergian dengan cepat dan aman hanya dapat ditemukan di " . env('APP_NAME', 'Default Name') . ". Tidak perlu diragukan adalah jasa travel terbaik.";
         $gtagManager = GtagManager::first();
         $analytics = Analytics::first();
+        $searchConsole = SearchConsole::first();
         return view('frontend.blog.index', compact('data', 'dataSeo', 'blogs', 'contacts', 'tentang', 'menuLayanan','tagManager','seoPage', 'metades','gtagManager','analytics'));
     }
 
@@ -80,6 +82,7 @@ class BlogController extends Controller
         $tagManager = TagManager::first();
         $gtagManager = GtagManager::first();
         $analytics = Analytics::first();
+        $searchConsole = SearchConsole::first();
         return view('frontend.blog.blogDetail', compact('data', 'dataSeo','detailBlog', 'contacts', 'tentang', 'menuLayanan','tagManager','gtagManager','analytics'));
     }
 }
