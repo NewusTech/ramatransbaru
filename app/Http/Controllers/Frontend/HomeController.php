@@ -85,6 +85,7 @@ class HomeController extends Controller
         $metades = env('APP_NAME', 'Default Name') . " adalah agen perjalanan yang terbaik dan terpercaya. Lebih dari 11 tahun melayani para pelanggan dengan pelayanan yang terbaik.";
         $tagManager = TagManager::first();
         $gtagManager = GtagManager::first();
+        $searchConsole = SearchConsole::first();
         $analytics = Analytics::first();
         // data SEO
         $seoTools = Seo::first();

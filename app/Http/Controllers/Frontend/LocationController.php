@@ -8,6 +8,7 @@ use App\Models\Kontak;
 use App\Models\Page;
 use App\Models\ParentArea;
 use App\Models\TagManager;
+use App\Models\SearchConsole;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
 
@@ -28,6 +29,7 @@ class LocationController extends Controller
         $contacts = Kontak::where('id', 1)->first();
         $tentang = Page::get()->first();
         $tagManager = TagManager::first();
+        $searchConsole = SearchConsole::first();
         return view('frontend.location.outletByProvinsi', compact('data', 'metades', 'tentang', 'parentOutlet', 'outlet_all', 'menuLayanan', 'contacts','tagManager'));
     }
 }

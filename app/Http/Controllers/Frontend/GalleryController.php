@@ -10,6 +10,7 @@ use App\Models\TagManager;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
 use App\Models\Seo;
+use App\Models\SearchConsole;
 
 
 class GalleryController extends Controller
@@ -31,6 +32,7 @@ class GalleryController extends Controller
         $dataSeo['keywords'] = $seoTools->keywords;
         $dataSeo['image'] = $seoTools->image;
         $contacts = Kontak::where('id', 1)->first();
+        $searchConsole = SearchConsole::first();
 
         $gallery = Gallery::get();
         $tagManager = TagManager::first();       
@@ -50,6 +52,7 @@ class GalleryController extends Controller
             $gallery = Gallery::latest()->get();
         }
         $tagManager = TagManager::first();
+        $searchConsole = SearchConsole::first();
         return response()->json($gallery);
         // return view('frontend.gallery.index', compact('gallery','tagManager'));
     }

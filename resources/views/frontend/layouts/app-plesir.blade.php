@@ -4,7 +4,8 @@
 <head>
     <meta charset="utf-8">
 
-    <script src="https://cdn.tiny.cloud/1/02ycb6jfsha69obgdavcwnfnm8bna9ez9cthzwha1gagrflu/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="https://cdn.tiny.cloud/1/02ycb6jfsha69obgdavcwnfnm8bna9ez9cthzwha1gagrflu/tinymce/6/tinymce.min.js"
+        referrerpolicy="origin"></script>
     <link rel="apple-touch-icon" sizes="57x57" href="{{ asset('frontend-assets') }}/favicon/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="{{ asset('frontend-assets') }}/favicon/apple-icon-60x60.png">
     <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('frontend-assets') }}/favicon/apple-icon-72x72.png">
@@ -13,15 +14,7 @@
     <link rel="apple-touch-icon" sizes="120x120" href="{{ asset('frontend-assets') }}/favicon/apple-icon-120x120.png">
     <link rel="apple-touch-icon" sizes="144x144" href="{{ asset('frontend-assets') }}/favicon/apple-icon-144x144.png">
     <link rel="apple-touch-icon" sizes="152x152" href="{{ asset('frontend-assets') }}/favicon/apple-icon-152x152.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('frontend-assets') }}/favicon/apple-icon-180x180.png"> 
-    {{-- <link rel="icon" type="image/png" sizes="192x192"
-        href="{{ asset('frontend-assets') }}/favicon/android-icon-192x192.png">
-    <link rel="icon" type="image/png" sizes="32x32"
-        href="{{ asset('frontend-assets') }}/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="96x96"
-        href="{{ asset('frontend-assets') }}/favicon/favicon-96x96.png">
-    <link rel="icon" type="image/png" sizes="16x16"
-        href="{{ asset('frontend-assets') }}/favicon/favicon-16x16.png"> --}}
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('frontend-assets') }}/favicon/apple-icon-180x180.png">
     <link rel="apple-touch-icon" sizes="57x57"
         href="{{ isset($dataSeo) ? Storage::disk('s3')->url($dataSeo['image']) : '' }}">
     <link rel="apple-touch-icon" sizes="60x60"
@@ -76,11 +69,14 @@
     <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
-    @if (env('APP_NAME') == 'Rama Tranz Travel')
+    {{-- @if (env('APP_NAME') == 'Rama Tranz Travel')
         <meta name="google-site-verification" content="DsgOXo1zazrQkBMSsxO0Pgs2AG-reAQ2Q0SHeyxXtfc" />
     @else
         <meta name="google-site-verification" content="YxkQct7gDfQb2sFOt5Wsa7aCUiOB6j4YV3nS168kVLo" />
-    @endif
+    @endif --}}
+
+    <meta name="google-site-verification" content="{{ $searchConsole->content }}" />
+
     {{-- meta syukron488@gmail.com --}}
     <title>
         @if (trim($__env->yieldContent('title')))

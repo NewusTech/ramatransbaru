@@ -15,6 +15,7 @@ use App\Models\TagManager;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
+use App\Models\SearchConsole;
 
 class LayananController extends Controller
 {
@@ -55,6 +56,7 @@ class LayananController extends Controller
         $menuLayanan = JenisLayanan::select(['id', 'title', 'slug'])->orderBy('slug', 'ASC')->get();
         $contacts = Kontak::where('id', 1)->first();
         $tentang = Page::get()->first();
+        $searchConsole = SearchConsole::first();
 
         $seoTools = Seo::first();
         $dataSeo['site_title'] = $seoTools->site_title;
@@ -108,6 +110,7 @@ class LayananController extends Controller
         $tentang = Page::get()->first();
         $tagManager = TagManager::first();
         $gtagManager = GtagManager::first();
+        $searchConsole = SearchConsole::first();
         $analytics = Analytics::first();
 
         $seoTools = Seo::first();
@@ -136,6 +139,7 @@ class LayananController extends Controller
         $contacts = Kontak::where('id', 1)->first();
         $tentang = Page::get()->first();
         $tagManager = TagManager::first();
+        $searchConsole = SearchConsole::first();
         $gtagManager = GtagManager::first();
         $analytics = Analytics::first();
 
@@ -171,6 +175,7 @@ class LayananController extends Controller
 
         $jenisLayanan = JenisLayanan::select(['id', 'title', 'slug','media','content', 'excerpt'])->get();
         $tagManager = TagManager::first();
+        $searchConsole = SearchConsole::first();
         $seoPage = Page::where('slug', '=', 'jadwal')->first();
         $gtagManager = GtagManager::first();
         $metades = env('APP_NAME', 'Default Name') . " memiliki jenis layanan yang dapat memudahkan para pelanggan. Door to door, point to point, dan charter adalah layanan yang unggul.";

@@ -10,6 +10,7 @@ use App\Models\Kontak;
 use App\Models\Page;
 use App\Models\Seo;
 use App\Models\TagManager;
+use App\Models\SearchConsole;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
 
@@ -31,6 +32,7 @@ class AboutController extends Controller
         $seoPage = Page::where('slug', '=', 'tentang-kami')->first();
         $gtagManager = GtagManager::first();
         $analytics = Analytics::first();
+        $searchConsole = SearchConsole::first();
 
         $seoTools = Seo::first();
         $dataSeo['site_title'] = $seoTools->site_title;

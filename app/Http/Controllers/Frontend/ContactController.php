@@ -10,6 +10,7 @@ use App\Models\Kontak;
 use App\Models\Page;
 use App\Models\Seo;
 use App\Models\TagManager;
+use App\Models\SearchConsole;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
 
@@ -38,6 +39,7 @@ class ContactController extends Controller
         $seoPage = Page::where('slug', '=', 'kontak')->first();
         $gtagManager = GtagManager::first();
         $analytics = Analytics::first();
+        $searchConsole = SearchConsole::first();
         return view('frontend.kontak.index', compact('data', 'dataSeo','metades', 'contacts', 'menuLayanan', 'tentang','tagManager','seoPage','gtagManager','analytics'));
     }
 }

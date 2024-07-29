@@ -11,6 +11,8 @@ use App\Models\Page;
 use App\Models\Analytics;
 use App\Models\TagManager;
 use App\Models\Feedback;
+use App\Models\SearchConsole;
+
 
 class ReviewController extends Controller
 {
@@ -27,6 +29,7 @@ class ReviewController extends Controller
         $gtagManager = GtagManager::first();
         $analytics = Analytics::first();
         $contacts = Kontak::where('id', 1)->first();
+        $searchConsole = SearchConsole::first();
         return view('frontend.review.index', compact('data','tagManager','seoPage', 'metades','gtagManager','analytics', 'contacts'));
     }
 
