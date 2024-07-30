@@ -69,13 +69,13 @@
     <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
-    {{-- @if (env('APP_NAME') == 'Rama Tranz Travel')
+    @if (env('APP_NAME') == 'Rama Tranz Travel')
         <meta name="google-site-verification" content="DsgOXo1zazrQkBMSsxO0Pgs2AG-reAQ2Q0SHeyxXtfc" />
     @else
         <meta name="google-site-verification" content="YxkQct7gDfQb2sFOt5Wsa7aCUiOB6j4YV3nS168kVLo" />
-    @endif --}}
+    @endif
 
-    <meta name="google-site-verification" content="{{ $searchConsole->content }}" />
+    
 
     {{-- meta syukron488@gmail.com --}}
     <title>
