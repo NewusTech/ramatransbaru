@@ -69,13 +69,11 @@
     <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
-    {{-- @if (env('APP_NAME') == 'Rama Tranz Travel')
+    @if (env('APP_NAME') == 'Rama Tranz Travel')
         <meta name="google-site-verification" content="DsgOXo1zazrQkBMSsxO0Pgs2AG-reAQ2Q0SHeyxXtfc" />
     @else
         <meta name="google-site-verification" content="YxkQct7gDfQb2sFOt5Wsa7aCUiOB6j4YV3nS168kVLo" />
-    @endif --}}
-
-    <meta name="google-site-verification" content="{{ $searchConsole->content }}" />
+    @endif
 
     {{-- meta syukron488@gmail.com --}}
     <title>
@@ -134,10 +132,6 @@
             content="{{ isset($seoPage->media) ? Storage::disk('s3')->url($seoPage->media) : 'https://ramatranzlampung.com/frontend-assets/img/logo-1.png' }}">
     @endif
     <link rel="manifest" href="{{ asset('frontend-assets') }}/favicon/manifest.json">
-    {{-- <link rel="apple-touch-icon"
-        href="{{ isset($dataSeo) ? Storage::disk('s3')->url($dataSeo['image']) : 'https://ramatranzlampung.com/frontend-assets/img/logo-1.png' }}">
-    <link rel="shortcut icon" type="image/png"
-        href="{{ isset($dataSeo) ? Storage::disk('s3')->url($dataSeo['image']) : 'https://ramatranzlampung.com/frontend-assets/favicon/favicon-96x96.png' }}"> --}}
     <link rel="apple-touch-icon" href="{{ isset($dataSeo) ? Storage::disk('s3')->url($dataSeo['image']) : '' }}">
     <link rel="shortcut icon" type="image/png"
         href="{{ isset($dataSeo) ? Storage::disk('s3')->url($dataSeo['image']) : '' }}">
@@ -166,10 +160,6 @@
                 @else
                     <img src="{{ url('frontend-assets/img/logo-rasya-light.png') }}" alt="profile" loading="lazy">
                 @endif
-            </div>
-            <div class="sdp-right">
-                {{-- <div class="sd-name">Lilia Doe</div> --}}
-                {{-- <div class="sd-status">Ramatranz Travel</div> --}}
             </div>
         </div>
         <ul class="list-unstyled components">
@@ -211,35 +201,35 @@
                 <a href="#">
                     <i class="fas fa-envelope"></i>
                     <div class="ntitle">Your transaction was successful</div>
-                    <div class="desc">lorem ipsum dolor sit amet...</div>
+                    <div class="desc">successful...</div>
                 </a>
             </li>
             <li class="right-menu-item">
                 <a href="#">
                     <i class="fas fa-star"></i>
                     <div class="ntitle">You have received an award</div>
-                    <div class="desc">lorem ipsum dolor sit amet...</div>
+                    <div class="desc">successful...</div>
                 </a>
             </li>
             <li class="right-menu-item">
                 <a href="#">
                     <i class="fas fa-car-alt"></i>
                     <div class="ntitle">Your tour schedule</div>
-                    <div class="desc">lorem ipsum dolor sit amet...</div>
+                    <div class="desc">successful...</div>
                 </a>
             </li>
             <li class="right-menu-item">
                 <a href="#">
                     <i class="fas fa-ticket-alt"></i>
                     <div class="ntitle">Promo offer for you today</div>
-                    <div class="desc">lorem ipsum dolor sit amet...</div>
+                    <div class="desc">successful...</div>
                 </a>
             </li>
             <li class="right-menu-item">
                 <a href="#">
                     <i class="fas fa-envelope"></i>
                     <div class="ntitle">You get a point</div>
-                    <div class="desc">lorem ipsum dolor sit amet...</div>
+                    <div class="desc">successful...</div>
                 </a>
             </li>
 
