@@ -202,7 +202,7 @@
                                 <img data-src="{{ url('assets-plesir/img2/cultures.png') }}" alt="icon"
                                     loading="lazy" class="lazy-load">
                                 <div class="s-icon-text">
-                                    Review
+                                    REVIEW
                                 </div>
                             </a>
                         </div>
