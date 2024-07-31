@@ -61,7 +61,7 @@
             <img data-src="{{ Storage::disk('s3')->url($slider->image) }}" alt="slider"
                  class="img-fluid lazy-load" loading="lazy" style="width: 100%;">
             <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1; color: white; background-color: rgba(0, 0, 0, 0.5); padding: 10px; border-radius: 5px;">
-                <h1>Rasya Mandiri Tranz Travel</h1>
+                <h1>Rasya Mandiri Tranz Travel </h1>
                 <p>perusahaan resmi Jasa angkutan Travel yang melayani Perjalanan Jakarta lampung (PP) door to door service Jakarta ke Lampung, Bandar Jaya, Metro, Pringsewu, Kotabumi, Baturaja, Palembang aman dan terpercaya</p>
             </div>
         </div>
