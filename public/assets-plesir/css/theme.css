@@ -1735,6 +1735,13 @@ a[data-toggle="collapse"] {
   /* HOMEPAGE SLIDER */
 }
 
+#content {
+  max-width: 90% !important;
+  margin: 0 auto;
+  background-color: #f4f4f4;
+  /* HOMEPAGE SLIDER */
+}
+
 #content .form-group .row {
   margin-bottom: 0px;
 }
