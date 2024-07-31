@@ -87,9 +87,6 @@
         <meta name="description" content="{{ $metades }}">
     @elseif(isset($seoPage) && isset($seoPage->meta_desc))
         <meta name="description" content="{{ $seoPage->meta_desc }}">
-        {{-- @else
-        <meta name="description"
-            content="Nikmati perjalanan Jakarta-Lampung yang nyaman dan aman bersama Rama Tranz Travel. Pesan tiket sekarang dan jelajahi keindahan kedua destinasi"> --}}
     @endif
     @if (trim($__env->yieldContent('keyword')))
         <meta name="keywords" content="@yield('keyword')">
@@ -496,5 +493,4 @@
     {{-- End Analytics --}}
     @yield('script')
 </body>
-
 </html>
