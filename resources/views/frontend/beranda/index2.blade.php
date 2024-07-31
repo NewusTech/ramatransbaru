@@ -20,7 +20,7 @@
         @endforeach
     </div>
     {{-- end modal --}}
-
+    
     <!-- Content Wrap  -->
     <div class="content">
         <h1 style="display: none;">{{ env('APP_NAME') }} adalah agen jasa travel terbaik</h1>
@@ -53,16 +53,22 @@
                 </div>
             </div>
         </div>
-        <!-- slider -->
-        <div class="img-hero">
-            @foreach ($carousel as $slider)
-                <div class="d-flex justify-content-center align-items-center">
-                    <img data-src="{{ Storage::disk('s3')->url($slider->image) }}" alt="slider"
-                        class="img-fluid lazy-load" loading="lazy">
-                </div>
-            @endforeach
+
+       <!-- slider -->
+<div class="container-fluid img-hero" style="position: relative;">
+    @foreach ($carousel as $slider)
+        <div class="d-flex justify-content-center align-items-center" style="position: relative;">
+            <img data-src="{{ Storage::disk('s3')->url($slider->image) }}" alt="slider"
+                 class="img-fluid lazy-load" loading="lazy" style="width: 100%;">
+            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1; color: white; background-color: rgba(0, 0, 0, 0.5); padding: 10px; border-radius: 5px;">
+                <h1>Rasya Mandiri Tranz Travel </h1>
+                <p>perusahaan resmi Jasa angkutan Travel yang melayani Perjalanan Jakarta lampung (PP) door to door service Jakarta ke Lampung, Bandar Jaya, Metro, Pringsewu, Kotabumi, Baturaja, Palembang aman dan terpercaya</p>
+            </div>
         </div>
-        <!-- .slider -->
+    @endforeach
+</div>
+<!-- .slider -->
+
 
         <!-- Modal Booking-->
         <div class="modal fade" id="modalBookingIndex" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -385,7 +391,7 @@
                                     </a>
                                 </div>
                                 <div class="hnw-text">
-                                    {!! Str::words($item->content, 50, '...') !!}
+                                    {!! Str::words($item->content, 40, '...') !!}
                                     <a href="{{ route('layananCategoryId', $item->slug) }}" style="color: #2450A6"
                                         class="more">Selengkapnya</a>
                                 </div>
