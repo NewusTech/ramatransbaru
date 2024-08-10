@@ -348,11 +348,12 @@
     @endforeach
     </div>
 
-        <div class="more-category text-right">
-            <a href="{{ url('/tarif.html') }}">
-                <div class="theme-button mcbutton">Rute Lainnya</div>
-            </a>
-        </div>
+    <div class="more-category d-flex justify-content-center">
+    <a href="{{ url('/tarif.html') }}">
+        <div class="theme-button mcbutton">Rute Lainnya</div>
+    </a>
+</div>
+
         <!-- .section 2-->
 
         {{-- Layanan --}}
