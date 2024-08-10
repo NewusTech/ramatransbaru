@@ -55,19 +55,19 @@
         </div>
 
        <!-- slider -->
-<div class="container-fluid img-hero" style="position: relative;">
-    @foreach ($carousel as $slider)
-        <div class="d-flex justify-content-center align-items-center" style="position: relative;">
-            <img data-src="{{ Storage::disk('s3')->url($slider->image) }}" alt="slider"
-                 class="img-fluid lazy-load" loading="lazy" style="width: 100%;">
-            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1; color: white; background-color: rgba(0, 0, 0, 0.5); padding: 10px; border-radius: 5px;">
-                <h1>Rasya Mandiri Tranz Travel </h1>
-                <p>perusahaan resmi Jasa angkutan Travel yang melayani Perjalanan Jakarta lampung (PP) door to door service Jakarta ke Lampung, Bandar Jaya, Metro, Pringsewu, Kotabumi, Baturaja, Palembang aman dan terpercaya</p>
+       <div class="container-fluid img-hero" style="position: relative;">
+        @foreach ($carousel as $slider)
+            <div class="d-flex justify-content-center align-items-center" style="position: relative;">
+                <img data-src="{{ Storage::disk('s3')->url($slider->image) }}" alt="slider" class="img-fluid lazy-load" loading="lazy" style="width: 100%;">
+                <div class="position-absolute top-50 start-50 translate-middle text-center text-white bg-dark bg-opacity-50 p-3 rounded">
+                    <h1 class="h4 h-sm-3 h-md-2">{{ env('APP_NAME') }}</h1>
+                    <p class="d-none d-md-block">{{ env('APP_NAME') }} (RAMA) adalah penyedia jasa angkutan travel terbaik di Lampung sejak 2012. Kami menawarkan rute-rute favorit seperti Travel Jakarta Lampung, Travel Lampung Jakarta, Travel Lampung Palembang, dan lainnya.</p>
+                </div>
             </div>
+        @endforeach
         </div>
-    @endforeach
-</div>
-<!-- .slider -->
+
+        <!-- .slider -->
 
 
         <!-- Modal Booking-->
@@ -222,142 +222,132 @@
             <div class="clear"></div>
         </div>
         <div class="section-home available-car">
-            <div class="container pt-3" style="background-color: #F0F4F7">
-                <div class="row">
-                    <div class="col-md-12">
-                        <form method="get" class="form search" action="{{ route('tarif') }}">
-                            <div class="row">
-                                <div class="col-md-3 col-sm-12 mb-2">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">
-                                                <i class="fas fa-map-marker"></i>
-                                            </span>
-                                        </div>
-                                        <select id="asal" name="asal" class="form-control">
-                                            <option selected disabled>Berangkat dari...</option>
-                                            @foreach ($asals as $item)
-                                                <option value="{{ $item }}">{{ $item }}</option>
-                                            @endforeach
-                                        </select>
-                                        <div class="input-group-append">
-                                            <button class="btn py-0" type="button"
-                                                style="background-color: white; border: 1px solid #ced4da; color: gray"
-                                                id="clearAsal"><span>x</span></button>
-                                        </div>
-                                    </div>
+    <div class="container pt-3" style="background-color: #F0F4F7">
+        <div class="row">
+            <div class="col-md-12">
+                <form method="get" class="form search" action="{{ route('tarif') }}">
+                    <div class="row g-2"> <!-- Menambahkan g-2 untuk mengatur jarak antar kolom -->
+                        <div class="col-md-3 col-sm-12 mb-2">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-map-marker"></i>
+                                    </span>
                                 </div>
-                                <div class="col-md-3 col-sm-12 mb-2">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">
-                                                <i class="fas fa-map-marker"></i>
-                                            </span>
-                                        </div>
-                                        <select id="tujuan" name="tujuan" class="form-control">
-                                            <option selected disabled>Tujuan...</option>
-                                            @foreach ($tujuans as $item)
-                                                <option value="{{ $item }}">{{ $item }}</option>
-                                            @endforeach
-                                        </select>
-                                        <div class="input-group-append">
-                                            <button class="btn py-0" type="button"
-                                                style="background-color: white; border: 1px solid #ced4da; color: gray"
-                                                id="clearTujuan"><span>x</span></button>
-                                        </div>
-                                    </div>
+                                <select id="asal" name="asal" class="form-control">
+                                    <option selected disabled>Berangkat dari...</option>
+                                    @foreach ($asals as $item)
+                                        <option value="{{ $item }}">{{ $item }}</option>
+                                    @endforeach
+                                </select>
+                                <div class="input-group-append">
+                                    <button class="btn py-0" type="button" style="background-color: white; border: 1px solid #ced4da; color: gray" id="clearAsal"><span>x</span></button>
                                 </div>
-                                <div class="col-md-3 col-sm-12 mb-2">
-                                    <div class="input-group">
-                                        <select name="jam" id="jam" class="custom-select">
-                                            <option value="" selected disabled>-- Pilih Waktu --</option>
-                                            <option value="08.00">08.00</option>
-                                            <option value="12.00">12.00</option>
-                                            <option value="15.00">15.00</option>
-                                            <option value="17.00">17.00</option>
-                                            <option value="19.00">19.00</option>
-                                            <option value="20.00">20.00</option>
-                                        </select>
-                                        <div class="input-group-append">
-                                            <button class="btn py-0" type="button"
-                                                style="background-color: white; border: 1px solid #ced4da; color: gray"
-                                                id="clearJam"><span>x</span></button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-12">
-                                    <button type="submit" class="btn btn-block p-1"
-                                        style="background-color: #1BB583">Cari</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                @foreach ($layanan as $key => $layanans)
-                    <!-- item -->
-                    <div class="col-md-4 col-sm-12 mb-1">
-                        <div class="acr-box">
-                            <div class="acr-box-in">
-                                <div class="acr-img">
-                                    <img src="{{ Storage::disk('s3')->url($layanans->image) }}" alt="you might like">
-                                </div>
-                                <div class="acr-content">
-                                    <div class="ct-name">{{ $layanans->title }}</div>
-                                    <div class="ct-cost">
-                                        <div class="jadwal-jemput">
-                                            <h4>Jadwal Jemput</h4>
-                                            <table class="tabel-jadwal-jemput">
-                                                <tbody>
-                                                    <tr>
-                                                        <td>PAGI</td>
-                                                        <td>:</td>
-                                                        <td>{{ $layanans->jam_pagi ? $layanans->jam_pagi : '-' }}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>SIANG</td>
-                                                        <td>:</td>
-                                                        <td>{{ $layanans->jam_siang ? $layanans->jam_siang : '-' }}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>SORE</td>
-                                                        <td>:</td>
-                                                        <td>{{ $layanans->jam_sore ? $layanans->jam_sore : '-' }}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>MALAM</td>
-                                                        <td>:</td>
-                                                        <td>{{ $layanans->jam_malam ? $layanans->jam_malam : '-' }}</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-
-                                    <div class="ct-reserve">
-                                        <a class="theme-button details-button text-white" data-toggle="modal"
-                                            data-item="{{ $layanans }}" data-target="#modalBookingIndex">
-                                            Pesan
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="acr-bg">
-                                <img src="{{ Storage::disk('s3')->url($layanans->image) }}">
                             </div>
                         </div>
+                        <div class="col-md-3 col-sm-12 mb-2">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-map-marker"></i>
+                                    </span>
+                                </div>
+                                <select id="tujuan" name="tujuan" class="form-control">
+                                    <option selected disabled>Tujuan...</option>
+                                    @foreach ($tujuans as $item)
+                                        <option value="{{ $item }}">{{ $item }}</option>
+                                    @endforeach
+                                </select>
+                                <div class="input-group-append">
+                                    <button class="btn py-0" type="button" style="background-color: white; border: 1px solid #ced4da; color: gray" id="clearTujuan"><span>x</span></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-12 mb-2">
+                            <div class="input-group">
+                                <select name="jam" id="jam" class="custom-select">
+                                    <option value="" selected disabled>-- Pilih Waktu --</option>
+                                    <option value="08.00">08.00</option>
+                                    <option value="12.00">12.00</option>
+                                    <option value="15.00">15.00</option>
+                                    <option value="17.00">17.00</option>
+                                    <option value="19.00">19.00</option>
+                                    <option value="20.00">20.00</option>
+                                </select>
+                                <div class="input-group-append">
+                                    <button class="btn py-0" type="button" style="background-color: white; border: 1px solid #ced4da; color: gray" id="clearJam"><span>x</span></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-12">
+                            <button type="submit" class="btn btn-block p-1" style="background-color: #1BB583">Cari</button>
+                        </div>
                     </div>
-                    <!-- .item -->
-                    @if ($key == 2)
+                </form>
             </div>
-            <div class="row">
-                @endif
-                @endforeach
-            </div>
-
         </div>
+    </div>
+    
+    <div class="row g-2"> <!-- Menggunakan g-2 untuk jarak antar card -->
+    @foreach ($layanan as $key => $layanans)
+        <!-- item -->
+        <div class="col-md-3 col-sm-12 mb-1">
+            <div class="acr-box h-100">
+                <div class="acr-box-in">
+                    <div class="acr-img">
+                        <img src="{{ Storage::disk('s3')->url($layanans->image) }}" alt="you might like">
+                    </div>
+                    <div class="acr-content">
+                        <div class="ct-name">{{ $layanans->title }}</div>
+                        <div class="ct-cost">
+                            <div class="jadwal-jemput">
+                                <h4>Jadwal Jemput</h4>
+                                <table class="tabel-jadwal-jemput">
+                                    <tbody>
+                                        <tr>
+                                            <td>PAGI</td>
+                                            <td>:</td>
+                                            <td>{{ $layanans->jam_pagi ? $layanans->jam_pagi : '-' }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>SIANG</td>
+                                            <td>:</td>
+                                            <td>{{ $layanans->jam_siang ? $layanans->jam_siang : '-' }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>SORE</td>
+                                            <td>:</td>
+                                            <td>{{ $layanans->jam_sore ? $layanans->jam_sore : '-' }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>MALAM</td>
+                                            <td>:</td>
+                                            <td>{{ $layanans->jam_malam ? $layanans->jam_malam : '-' }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="ct-reserve">
+                            <a class="theme-button details-button text-white" data-toggle="modal" data-item="{{ $layanans }}" data-target="#modalBookingIndex">
+                                Pesan
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="acr-bg">
+                    <img src="{{ Storage::disk('s3')->url($layanans->image) }}">
+                </div>
+            </div>
+        </div>
+        <!-- .item -->
+        @if (($key + 1) % 4 == 0) <!-- Menambahkan baris baru setelah setiap 4 item -->
+            </div><div class="row g-2"> <!-- Menambahkan row baru dengan jarak antar card -->
+        @endif
+    @endforeach
+    </div>
+
         <div class="more-category text-right">
             <a href="{{ url('/tarif.html') }}">
                 <div class="theme-button mcbutton">Rute Lainnya</div>
