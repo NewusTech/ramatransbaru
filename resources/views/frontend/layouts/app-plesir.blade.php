@@ -257,7 +257,9 @@
     </div>
 
     <div>
-    <footer style="background-color: #006600;">
+    <footer style="background-color: #3333cc; @if (env('APP_NAME') == 'Rasya Mandiri Tranz') background-color: #006600; @endif">
+    <!-- Konten footer di sini -->
+
 
             <div class="container pt-2">
                 <div class="row">
