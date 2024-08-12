@@ -56,7 +56,7 @@
 
        <!-- slider { Storage::disk('s3')->url($slider->image) }-->
        <div id="carouselExampleInterval" class="carousel slide" data-ride="carousel">
-                <div class="carousel-inner">
+            <div class="carousel-inner">
                 @foreach ($carousel as $slider)
                 <div class="carousel-item active" data-interval="10000">
                 <img src="{{ Storage::disk('s3')->url($slider->image) }}" class="d-block w-100" alt="..." style="height: 400px; object-fit: cover;">
@@ -553,7 +553,7 @@
             </div>
         </section>
         <!-- ! testimonials section-->
-        {{-- Gallery --}}
+        <!-- {{-- Gallery --}} -->
         <div class="heading-section" id="gallery-home">
             <div class="sa-title popcat">Gallery
             </div>
@@ -590,8 +590,17 @@
 
     </div>
 
-
-
+    <!-- video player -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/ehi8DMG4Ci0" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
 @endsection
 
 @section('script')
