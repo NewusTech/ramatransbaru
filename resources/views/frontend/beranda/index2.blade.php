@@ -54,21 +54,22 @@
             </div>
         </div>
 
-       <!-- slider -->
-       <div class="container-fluid img-hero" style="position: relative;">
-        @foreach ($carousel as $slider)
-            <div class="d-flex justify-content-center align-items-center" style="position: relative;">
-                <img data-src="{{ Storage::disk('s3')->url($slider->image) }}" alt="slider" class="img-fluid lazy-load" loading="lazy" style="width: 100%;">
-                <div class="position-absolute top-50 start-50 translate-middle text-center text-white bg-dark bg-opacity-50 p-3 rounded">
-                    <h1 class="h4 h-sm-3 h-md-2">{{ env('APP_NAME') }}</h1>
-                    <p class="d-none d-md-block">{{ env('APP_NAME') }} (RAMA) adalah penyedia jasa angkutan travel terbaik di Lampung sejak 2012. Kami menawarkan rute-rute favorit seperti Travel Jakarta Lampung, Travel Lampung Jakarta, Travel Lampung Palembang, dan lainnya.</p>
+       <!-- slider { Storage::disk('s3')->url($slider->image) }-->
+       <div id="carouselExampleInterval" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                @foreach ($carousel as $slider)
+                <div class="carousel-item active" data-interval="10000">
+                <img src="{{ Storage::disk('s3')->url($slider->image) }}" class="d-block w-100" alt="..." style="height: 400px; object-fit: cover;">
+                    <div class="carousel-caption d-none d-md-block" style="background-color: #3333cc; @if (env('APP_NAME') == 'Rasya Mandiri Tranz') background-color: #006600; @endif; opacity: 0.3;">
+                        <h5>{{ env('APP_NAME') }}</h5>
+                        <p>{{ env('APP_NAME') }} (RAMA) adalah penyedia jasa angkutan travel terbaik di Lampung sejak 2012. Kami menawarkan rute-rute favorit seperti Travel Jakarta Lampung, Travel Lampung Jakarta, Travel Lampung Palembang, dan lainnya.</p>
+                    </div>
                 </div>
+                @endforeach
             </div>
-        @endforeach
+            <!-- Removed the carousel-control-prev and carousel-control-next buttons -->
         </div>
-
         <!-- .slider -->
-
 
         <!-- Modal Booking-->
         <div class="modal fade" id="modalBookingIndex" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
