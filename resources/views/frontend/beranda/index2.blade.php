@@ -454,7 +454,7 @@
         </div>
         <div class="section-home home-news">
             <div class="home-news-wrap">
-                @foreach ($blogs as $blog)
+                <!-- @foreach ($blogs as $blog)
                     <div class="news-item">
                         <div class="news-content">
                             <div class="hnw-img">
@@ -475,7 +475,33 @@
                             </div>
                         </div>
                     </div>
-                @endforeach
+                @endforeach -->
+                <!-- line baru -->
+                
+                <div class="card-deck">
+    @foreach ($blogs as $blog)
+        <div class="card">
+            <img src="{{ Storage::disk('s3')->url($blog->image) }}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <a href="{{ route('detail-blog.blogId', $blog->slug) }}" style="color: #2450A6">
+                        {{ $blog->title }}
+                    </a>
+                </h5>
+                <p class="card-text">{{ Str::limit($blog->excerpt, 95, '...') }}</p>
+                <a href="{{ route('detail-blog.blogId', $blog->slug) }}" style="color: #ffffff" class="btn btn-primary">
+                    Read More
+                </a>
+            </div>
+            <div class="card-footer">
+                <small class="text-muted">{{ $blog->published_at }}</small>
+            </div>
+        </div>
+    @endforeach
+</div>
+
+                
+        <br>
                 <div class=" more-category">
                     <a href="{{ url('/blog') }}">
                         <div class="theme-button mcbutton">Selengkapnya</div>
@@ -483,7 +509,11 @@
                 </div>
             </div>
         </div>
+        
         <!-- .section 4 -->
+
+        
+
         <!-- testimonials section-->
         <section class="section-home home-news cws_prlx_section bg-blue-40" style="background-color: #040b16">
             <div class="container">
