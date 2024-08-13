@@ -290,31 +290,31 @@
     </div>
     
     <div class="container-fluid"> <!-- Membungkus semua card dalam container untuk kontrol layout -->
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3"> <!-- Menambahkan kolom untuk berbagai ukuran layar -->
-        @foreach ($layanan as $key => $layanans)
-            <div class="col"> <!-- Setiap card akan menggunakan col untuk penyesuaian ukuran layar -->
-                <div class="card h-100 border-0 shadow-sm pt-1 pb-1"> <!-- Menambahkan padding vertikal -->
-                    <img src="{{ Storage::disk('s3')->url($layanans->image) }}" class="card-img-top" alt="{{ $layanans->title }}" style="height: 100px; object-fit: cover;">
-                    <div class="card-body">
-                        <h5 class="card-title" style="font-size: 12px;">{{ $layanans->title }}</h5> <!-- Ukuran font disesuaikan -->
-                        <h6 style="font-size: 0.9rem;">Jadwal Jemput</h6> <!-- Ukuran font disesuaikan -->
-                        <ul class="list-unstyled" style="font-size: 10px;"> <!-- Ukuran font disesuaikan -->
-                            <li>PAGI: {{ $layanans->jam_pagi ?: '-' }}</li>
-                            <li>SIANG: {{ $layanans->jam_siang ?: '-' }}</li>
-                            <li>SORE: {{ $layanans->jam_sore ?: '-' }}</li>
-                            <li>MALAM: {{ $layanans->jam_malam ?: '-' }}</li>
-                        </ul>
-                    </div>
-                    <div class="card-footer bg-transparent border-0">
-                        <a href="#" class="btn btn-primary w-100" data-toggle="modal" data-item="{{ $layanans }}" data-target="#modalBookingIndex">
-                            Pesan
-                        </a>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3"> <!-- Menambahkan kolom untuk berbagai ukuran layar -->
+            @foreach ($layanan as $key => $layanans)
+                <div class="col"> <!-- Setiap card akan menggunakan col untuk penyesuaian ukuran layar -->
+                    <div class="card h-100 border-0 shadow-sm pt-1 pb-1"> <!-- Menambahkan padding vertikal -->
+                        <img src="{{ Storage::disk('s3')->url($layanans->image) }}" class="card-img-top" alt="{{ $layanans->title }}" style="height: 100px; object-fit: cover;">
+                        <div class="card-body">
+                            <h5 class="card-title" style="font-size: 12px;">{{ $layanans->title }}</h5> <!-- Ukuran font disesuaikan -->
+                            <h6 style="font-size: 12px;">Jadwal Jemput</h6> <!-- Ukuran font disesuaikan -->
+                            <ul class="list-unstyled" style="font-size: 10px;"> <!-- Ukuran font disesuaikan -->
+                                <li>PAGI: {{ $layanans->jam_pagi ?: '-' }}</li>
+                                <li>SIANG: {{ $layanans->jam_siang ?: '-' }}</li>
+                                <li>SORE: {{ $layanans->jam_sore ?: '-' }}</li>
+                                <li>MALAM: {{ $layanans->jam_malam ?: '-' }}</li>
+                            </ul>
+                        </div>
+                        <div class="card-footer bg-transparent border-0">
+                            <a href="#" class="btn btn-primary w-100" data-toggle="modal" data-item="{{ $layanans }}" data-target="#modalBookingIndex">
+                                Pesan
+                            </a>
+                        </div>
                     </div>
                 </div>
-            </div>
-        @endforeach
+            @endforeach
+        </div>
     </div>
-</div>
 
 
 
@@ -337,30 +337,19 @@
         </div>
         <div class="section-home home-news sm-section-layanan">
             <div class="home-news-wrap">
+                
                 @foreach ($jenisLayanan as $item)
-                    <div class="news-item">
-                        <div class="news-content">
-                            <div class="hnw-img">
-                                <a href="{{ route('layananCategoryId', $item->slug) }}" style="color: #2450A6">
-                                    <img data-src="{{ Storage::disk('s3')->url($item->media) }}" alt="news"
-                                        loading="lazy" class="lazy-load">
-                                </a>
-                            </div>
-                            <div class="hnw-desc">
-                                <div class="hnw-title">
-                                    <a href="{{ route('layananCategoryId', $item->slug) }}" style="color: #2450A6">
-                                        {{ $item->title }}
-                                    </a>
-                                </div>
-                                <div class="hnw-text">
-                                    {!! Str::words($item->content, 40, '...') !!}
-                                    <a href="{{ route('layananCategoryId', $item->slug) }}" style="color: #2450A6"
-                                        class="more">Selengkapnya</a>
-                                </div>
-                            </div>
-                        </div>
+                <div class="card pt-1 pb-1"> <!-- Menambahkan padding atas dan bawah pada card -->
+                    <img src="img/car.jpg" class="card-img-top" alt="..." style="height: 180px; object-fit: cover;"> <!-- Mengatur tinggi gambar -->
+                    <div class="card-body">
+                        <h5 class="card-title">{{ $item->title }}</h5>
+                        <p class="card-text">{!! Str::words($item->content, 40, '...') !!}</p>
+                        <p class="card-text"><small class="text-muted">Selegkapnya</small></p>
                     </div>
+                </div>
                 @endforeach
+                <br>
+
                 <div class=" more-category">
                     <a href="{{ url('/jenis-layanan.html') }}">
                         <div class="theme-button mcbutton">Selengkapnya</div>
@@ -424,28 +413,6 @@
         </div>
         <div class="section-home home-news">
             <div class="home-news-wrap">
-                <!-- @foreach ($blogs as $blog)
-                    <div class="news-item">
-                        <div class="news-content">
-                            <div class="hnw-img">
-                                <a href="{{ route('detail-blog.blogId', $blog->slug) }}" style="color: #2450A6">
-                                    <img data-src="{{ Storage::disk('s3')->url($blog->image) }}" alt="news"
-                                        class="lazy-load" loading="lazy">
-                                </a>
-                            </div>
-                            <div class="hnw-desc">
-                                <div class="hnw-title">
-                                    <a href="{{ route('detail-blog.blogId', $blog->slug) }}" style="color: #2450A6">
-                                        {{ $blog->title }}
-                                    </a>
-                                </div>
-                                <div class="hnw-text">
-                                    {{ Str::limit($blog->excerpt, 95, '...') }}<span class="more">Selengkapnya</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach -->
                 <!-- line baru -->
                 
                 <div class="card-deck">
@@ -470,7 +437,6 @@
                     @endforeach
                 </div>
 
-                
                 <br>
                 <div class=" more-category">
                     <a href="{{ url('/blog') }}">
@@ -479,10 +445,7 @@
                 </div>
             </div>
         </div>
-        
         <!-- .section 4 -->
-
-        
 
         <!-- testimonials section-->
         <section class="section-home home-news cws_prlx_section bg-blue-40" style="background-color: #040b16">
