@@ -289,65 +289,35 @@
         </div>
     </div>
     
-    <div class="row g-2"> <!-- Menggunakan g-2 untuk jarak antar card -->
-    @foreach ($layanan as $key => $layanans)
-        <!-- item -->
-        <div class="col-md-3 col-sm-12 mb-1">
-            <div class="acr-box h-100">
-                <div class="acr-box-in">
-                    <div class="acr-img">
-                        <img src="{{ Storage::disk('s3')->url($layanans->image) }}" alt="you might like">
+    <div class="container-fluid"> <!-- Membungkus semua card dalam container untuk kontrol layout -->
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3"> <!-- Menambahkan kolom untuk berbagai ukuran layar -->
+        @foreach ($layanan as $key => $layanans)
+            <div class="col"> <!-- Setiap card akan menggunakan col untuk penyesuaian ukuran layar -->
+                <div class="card h-100 border-0 shadow-sm pt-1 pb-1"> <!-- Menambahkan padding vertikal -->
+                    <img src="{{ Storage::disk('s3')->url($layanans->image) }}" class="card-img-top" alt="{{ $layanans->title }}" style="height: 100px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title" style="font-size: 12px;">{{ $layanans->title }}</h5> <!-- Ukuran font disesuaikan -->
+                        <h6 style="font-size: 0.9rem;">Jadwal Jemput</h6> <!-- Ukuran font disesuaikan -->
+                        <ul class="list-unstyled" style="font-size: 10px;"> <!-- Ukuran font disesuaikan -->
+                            <li>PAGI: {{ $layanans->jam_pagi ?: '-' }}</li>
+                            <li>SIANG: {{ $layanans->jam_siang ?: '-' }}</li>
+                            <li>SORE: {{ $layanans->jam_sore ?: '-' }}</li>
+                            <li>MALAM: {{ $layanans->jam_malam ?: '-' }}</li>
+                        </ul>
                     </div>
-                    <div class="acr-content">
-                        <div class="ct-name">{{ $layanans->title }}</div>
-                        <div class="ct-cost">
-                            <div class="jadwal-jemput">
-                                <h4>Jadwal Jemput</h4>
-                                <table class="tabel-jadwal-jemput">
-                                    <tbody>
-                                        <tr>
-                                            <td>PAGI</td>
-                                            <td>:</td>
-                                            <td>{{ $layanans->jam_pagi ? $layanans->jam_pagi : '-' }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>SIANG</td>
-                                            <td>:</td>
-                                            <td>{{ $layanans->jam_siang ? $layanans->jam_siang : '-' }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>SORE</td>
-                                            <td>:</td>
-                                            <td>{{ $layanans->jam_sore ? $layanans->jam_sore : '-' }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>MALAM</td>
-                                            <td>:</td>
-                                            <td>{{ $layanans->jam_malam ? $layanans->jam_malam : '-' }}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-
-                        <div class="ct-reserve">
-                            <a class="theme-button details-button text-white" data-toggle="modal" data-item="{{ $layanans }}" data-target="#modalBookingIndex">
-                                Pesan
-                            </a>
-                        </div>
+                    <div class="card-footer bg-transparent border-0">
+                        <a href="#" class="btn btn-primary w-100" data-toggle="modal" data-item="{{ $layanans }}" data-target="#modalBookingIndex">
+                            Pesan
+                        </a>
                     </div>
-                </div>
-                <div class="acr-bg">
-                    <img src="{{ Storage::disk('s3')->url($layanans->image) }}">
                 </div>
             </div>
-        </div>
-        <!-- .item -->
-        @if (($key + 1) % 4 == 0) <!-- Menambahkan baris baru setelah setiap 4 item -->
-            </div><div class="row g-2"> <!-- Menambahkan row baru dengan jarak antar card -->
-        @endif
-    @endforeach
+        @endforeach
     </div>
+</div>
+
+
+
 
     <div class="more-category d-flex justify-content-center">
     <a href="{{ url('/tarif.html') }}">
@@ -479,29 +449,29 @@
                 <!-- line baru -->
                 
                 <div class="card-deck">
-    @foreach ($blogs as $blog)
-        <div class="card">
-            <img src="{{ Storage::disk('s3')->url($blog->image) }}" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">
-                    <a href="{{ route('detail-blog.blogId', $blog->slug) }}" style="color: #2450A6">
-                        {{ $blog->title }}
-                    </a>
-                </h5>
-                <p class="card-text">{{ Str::limit($blog->excerpt, 95, '...') }}</p>
-                <a href="{{ route('detail-blog.blogId', $blog->slug) }}" style="color: #ffffff" class="btn btn-primary">
-                    Read More
-                </a>
-            </div>
-            <div class="card-footer">
-                <small class="text-muted">{{ $blog->published_at }}</small>
-            </div>
-        </div>
-    @endforeach
-</div>
+                    @foreach ($blogs as $blog)
+                        <div class="card">
+                            <img src="{{ Storage::disk('s3')->url($blog->image) }}" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <a href="{{ route('detail-blog.blogId', $blog->slug) }}" style="color: #2450A6">
+                                        {{ $blog->title }}
+                                    </a>
+                                </h5>
+                                <p class="card-text">{{ Str::limit($blog->excerpt, 95, '...') }}</p>
+                                <a href="{{ route('detail-blog.blogId', $blog->slug) }}" style="color: #ffffff" class="btn btn-primary">
+                                    Read More
+                                </a>
+                            </div>
+                            <div class="card-footer">
+                                <small class="text-muted">{{ $blog->published_at }}</small>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
 
                 
-        <br>
+                <br>
                 <div class=" more-category">
                     <a href="{{ url('/blog') }}">
                         <div class="theme-button mcbutton">Selengkapnya</div>
