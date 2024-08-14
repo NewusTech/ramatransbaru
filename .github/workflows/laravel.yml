@@ -22,7 +22,7 @@ jobs:
         COMPOSER_ALLOW_SUPERUSER: 1
       run: |
         set -e
-        composer install || composer update
+        composer install
     - run : |
           cd /home/rasyamandiritranz/htdocs/rasyamandiritranz.com
           yes | php artisan migrate
