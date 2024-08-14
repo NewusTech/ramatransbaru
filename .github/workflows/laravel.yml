@@ -22,8 +22,5 @@ jobs:
           php artisan cache:clear
     - name: Validate composer.json and composer.lock
       run: composer validate
-    - name: Migration run
-      run : |
-          cd /home/rasyamandiritranz/htdocs/rasyamandiritranz.com
-          yes | php artisan migrate
-    - run : systemctl restart nginx
+    - name: restart app run
+      run : systemctl restart nginx
