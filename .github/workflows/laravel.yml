@@ -23,7 +23,7 @@ jobs:
     - name: Validate composer.json and composer.lock
       run: composer validate
     - name: Migration run
-    - run : |
+      run : |
           cd /home/rasyamandiritranz/htdocs/rasyamandiritranz.com
           yes | php artisan migrate
     - run : systemctl restart nginx
