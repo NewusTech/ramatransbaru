@@ -22,12 +22,7 @@ jobs:
           php artisan cache:clear
     - name: Validate composer.json and composer.lock
       run: composer validate
-    - name: Install dependencies
-      env:
-        COMPOSER_ALLOW_SUPERUSER: 1
-      run: |
-        set -e
-        composer install
+    - name: Migration run
     - run : |
           cd /home/rasyamandiritranz/htdocs/rasyamandiritranz.com
           yes | php artisan migrate
