@@ -1,0 +1,29 @@
+name: Ramatransbaru
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: self-hosted
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Deployment
+      run: |
+          cd /home/rasyamandiritranz/htdocs/rasyamandiritranz.com
+          git checkout -f
+          git pull
+    - name: Validate composer.json and composer.lock
+      run: composer validate
+    - name: Install dependencies
+      env:
+        COMPOSER_ALLOW_SUPERUSER: 1
+      run: |
+        set -e
+        composer install || composer update
+    - run : |
+          cd /home/rasyamandiritranz/htdocs/rasyamandiritranz.com
+          yes | php artisan migrate
+    - run : systemctl restart nginx
