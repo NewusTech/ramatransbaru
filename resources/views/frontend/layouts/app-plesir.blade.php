@@ -319,7 +319,8 @@
                 </div>
 
                 <div class="d-flex flex-column flex-sm-row justify-content-between py-3 my-1 border-top">
-                    <p>&copy; Copyright 2023 {{ env('APP_NAME') }} | All Rights Reserved.</p>
+                    <p>&copy; Copyright 2023 {{ env('APP_NAME') }} by <a href="https://newus.id/" rel="tag" class="tag" style="color: white; text-decoration: none;" onmouseover="this.style.color='red'" onmouseout="this.style.color='white'">Newus Technology</a>
+                    | All Rights Reserved.</p>
                     <ul class="list-unstyled d-flex">
                         <li class="ms-3"><a class="link-body-emphasis" href="#"><i
                                     class="fab fa-twitter"></i></a></li>
@@ -331,7 +332,6 @@
                 </div>
             </div>
         </footer>
-
     </div>
 
     <!-- Botom Panel  -->
