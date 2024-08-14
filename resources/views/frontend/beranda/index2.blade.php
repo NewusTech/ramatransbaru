@@ -137,80 +137,57 @@
 
         <!-- section 1 -->
         <div class="home-icon">
-            <div class="section-home">
-                <div class="container">
-                    <div class="row">
-                        <div class="col s-icon">
-                            <a href="{{ url('/jenis-layanan.html') }}" class="homepage-icon-menu">
-                                <img data-src="{{ url('assets-plesir/img2/hotel.png') }}" alt="icon" loading="lazy"
-                                    class="lazy-load">
-                                <div class="s-icon-text">
-                                    LAYANAN
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col s-icon">
-                            <a href="{{ url('/jadwal.html') }}" class="homepage-icon-menu">
-                                <img data-src="{{ url('assets-plesir/img2/cab.png') }}" alt="icon" loading="lazy"
-                                    class="lazy-load">
-                                <div class="s-icon-text">
-                                    JADWAL
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col s-icon">
-                            <a href="#rute" class="homepage-icon-menu">
-                                <img data-src="{{ url('assets-plesir/img2/takeoff.png') }}" alt="icon"
-                                    loading="lazy" class="lazy-load">
-                                <div class="s-icon-text">
-                                    RUTE
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col s-icon">
-                            <a href="#blog" class="homepage-icon-menu">
-                                <img data-src="{{ url('assets-plesir/img2/temple.png') }}" alt="icon" loading="lazy"
-                                    class="lazy-load">
-                                <div class="s-icon-text">
-                                    BLOG
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col s-icon">
-                            <a href="{{ url('/kontak-kami.html') }}" class="homepage-icon-menu">
-                                <img data-src="{{ url('assets-plesir/img2/hospital.png') }}" alt="icon"
-                                    loading="lazy" class="lazy-load">
-                                <div class="s-icon-text">
-                                    KONTAK
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col s-icon">
-                            <a href="{{ url('/tentang-kami.html') }}" class="homepage-icon-menu">
-                                <img data-src="{{ url('assets-plesir/img2/cultures.png') }}" alt="icon"
-                                    loading="lazy" class="lazy-load">
-                                <div class="s-icon-text">
-                                    TENTANG KAMI
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col s-icon">
-                            <a href="{{ url('/review') }}" class="homepage-icon-menu">
-                                <img data-src="{{ url('assets-plesir/img2/cultures.png') }}" alt="icon"
-                                    loading="lazy" class="lazy-load">
-                                <div class="s-icon-text">
-                                    REVIEW
-                                </div>
-                            </a>
-                        </div>
-                    </div>
+    <div class="section-home">
+        <div class="container">
+            <div class="row">
+                <!-- Semua kolom digabungkan dalam satu baris -->
+                <div class="col-md s-icon">
+                    <a href="{{ url('/jenis-layanan.html') }}" class="homepage-icon-menu">
+                        <img data-src="{{ url('assets-plesir/img2/hotel.png') }}" alt="icon" loading="lazy" class="lazy-load">
+                        <div class="s-icon-text">LAYANAN</div>
+                    </a>
+                </div>
+                <div class="col-md s-icon">
+                    <a href="{{ url('/jadwal.html') }}" class="homepage-icon-menu">
+                        <img data-src="{{ url('assets-plesir/img2/cab.png') }}" alt="icon" loading="lazy" class="lazy-load">
+                        <div class="s-icon-text">JADWAL</div>
+                    </a>
+                </div>
+                <div class="col-md s-icon">
+                    <a href="#rute" class="homepage-icon-menu">
+                        <img data-src="{{ url('assets-plesir/img2/takeoff.png') }}" alt="icon" loading="lazy" class="lazy-load">
+                        <div class="s-icon-text">RUTE</div>
+                    </a>
+                </div>
+                <div class="col-md s-icon">
+                    <a href="#blog" class="homepage-icon-menu">
+                        <img data-src="{{ url('assets-plesir/img2/temple.png') }}" alt="icon" loading="lazy" class="lazy-load">
+                        <div class="s-icon-text">BLOG</div>
+                    </a>
+                </div>
+                <div class="col-md s-icon">
+                    <a href="{{ url('/kontak-kami.html') }}" class="homepage-icon-menu">
+                        <img data-src="{{ url('assets-plesir/img2/hospital.png') }}" alt="icon" loading="lazy" class="lazy-load">
+                        <div class="s-icon-text">KONTAK</div>
+                    </a>
+                </div>
+                <div class="col-md s-icon">
+                    <a href="{{ url('/tentang-kami.html') }}" class="homepage-icon-menu">
+                        <img data-src="{{ url('assets-plesir/img2/cultures.png') }}" alt="icon" loading="lazy" class="lazy-load">
+                        <div class="s-icon-text">TENTANG KAMI</div>
+                    </a>
+                </div>
+                <div class="col-md s-icon">
+                    <a href="{{ url('/review') }}" class="homepage-icon-menu">
+                        <img data-src="{{ url('assets-plesir/img2/cultures.png') }}" alt="icon" loading="lazy" class="lazy-load">
+                        <div class="s-icon-text">REVIEW</div>
+                    </a>
                 </div>
             </div>
         </div>
+    </div>
+</div>
+
         <!-- .section 1 -->
 
         <!-- section 2 -->
