@@ -340,12 +340,12 @@
                 
                 @foreach ($jenisLayanan as $item)
                 <div class="card pt-1 pb-1"> <!-- Menambahkan padding atas dan bawah pada card -->
-                    <img src="{{ Storage::disk('s3')->url($layanans->image) }}" class="card-img-top" alt="..." style="height: 180px; object-fit: cover;"> <!-- Mengatur tinggi gambar -->
+                <a href="{{route('layananCategoryId', $item->slug)}}">    
+                <img src="{{ Storage::disk('s3')->url($item->media) }}" class="card-img-top" alt="..." style="height: 180px; object-fit: cover;"> <!-- Mengatur tinggi gambar -->
                     <div class="card-body">
                         <h5 class="card-title">{{ $item->title }}</h5>
                         <p class="card-text">{!! Str::words($item->content, 40, '...') !!}</p>
-                        <p class="card-text"><small class="text-muted">Selegkapnya</small></p>
-                    </div>
+                        <a href="{{ route('layananCategoryId', $item->slug) }}" style="color: #2450A6" class="more">Selengkapnya</a>
                 </div>
                 @endforeach
                 <br>
