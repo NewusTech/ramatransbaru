@@ -15,6 +15,11 @@ jobs:
           cd /home/rasyamandiritranz/htdocs/rasyamandiritranz.com
           git checkout -f
           git pull
+    - name: clear cache proccess
+      run : | 
+          cd /home/rasyamandiritranz/htdocs/rasyamandiritranz.com
+          php artisan config:cache
+          php artisan cache:clear
     - name: Validate composer.json and composer.lock
       run: composer validate
     - name: Install dependencies
