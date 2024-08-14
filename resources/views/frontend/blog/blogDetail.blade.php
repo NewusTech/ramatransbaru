@@ -6,7 +6,7 @@
 @section('content')
 
     <!-- section portfolio item-->
-    <div class="content-wrap page-news">
+    <div class="content-wrap page-news" style="padding-left: 30px; padding-right: 30px;">
         <div class="subsite">
             <div class="row">
                 <div class="col-md-12">
