@@ -336,27 +336,32 @@
             <div class="clear"></div>
         </div>
         <div class="section-home home-news sm-section-layanan">
-            <div class="home-news-wrap">
-                
-                @foreach ($jenisLayanan as $item)
-                <div class="card pt-1 pb-1"> <!-- Menambahkan padding atas dan bawah pada card -->
-                <a href="{{route('layananCategoryId', $item->slug)}}">    
-                <img src="{{ Storage::disk('s3')->url($item->media) }}" class="card-img-top" alt="..." style="height: 180px; object-fit: cover;"> <!-- Mengatur tinggi gambar -->
+    <div class="home-news-wrap">
+        <div class="row">
+            @foreach ($jenisLayanan as $item)
+            <div class="col-md-4 mb-4">
+                <div class="card pt-1 pb-1 h-100"> <!-- Menambahkan padding atas dan bawah pada card -->
+                    <a href="{{ route('layananCategoryId', $item->slug) }}">
+                        <img src="{{ Storage::disk('s3')->url($item->media) }}" class="card-img-top" alt="..." style="height: 180px; object-fit: cover;"> <!-- Mengatur tinggi gambar -->
+                    </a>
                     <div class="card-body">
                         <h5 class="card-title">{{ $item->title }}</h5>
                         <p class="card-text">{!! Str::words($item->content, 40, '...') !!}</p>
                         <a href="{{ route('layananCategoryId', $item->slug) }}" style="color: #2450A6" class="more">Selengkapnya</a>
-                </div>
-                @endforeach
-                <br>
-
-                <div class=" more-category">
-                    <a href="{{ url('/jenis-layanan.html') }}">
-                        <div class="theme-button mcbutton">Selengkapnya</div>
-                    </a>
+                    </div>
                 </div>
             </div>
+            @endforeach
         </div>
+
+        <div class="more-category text-center">
+            <a href="{{ url('/jenis-layanan.html') }}">
+                <div class="theme-button mcbutton">Selengkapnya</div>
+            </a>
+        </div>
+    </div>
+</div>
+
         {{-- End Layanan --}}
 
         <!-- section 3 -->
