@@ -56,19 +56,32 @@
 
        <!-- slider { Storage::disk('s3')->url($slider->image) }-->
        <div id="carouselExampleInterval" class="carousel slide" data-ride="carousel">
-            <div class="carousel-inner">
-                @foreach ($carousel as $slider)
-                <div class="carousel-item active" data-interval="10000">
-                <img src="{{ Storage::disk('s3')->url($slider->image) }}" class="d-block w-100" alt="..." style="height: 400px; object-fit: cover;">
-                    <div class="carousel-caption d-none d-md-block" style="background-color: #3333cc; @if (env('APP_NAME') == 'Rasya Mandiri Tranz') background-color: #006600; @endif; opacity: 0.3;">
-                        <h5>{{ env('APP_NAME') }}</h5>
-                        <p>{{ env('APP_NAME') }} (RAMA) adalah penyedia jasa angkutan travel terbaik di Lampung sejak 2012. Kami menawarkan rute-rute favorit seperti Travel Jakarta Lampung, Travel Lampung Jakarta, Travel Lampung Palembang, dan lainnya.</p>
-                    </div>
-                </div>
-                @endforeach
+    <div class="carousel-inner">
+        @foreach ($carousel as $index => $slider)
+        <div class="carousel-item @if ($index === 0) active @endif" data-interval="10000">
+            <img src="img/car.jpg" class="d-block w-100" alt="..." style="height: 400px; object-fit: cover;">
+            <div class="carousel-caption d-none d-md-block" style="background-color: #3333cc; @if (env('APP_NAME') == 'Rasya Mandiri Tranz') background-color: #006600; @endif; opacity: 0.8;">
+                <h5>{{ env('APP_NAME') }}</h5>
+                <p>{{ env('APP_NAME') }} (RAMA) adalah penyedia jasa angkutan travel terbaik di Lampung sejak 2012. Kami menawarkan rute-rute favorit seperti Travel Jakarta Lampung, Travel Lampung Jakarta, Travel Lampung Palembang, dan lainnya.</p>
             </div>
-            <!-- Removed the carousel-control-prev and carousel-control-next buttons -->
+            <div class="carousel-caption d-md-none" style="background-color: #3333cc; @if (env('APP_NAME') == 'Rasya Mandiri Tranz') background-color: #006600; @endif; opacity: 0.8;">
+                <h5>{{ env('APP_NAME') }}</h5>
+                <p>{{ env('APP_NAME') }} (RAMA) adalah penyedia jasa angkutan travel terbaik di Lampung</p>
+            </div>
         </div>
+        @endforeach
+    </div>
+    <!-- Add controls if needed -->
+    <a class="carousel-control-prev" href="#carouselExampleInterval" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleInterval" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+
         <!-- .slider -->
 
         <!-- Modal Booking-->
@@ -136,48 +149,55 @@
         <!-- End Modal -->
 
         <!-- section 1 -->
-        <div class="home-icon">
+       <!-- Versi Mobile -->
+<div class="home-icon d-md-none">
     <div class="section-home">
         <div class="container">
+            <!-- Baris pertama -->
             <div class="row">
-                <!-- Semua kolom digabungkan dalam satu baris -->
-                <div class="col-md s-icon">
+                <div class="col-4 s-icon mb-3">
                     <a href="{{ url('/jenis-layanan.html') }}" class="homepage-icon-menu">
                         <img data-src="{{ url('assets-plesir/img2/hotel.png') }}" alt="icon" loading="lazy" class="lazy-load">
                         <div class="s-icon-text">LAYANAN</div>
                     </a>
                 </div>
-                <div class="col-md s-icon">
+                <div class="col-4 s-icon mb-3">
                     <a href="{{ url('/jadwal.html') }}" class="homepage-icon-menu">
                         <img data-src="{{ url('assets-plesir/img2/cab.png') }}" alt="icon" loading="lazy" class="lazy-load">
                         <div class="s-icon-text">JADWAL</div>
                     </a>
                 </div>
-                <div class="col-md s-icon">
+                <div class="col-4 s-icon mb-3">
                     <a href="#rute" class="homepage-icon-menu">
                         <img data-src="{{ url('assets-plesir/img2/takeoff.png') }}" alt="icon" loading="lazy" class="lazy-load">
                         <div class="s-icon-text">RUTE</div>
                     </a>
                 </div>
-                <div class="col-md s-icon">
+            </div>
+            <!-- Baris kedua -->
+            <div class="row">
+                <div class="col-4 s-icon mb-3">
                     <a href="#blog" class="homepage-icon-menu">
                         <img data-src="{{ url('assets-plesir/img2/temple.png') }}" alt="icon" loading="lazy" class="lazy-load">
                         <div class="s-icon-text">BLOG</div>
                     </a>
                 </div>
-                <div class="col-md s-icon">
+                <div class="col-4 s-icon mb-3">
                     <a href="{{ url('/kontak-kami.html') }}" class="homepage-icon-menu">
                         <img data-src="{{ url('assets-plesir/img2/hospital.png') }}" alt="icon" loading="lazy" class="lazy-load">
                         <div class="s-icon-text">KONTAK</div>
                     </a>
                 </div>
-                <div class="col-md s-icon">
+                <div class="col-4 s-icon mb-3">
                     <a href="{{ url('/tentang-kami.html') }}" class="homepage-icon-menu">
                         <img data-src="{{ url('assets-plesir/img2/cultures.png') }}" alt="icon" loading="lazy" class="lazy-load">
                         <div class="s-icon-text">TENTANG KAMI</div>
                     </a>
                 </div>
-                <div class="col-md s-icon">
+            </div>
+            <!-- Baris ketiga, terpusat jika ada lebih dari 6 ikon -->
+            <div class="row justify-content-center">
+                <div class="col-4 s-icon mb-3">
                     <a href="{{ url('/review') }}" class="homepage-icon-menu">
                         <img data-src="{{ url('assets-plesir/img2/cultures.png') }}" alt="icon" loading="lazy" class="lazy-load">
                         <div class="s-icon-text">REVIEW</div>
@@ -187,6 +207,61 @@
         </div>
     </div>
 </div>
+
+<!-- Versi Desktop -->
+<div class="home-icon d-none d-md-block">
+    <div class="section-home">
+        <div class="container">
+            <div class="row">
+                <!-- Semua kolom digabungkan dalam satu baris -->
+                <div class="col-md s-icon mb-3">
+                    <a href="{{ url('/jenis-layanan.html') }}" class="homepage-icon-menu">
+                        <img data-src="{{ url('assets-plesir/img2/hotel.png') }}" alt="icon" loading="lazy" class="lazy-load">
+                        <div class="s-icon-text">LAYANAN</div>
+                    </a>
+                </div>
+                <div class="col-md s-icon mb-3">
+                    <a href="{{ url('/jadwal.html') }}" class="homepage-icon-menu">
+                        <img data-src="{{ url('assets-plesir/img2/cab.png') }}" alt="icon" loading="lazy" class="lazy-load">
+                        <div class="s-icon-text">JADWAL</div>
+                    </a>
+                </div>
+                <div class="col-md s-icon mb-3">
+                    <a href="#rute" class="homepage-icon-menu">
+                        <img data-src="{{ url('assets-plesir/img2/takeoff.png') }}" alt="icon" loading="lazy" class="lazy-load">
+                        <div class="s-icon-text">RUTE</div>
+                    </a>
+                </div>
+                <div class="col-md s-icon mb-3">
+                    <a href="#blog" class="homepage-icon-menu">
+                        <img data-src="{{ url('assets-plesir/img2/temple.png') }}" alt="icon" loading="lazy" class="lazy-load">
+                        <div class="s-icon-text">BLOG</div>
+                    </a>
+                </div>
+                <div class="col-md s-icon mb-3">
+                    <a href="{{ url('/kontak-kami.html') }}" class="homepage-icon-menu">
+                        <img data-src="{{ url('assets-plesir/img2/hospital.png') }}" alt="icon" loading="lazy" class="lazy-load">
+                        <div class="s-icon-text">KONTAK</div>
+                    </a>
+                </div>
+                <div class="col-md s-icon mb-3">
+                    <a href="{{ url('/tentang-kami.html') }}" class="homepage-icon-menu">
+                        <img data-src="{{ url('assets-plesir/img2/cultures.png') }}" alt="icon" loading="lazy" class="lazy-load">
+                        <div class="s-icon-text">TENTANG KAMI</div>
+                    </a>
+                </div>
+                <div class="col-md s-icon mb-3">
+                    <a href="{{ url('/review') }}" class="homepage-icon-menu">
+                        <img data-src="{{ url('assets-plesir/img2/cultures.png') }}" alt="icon" loading="lazy" class="lazy-load">
+                        <div class="s-icon-text">REVIEW</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
         <!-- .section 1 -->
 
