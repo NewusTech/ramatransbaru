@@ -344,7 +344,7 @@
     <div class="container-fluid"> <!-- Membungkus semua card dalam container untuk kontrol layout -->
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3"> <!-- Menambahkan kolom untuk berbagai ukuran layar -->
             @foreach ($layanan as $key => $layanans)
-                <div class="col"> <!-- Setiap card akan menggunakan col untuk penyesuaian ukuran layar -->
+                <div class="col pt-2 pb-2"> <!-- Setiap card akan menggunakan col untuk penyesuaian ukuran layar -->
                     <div class="card h-100 border-0 shadow-sm pt-1 pb-1"> <!-- Menambahkan padding vertikal -->
                         <img src="{{ Storage::disk('s3')->url($layanans->image) }}" class="card-img-top" alt="{{ $layanans->title }}" style="height: 100px; object-fit: cover;">
                         <div class="card-body">
@@ -356,12 +356,11 @@
                                 <li>SORE: {{ $layanans->jam_sore ?: '-' }}</li>
                                 <li>MALAM: {{ $layanans->jam_malam ?: '-' }}</li>
                             </ul>
+                            
                         </div>
-                        <div class="card-footer bg-transparent border-0">
-                            <a href="#" class="btn btn-primary w-100" data-toggle="modal" data-item="{{ $layanans }}" data-target="#modalBookingIndex">
+                        <a href="#" class="btn btn-primary w-100" data-toggle="modal" data-item="{{ $layanans }}" data-target="#modalBookingIndex">
                                 Pesan
-                            </a>
-                        </div>
+                        </a>
                     </div>
                 </div>
             @endforeach
