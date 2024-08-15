@@ -583,7 +583,7 @@
     </div>
 
     <!-- video player -->
-    <div class="container-fluid">
+    <div class="container-fluid pt-4 pb-4" style="background-color: #040b16">
         <div class="row">
             <div class="col-md-8 offset-md-2">
                 <div class="embed-responsive embed-responsive-16by9">
@@ -592,7 +592,6 @@
             </div>
         </div>
     </div>
-    <br>
 @endsection
 
 @section('script')
