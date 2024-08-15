@@ -584,7 +584,13 @@
 
     <!-- video player -->
     <div class="container-fluid pt-4 pb-4" style="background-color: #040b16">
+        
         <div class="row">
+                <div class="col-md-12">
+                    <h6 class="title-section-top font-4">Video</h6>
+                    <h2 class="title-section alt-2"><span>Review</span> Armada Kami</h2>
+                    <div class="cws_divider mb-25 mt-5"></div>
+                </div>
             <div class="col-md-8 offset-md-2">
                 <div class="embed-responsive embed-responsive-16by9">
                     <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/ehi8DMG4Ci0" allowfullscreen></iframe>
