@@ -59,7 +59,7 @@
     <div class="carousel-inner">
         @foreach ($carousel as $index => $slider)
         <div class="carousel-item @if ($index === 0) active @endif" data-interval="10000">
-            <img src="{{ Storage::disk('s3')->url($slider->image) }}" class="d-block w-100" alt="..." style="height: 510px; object-fit: cover;">
+            <img src="{{ Storage::disk('s3')->url($slider->image) }}" class="d-block w-100" alt="..." style="height: 505px; object-fit: cover;">
             <div class="carousel-caption d-none d-md-block" style="background-color: #3333cc; @if (env('APP_NAME') == 'Rasya Mandiri Tranz') background-color: #006600; @endif; opacity: 0.8;">
                 <h5>{{ env('APP_NAME') }}</h5>
                 <p>{{ env('APP_NAME') }} (RAMA) adalah penyedia jasa angkutan travel terbaik di Lampung sejak 2012. Kami menawarkan rute-rute favorit seperti Travel Jakarta Lampung, Travel Lampung Jakarta, Travel Lampung Palembang, dan lainnya.</p>
@@ -462,7 +462,7 @@
 
         <!-- section 4 -->
         <div class="heading-section" id="blog">
-            <div class="sa-title popcat">Blog </div>
+            <div class="sa-title popcat text-center">Blog </div>
             <div class="heading-info">
                 {{-- Travel quicker, cheaper and smarter --}}
             </div>
@@ -544,14 +544,16 @@
         </section>
         <!-- ! testimonials section-->
         <!-- {{-- Gallery --}} -->
-        <div class="heading-section" id="gallery-home">
-            <div class="sa-title popcat">Gallery
-            </div>
-            <div class="heading-info">
-                Koleksi gallery foto
-            </div>
-            <div class="clear"></div>
-        </div>
+        <div class="heading-section text-center" id="gallery-home">
+    <div class="sa-title popcat">
+        Gallery
+    </div>
+    <div class="heading-info">
+        Koleksi gallery foto
+    </div>
+    <div class="clear"></div>
+</div>
+
         <div class="section-home vacation-destination gallery-home">
             <div class="sm-slider vs-carousel">
                 @foreach ($gallery as $item)
