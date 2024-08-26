@@ -183,20 +183,11 @@
                     </a>
                 </div>
                 <div class="col-4 s-icon mb-3">
-                    <a href="{{ url('/kontak-kami.html') }}" class="homepage-icon-menu">
+                    <a href="{{ url('assets-plesir/img2/hospital.png') }}" class="homepage-icon-menu">
                         <img data-src="{{ url('assets-plesir/img2/hospital.png') }}" alt="icon" loading="lazy" class="lazy-load">
-                        <div class="s-icon-text">KONTAK</div>
-                    </a>
-                </div>
-                <div class="col-4 s-icon mb-3">
-                    <a href="{{ url('/tentang-kami.html') }}" class="homepage-icon-menu">
-                        <img data-src="{{ url('assets-plesir/img2/cultures.png') }}" alt="icon" loading="lazy" class="lazy-load">
                         <div class="s-icon-text">TENTANG KAMI</div>
                     </a>
                 </div>
-            </div>
-            <!-- Baris ketiga, terpusat jika ada lebih dari 6 ikon -->
-            <div class="row justify-content-center">
                 <div class="col-4 s-icon mb-3">
                     <a href="{{ url('/review') }}" class="homepage-icon-menu">
                         <img data-src="{{ url('assets-plesir/img2/cultures.png') }}" alt="icon" loading="lazy" class="lazy-load">
@@ -204,6 +195,15 @@
                     </a>
                 </div>
             </div>
+            <!-- Baris ketiga, terpusat jika ada lebih dari 6 ikon -->
+            <!-- <div class="row justify-content-center">
+                <div class="col-4 s-icon mb-3">
+                    <a href="{{ url('/review') }}" class="homepage-icon-menu">
+                        <img data-src="{{ url('assets-plesir/img2/cultures.png') }}" alt="icon" loading="lazy" class="lazy-load">
+                        <div class="s-icon-text">REVIEW</div>
+                    </a>
+                </div>
+            </div> -->
         </div>
     </div>
 </div>
@@ -239,14 +239,8 @@
                     </a>
                 </div>
                 <div class="col-md s-icon mb-3">
-                    <a href="{{ url('/kontak-kami.html') }}" class="homepage-icon-menu">
-                        <img data-src="{{ url('assets-plesir/img2/hospital.png') }}" alt="icon" loading="lazy" class="lazy-load">
-                        <div class="s-icon-text">KONTAK</div>
-                    </a>
-                </div>
-                <div class="col-md s-icon mb-3">
                     <a href="{{ url('/tentang-kami.html') }}" class="homepage-icon-menu">
-                        <img data-src="{{ url('assets-plesir/img2/cultures.png') }}" alt="icon" loading="lazy" class="lazy-load">
+                        <img data-src="{{ url('assets-plesir/img2/hospital.png') }}" alt="icon" loading="lazy" class="lazy-load">
                         <div class="s-icon-text">TENTANG KAMI</div>
                     </a>
                 </div>
