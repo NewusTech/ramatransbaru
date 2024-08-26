@@ -58,7 +58,7 @@
        <div id="carouselExampleInterval" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner">
         @foreach ($carousel as $index => $slider)
-        <div class="carousel-item @if ($index === 0) active @endif" data-interval="10000">
+        <div class="carousel-item @if ($index === 0) active @endif" data-interval="1000">
             <img src="{{ Storage::disk('s3')->url($slider->image) }}" class="d-block w-100" alt="..." style="height: 80vh; object-fit: cover;">
             <div class="carousel-caption d-none d-md-block" style="background-color: #3333cc; @if (env('APP_NAME') == 'Rasya Mandiri Tranz') background-color: #006600; @endif; opacity: 0.8;">
                 <h5>{{ env('APP_NAME') }}</h5>
@@ -335,31 +335,78 @@
         </div>
     </div>
     
-    <div class="container-fluid"> <!-- Membungkus semua card dalam container untuk kontrol layout -->
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3"> <!-- Menambahkan kolom untuk berbagai ukuran layar -->
+    <!-- versi desktop -->
+<div class="d-none d-md-block">
+    <div class="container-fluid">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3">
             @foreach ($layanan as $key => $layanans)
-                <div class="col pt-2 pb-2"> <!-- Setiap card akan menggunakan col untuk penyesuaian ukuran layar -->
-                    <div class="card h-100 border-0 shadow-sm pt-1 pb-1"> <!-- Menambahkan padding vertikal -->
+                <div class="col pt-2 pb-2">
+                    <div class="card h-100 border-0 shadow-sm pt-1 pb-1">
                         <img src="{{ Storage::disk('s3')->url($layanans->image) }}" class="card-img-top" alt="{{ $layanans->title }}" style="height: 100px; object-fit: cover;">
                         <div class="card-body">
-                            <h5 class="card-title" style="font-size: 12px;">{{ $layanans->title }}</h5> <!-- Ukuran font disesuaikan -->
-                            <h6 style="font-size: 12px;">Jadwal Jemput</h6> <!-- Ukuran font disesuaikan -->
-                            <ul class="list-unstyled" style="font-size: 10px;"> <!-- Ukuran font disesuaikan -->
+                            <h5 class="card-title" style="font-size: 12px;">{{ $layanans->title }}</h5>
+                            <h6 style="font-size: 12px;">Jadwal Jemput</h6>
+                            <ul class="list-unstyled" style="font-size: 10px;">
                                 <li>PAGI: {{ $layanans->jam_pagi ?: '-' }}</li>
                                 <li>SIANG: {{ $layanans->jam_siang ?: '-' }}</li>
                                 <li>SORE: {{ $layanans->jam_sore ?: '-' }}</li>
                                 <li>MALAM: {{ $layanans->jam_malam ?: '-' }}</li>
                             </ul>
-                            
                         </div>
                         <a href="#" class="btn btn-primary w-100" data-toggle="modal" data-item="{{ $layanans }}" data-target="#modalBookingIndex">
-                                Pesan
+                            Pesan
                         </a>
                     </div>
                 </div>
             @endforeach
         </div>
     </div>
+</div>
+
+<!-- versi mobile -->
+<div class="d-block d-md-none">
+    <br>
+    <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            @foreach ($layanan as $key => $layanans)
+                <li data-target="#carouselExampleCaptions" data-slide-to="{{ $key }}" class="{{ $key == 0 ? 'active' : '' }}"></li>
+            @endforeach
+        </ol>
+        <div class="carousel-inner">
+            @foreach ($layanan as $key => $layanans)
+                <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
+                    <img src="{{ Storage::disk('s3')->url($layanans->image) }}" class="d-block w-100" alt="{{ $layanans->title }}" style="object-fit: cover; height: 300px;">
+                    <div class="carousel-caption d-block d-md-none">
+                        <div style="background-color: rgba(0, 0, 0, 0.5); padding: 10px;">
+                            <h5 class="text-white">{{ $layanans->title }}</h5>
+                            <p class="text-white">
+                                Jadwal Jemput:<br>
+                                PAGI: {{ $layanans->jam_pagi ?: '-' }}<br>
+                                SIANG: {{ $layanans->jam_siang ?: '-' }}<br>
+                                SORE: {{ $layanans->jam_sore ?: '-' }}<br>
+                                MALAM: {{ $layanans->jam_malam ?: '-' }}
+                            </p>
+                        </div>
+                        <a href="#" class="btn btn-primary w-100" data-toggle="modal" data-item="{{ $layanans }}" data-target="#modalBookingIndex">
+                            Pesan
+                        </a>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+</div>
+
+
+
 
 
 
