@@ -387,9 +387,7 @@
                                 MALAM: {{ $layanans->jam_malam ?: '-' }}
                             </p>
                         </div>
-                        <a href="#" class="btn btn-primary w-100" data-toggle="modal" data-item="{{ $layanans }}" data-target="#modalBookingIndex">
-                            Pesan
-                        </a>
+                        
                     </div>
                 </div>
             @endforeach
@@ -403,6 +401,10 @@
             <span class="sr-only">Next</span>
         </a>
     </div>
+    <br>
+    <a href="#" class="btn btn-primary w-100" data-toggle="modal" data-item="{{ $layanans }}" data-target="#modalBookingIndex">
+                            Pesan
+                        </a>
 </div>
 
 
