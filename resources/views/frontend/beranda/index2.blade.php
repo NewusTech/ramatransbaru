@@ -401,7 +401,6 @@
             <span class="sr-only">Next</span>
         </a>
     </div>
-    <br>
     <a href="#" class="btn btn-primary w-100" data-toggle="modal" data-item="{{ $layanans }}" data-target="#modalBookingIndex">
                             Pesan
                         </a>
