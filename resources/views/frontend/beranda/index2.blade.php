@@ -195,15 +195,6 @@
                     </a>
                 </div>
             </div>
-            <!-- Baris ketiga, terpusat jika ada lebih dari 6 ikon -->
-            <!-- <div class="row justify-content-center">
-                <div class="col-4 s-icon mb-3">
-                    <a href="{{ url('/review') }}" class="homepage-icon-menu">
-                        <img data-src="{{ url('assets-plesir/img2/cultures.png') }}" alt="icon" loading="lazy" class="lazy-load">
-                        <div class="s-icon-text">REVIEW</div>
-                    </a>
-                </div>
-            </div> -->
         </div>
     </div>
 </div>
@@ -419,7 +410,6 @@
 </div>
 
         <!-- .section 2-->
-
         {{-- Layanan --}}
         <div class="heading-section" id="section-layanan">
             <div class="sa-title popcat">Layanan</div>
@@ -501,6 +491,44 @@
         </div>
         <!-- .section 3 -->
 
+        <div class="container text-center">
+    <h2>Tujuan Populer</h2>
+    <p>Tujuan yang rekomendasi untuk liburan Anda</p>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card" style="overflow: hidden;">
+                <img src="img/monas.jpg" class="card-img-top" alt="Travel Jakarta Lampung" style="transition: transform 0.3s ease, filter 0.3s ease;">
+                <div class="card-body" style="padding-top:5px;">
+                    <p class="card-text">Travel Jakarta Lampung</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card" style="overflow: hidden;">
+                <img src="img/siger.jpg" class="card-img-top" alt="Travel Lampung Jakarta" style="transition: transform 0.3s ease, filter 0.3s ease;">
+                <div class="card-body" style="padding-top:5px;">
+                    <p class="card-text">Travel Lampung Jakarta</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card" style="overflow: hidden;">
+                <img src="img/pt.jpg" class="card-img-top" alt="Travel Lampung Palembang" style="transition: transform 0.3s ease, filter 0.3s ease;">
+                <div class="card-body" style="padding-top:5px;">
+                    <p class="card-text">Travel Lampung Palembang</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card" style="overflow: hidden;">
+                <img src="img/plg.jpg" class="card-img-top" alt="Travel Palembang Lampung" style="transition: transform 0.3s ease, filter 0.3s ease;">
+                <div class="card-body" style="padding-top:5px;">
+                    <p class="card-text">Travel Palembang Lampung</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
         <!-- section 4 -->
         <div class="heading-section" id="blog">
             <div class="sa-title popcat text-center">Blog </div>
@@ -527,9 +555,6 @@
                                 <a href="{{ route('detail-blog.blogId', $blog->slug) }}" style="color: #ffffff" class="btn btn-primary">
                                     Read More
                                 </a>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-muted">{{ $blog->published_at }}</small>
                             </div>
                         </div>
                     @endforeach
@@ -809,6 +834,17 @@
                 lazyLoad(img);
             });
         });
+
+        document.querySelectorAll('.card-img-top').forEach(img => {
+        img.addEventListener('mouseover', () => {
+            img.style.transform = 'scale(1.1)';
+            img.style.filter = 'grayscale(100%)';
+        });
+        img.addEventListener('mouseout', () => {
+            img.style.transform = 'scale(1)';
+            img.style.filter = 'grayscale(0%)';
+        });
+    });
     </script>
 
 @endsection
