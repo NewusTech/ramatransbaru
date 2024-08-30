@@ -58,7 +58,7 @@
        <div id="carouselExampleInterval" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner">
         @foreach ($carousel as $index => $slider)
-        <div class="carousel-item @if ($index === 0) active @endif" data-interval="1000">
+        <div class="carousel-item @if ($index === 0) active @endif" data-interval="3000">
             <img src="{{ Storage::disk('s3')->url($slider->image) }}" class="d-block w-100" alt="..." style="height: 80vh; object-fit: cover;">
             <div class="carousel-caption d-none d-md-block" style="background-color: #3333cc; @if (env('APP_NAME') == 'Rasya Mandiri Tranz') background-color: #006600; @endif; opacity: 0.8;">
                 <h5>{{ env('APP_NAME') }}</h5>
@@ -392,22 +392,15 @@
             <span class="sr-only">Next</span>
         </a>
     </div>
-    <a href="#" class="btn btn-primary w-100" data-toggle="modal" data-item="{{ $layanans }}" data-target="#modalBookingIndex">
+        <a href="#" class="btn btn-primary w-100" data-toggle="modal" data-item="{{ $layanans }}" data-target="#modalBookingIndex">
                             Pesan
                         </a>
-</div>
-
-
-
-
-
-
-
-    <div class="more-category d-flex justify-content-center">
-    <a href="{{ url('/tarif.html') }}">
-        <div class="theme-button mcbutton">Rute Lainnya</div>
-    </a>
-</div>
+        </div>
+            <div class="more-category d-flex justify-content-center">
+            <a href="{{ url('/tarif.html') }}">
+                <div class="theme-button mcbutton">Rute Lainnya</div>
+            </a>
+        </div>
 
         <!-- .section 2-->
         {{-- Layanan --}}
