@@ -491,43 +491,24 @@
         </div>
         <!-- .section 3 -->
 
+        <!-- page tujuan slider -->
         <div class="container text-center">
-    <h2>Tujuan Populer</h2>
-    <p>Tujuan yang rekomendasi untuk liburan Anda</p>
-    <div class="row">
-        <div class="col-md-3">
-            <div class="card" style="overflow: hidden;">
-                <img src="img/monas.jpg" class="card-img-top" alt="Travel Jakarta Lampung" style="transition: transform 0.3s ease, filter 0.3s ease;">
-                <div class="card-body" style="padding-top:5px;">
-                    <p class="card-text">Travel Jakarta Lampung</p>
+            <h2>Tujuan Populer</h2>
+            <p>Tujuan yang rekomendasi untuk liburan Anda</p>
+            <div class="row">
+            @foreach ($carousel2 as $slider)
+                <div class="col-md-3">
+                    <div class="card" style="overflow: hidden;">
+                        <img src="{{ Storage::disk('s3')->url($slider->image) }}" class="card-img-top" alt="Travel Jakarta Lampung" style="transition: transform 0.3s ease, filter 0.3s ease;">
+                        <div class="card-body" style="padding-top:5px;">
+                            <p class="card-text">{{ $slider->title }}</p>
+                        </div>
+                    </div>
                 </div>
+            @endforeach
             </div>
         </div>
-        <div class="col-md-3">
-            <div class="card" style="overflow: hidden;">
-                <img src="img/siger.jpg" class="card-img-top" alt="Travel Lampung Jakarta" style="transition: transform 0.3s ease, filter 0.3s ease;">
-                <div class="card-body" style="padding-top:5px;">
-                    <p class="card-text">Travel Lampung Jakarta</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card" style="overflow: hidden;">
-                <img src="img/pt.jpg" class="card-img-top" alt="Travel Lampung Palembang" style="transition: transform 0.3s ease, filter 0.3s ease;">
-                <div class="card-body" style="padding-top:5px;">
-                    <p class="card-text">Travel Lampung Palembang</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card" style="overflow: hidden;">
-                <img src="img/plg.jpg" class="card-img-top" alt="Travel Palembang Lampung" style="transition: transform 0.3s ease, filter 0.3s ease;">
-                <div class="card-body" style="padding-top:5px;">
-                    <p class="card-text">Travel Palembang Lampung</p>
-                </div>
-            </div>
-        </div>
-    </div>
+        <!-- end tujuan slider -->
 
         <!-- section 4 -->
         <div class="heading-section" id="blog">
