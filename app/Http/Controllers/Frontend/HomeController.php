@@ -67,7 +67,7 @@ class HomeController extends Controller
             ->leftjoin('layanans', 'layanans.jenis_layanan_id', '=', 'jenis_layanans.id')
             ->orderBy('slug', 'ASC')->get();
         $menuLayanan = JenisLayanan::select(['id', 'title', 'slug'])->orderBy('slug', 'ASC')->get();
-        $carousel = Carousel::get();
+        $carousel = Carousel::orderBy('id', "ASC")->limit(4)->get();
         $hq = Area::where('isHQ', 1)->first();
         $tentang = Page::get()->first();
         $youtube = LinkYoutube::where('id', 1)->first();
@@ -87,6 +87,7 @@ class HomeController extends Controller
         $gtagManager = GtagManager::first();
         $searchConsole = SearchConsole::first();
         $analytics = Analytics::first();
+        $carousel2 = Carousel::orderBy('id', "DESC")->limit(4)->get();
         // data SEO
         $seoTools = Seo::first();
         $dataSeo['site_title'] = $seoTools->site_title;
@@ -99,7 +100,7 @@ class HomeController extends Controller
         $blogs = Blog::latest()->where('status', '=', 'Publish')->paginate(3)->withQueryString();
         $gallery = Gallery::take(15)->latest()->get();
         return view('frontend.beranda.index2', compact(
-                                                      'data', 'layananTarif', 'carousel', 'metades',
+                                                      'data', 'layananTarif', 'carousel', 'carousel2','metades',
                                                       'youtube', 'unggulan', 'feedback', 
                                                       'hq', 'contacts', 
                                                       'jenisLayanan', 'tentang', 'parentOutlet', 
