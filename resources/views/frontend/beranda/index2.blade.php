@@ -245,9 +245,6 @@
         </div>
     </div>
 </div>
-
-
-
         <!-- .section 1 -->
 
         <!-- section 2 -->
@@ -335,7 +332,7 @@
                     <div class="card h-100 border-0 shadow-sm pt-1 pb-1">
                         <img src="{{ Storage::disk('s3')->url($layanans->image) }}" class="card-img-top" alt="{{ $layanans->title }}" style="height: 100px; object-fit: cover;">
                         <div class="card-body">
-                            <h5 class="card-title" style="font-size: 12px;">{{ $layanans->title }}</h5>
+                            <h5 class="card-title" style="font-size: 12px;"><a href="{{ url('/tarif.html') }}">{{ $layanans->title }}</a></h5>
                             <h6 style="font-size: 12px;">Jadwal Jemput</h6>
                             <ul class="list-unstyled" style="font-size: 10px;">
                                 <li>PAGI: {{ $layanans->jam_pagi ?: '-' }}</li>
@@ -369,7 +366,7 @@
                     <img src="{{ Storage::disk('s3')->url($layanans->image) }}" class="d-block w-100" alt="{{ $layanans->title }}" style="object-fit: cover; height: 300px;">
                     <div class="carousel-caption d-block d-md-none">
                         <div style="background-color: rgba(0, 0, 0, 0.5); padding: 10px;">
-                            <h5 class="text-white">{{ $layanans->title }}</h5>
+                            <h5 class="text-white"><a href="{{ url('/tarif.html') }}">{{ $layanans->title }}</a></h5>
                             <p class="text-white">
                                 Jadwal Jemput:<br>
                                 PAGI: {{ $layanans->jam_pagi ?: '-' }}<br>
@@ -421,7 +418,7 @@
                         <img src="{{ Storage::disk('s3')->url($item->media) }}" class="card-img-top" alt="..." style="height: 180px; object-fit: cover;"> <!-- Mengatur tinggi gambar -->
                     </a>
                     <div class="card-body">
-                        <h5 class="card-title">{{ $item->title }}</h5>
+                        <h5 class="card-title"><a href="{{ url('/jenis-layanan.html') }}">{{ $item->title }}</a></h5>
                         <p class="card-text">{!! Str::words($item->content, 30, '...') !!}</p>
                         <a href="{{ route('layananCategoryId', $item->slug) }}" style="color: #2450A6" class="more">Selengkapnya</a>
                     </div>
